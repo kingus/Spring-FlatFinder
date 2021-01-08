@@ -40,4 +40,14 @@ public class UserController {
         }
 
     }
+    @GetMapping("/api/users/{id}")
+    public ResponseEntity getUser(@PathVariable(value = "id") int id) {
+        try {
+            return new ResponseEntity(userService.getUser(id),HttpStatus.OK);
+        }
+        catch (Exception exception){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+    }
 }

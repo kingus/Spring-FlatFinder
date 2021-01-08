@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -40,7 +41,7 @@ public class Offer {
     @Column(name="source")
     private String source;
 
-    @Column(name="source_id")
+    @Column(name="source_id", unique = true)
     private String sourceId;
 
     @Column(name="title")
@@ -53,5 +54,9 @@ public class Offer {
     @Column(name="end_dttm")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime endDttm;
+
+    @OneToMany(mappedBy = "id")
+    private List<UserOffers> userOffers;
+
 
 }
