@@ -29,7 +29,7 @@ public class OfferServiceImpl implements OfferService {
                     .map(offerEntity -> new OfferResponse
                             (offerEntity.getId(), offerEntity.getDistrict(), offerEntity.getArea(),
                                     offerEntity.getImgUrl(), offerEntity.getLatitude(), offerEntity.getLongitude(),offerEntity.getOfferUrl(),
-                                    offerEntity.getPrice(), offerEntity.getRooms(), offerEntity.getSource(), offerEntity.getSourceId())).collect(Collectors.toList());
+                                    offerEntity.getPrice(), offerEntity.getRooms(), offerEntity.getSource(), offerEntity.getSourceId(), offerEntity.getTitle())).collect(Collectors.toList());
     }
 
     @Override
