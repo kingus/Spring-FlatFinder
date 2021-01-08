@@ -43,6 +43,9 @@ public class Offer {
     @Column(name="source_id")
     private String sourceId;
 
+    @Column(name="title")
+    private String title;
+
     @Column(name="start_dttm")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime startDttm;

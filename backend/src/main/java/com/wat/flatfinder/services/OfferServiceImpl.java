@@ -48,6 +48,7 @@ public class OfferServiceImpl implements OfferService {
         offer.setRooms(offerRequest.getRooms());
         offer.setSource(offerRequest.getSource());
         offer.setSourceId(offerRequest.getSource_id());
+        offer.setTitle(offerRequest.getTitle());
         offer.setStartDttm(ldt);
         offer.setEndDttm(LocalDateTime.now());
         offerRepository.save(offer);
