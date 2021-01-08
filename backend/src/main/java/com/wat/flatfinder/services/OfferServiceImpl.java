@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class OfferServiceImpl implements OfferService {
@@ -22,7 +24,12 @@ public class OfferServiceImpl implements OfferService {
 
     @Override
     public List<OfferResponse> getAll() {
-        return null;
+
+            return StreamSupport.stream(offerRepository.findAll().spliterator(), false)
+                    .map(offerEntity -> new OfferResponse
+                            (offerEntity.getId(), offerEntity.getDistrict(), offerEntity.getArea(),
+                                    offerEntity.getImgUrl(), offerEntity.getLatitude(), offerEntity.getLongitude(),offerEntity.getOfferUrl(),
+                                    offerEntity.getPrice(), offerEntity.getRooms(), offerEntity.getSource(), offerEntity.getSourceId())).collect(Collectors.toList());
     }
 
     @Override
@@ -31,7 +38,6 @@ public class OfferServiceImpl implements OfferService {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "dd/MM/uuuu HH:mm:ss" ) ;
         LocalDateTime ldt = LocalDateTime.parse( input , dtf) ;
         Offer offer =  new Offer();
-//        offer.setId(offer.getId());
         offer.setArea(offerRequest.getArea());
         offer.setDistrict(offerRequest.getDistrict());
         offer.setImgUrl(offerRequest.getImg_url());
@@ -44,9 +50,7 @@ public class OfferServiceImpl implements OfferService {
         offer.setSourceId(offerRequest.getSource_id());
         offer.setTitle(offerRequest.getTitle());
         offer.setStartDttm(ldt);
-        offer.setEndDttm(ldt);
-
-//        Apartament offer = new Apartament(2, "Bielany", "NANA", 100.3f, 12.3f, 123.2f, "2", "WUW","ww", ldt,ldt);
+        offer.setEndDttm(LocalDateTime.now());
         offerRepository.save(offer);
     }
 }

@@ -24,6 +24,4 @@ public class OfferRequest {
     private String source;
     private String source_id;
     private String title;
-    private LocalDateTime startDttm;
-    private LocalDateTime endDttm;
 }
