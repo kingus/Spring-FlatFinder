@@ -23,6 +23,4 @@ public class OfferRequest {
     private String rooms;
     private String source;
     private String source_id;
-    private LocalDateTime startDttm;
-    private LocalDateTime endDttm;
 }
