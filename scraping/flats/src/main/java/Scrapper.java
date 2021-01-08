@@ -8,20 +8,48 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import sun.rmi.runtime.Log;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Scrapper {
+    static Map<String, String> districts;
+
+    static {
+        districts = new HashMap<String, String>();
+        districts.put("bemowo", "v1c9073l3200009");
+        districts.put("bialoleka", "v1c9073l3200010");
+        districts.put("bielany", "v1c9073l3200011");
+        districts.put("mokotow", "v1c9073l3200012");
+        districts.put("ochota", "v1c9073l3200013");
+        districts.put("praga-poludnie", "v1c9073l3200015");
+        districts.put("praga-polnoc", "v1c9073l3200014");
+        districts.put("rembertow", "v1c9073l3200016");
+        districts.put("targowek", "v1c9073l3200018");
+        districts.put("ursus", "v1c9073l3200019");
+        districts.put("ursynow", "v1c9073l3200020");
+        districts.put("wawer", "v1c9073l3200021");
+        districts.put("wesola", "v1c9073l3200022");
+        districts.put("wilanow", "v1c9073l3200023");
+        districts.put("wola", "v1c9073l3200025");
+        districts.put("wlochy", "v1c9073l3200024");
+        districts.put("srodmiescie", "v1c9073l3200017");
+        districts.put("zoliborz", "v1c9073l3200026");
+
+    }
+
     public static JSONArray getOffersFromGumtree(String district) {
         JSONArray offersJSON = new JSONArray();
 
         int pageNumber = 1;
         int maxPageNumber = pageNumber;
         do {
-            System.out.println("PAGE: " + pageNumber);
-
+            System.out.println("PAGE NUMBER: " + pageNumber);
+            System.out.println(district);
+            System.out.println(districts.get(district));
             Document doc;
-
             try {
-                System.out.println("https://www.gumtree.pl/s-mieszkania-i-domy-sprzedam-i-kupie/" + district + "/page-" + Integer.toString(pageNumber) + "/v1c9073l3200025" + "p" + Integer.toString(pageNumber));
-                doc = Jsoup.connect("https://www.gumtree.pl/s-mieszkania-i-domy-sprzedam-i-kupie/" + district + "/page-" + Integer.toString(pageNumber) + "/v1c9073l3200025" + "p" + Integer.toString(pageNumber)).get();
+                System.out.println("https://www.gumtree.pl/s-mieszkania-i-domy-sprzedam-i-kupie/" + district + "/page-" + Integer.toString(pageNumber) + "/" + districts.get(district) + "p" + Integer.toString(pageNumber));
+                doc = Jsoup.connect("https://www.gumtree.pl/s-mieszkania-i-domy-sprzedam-i-kupie/" + district + "/page-" + Integer.toString(pageNumber) + "/" + districts.get(district) + "p" + Integer.toString(pageNumber)).get();
                 if (pageNumber == 1) {
                     Element lastUrlElement = doc.getElementsByClass("icon-double-angle-right").first().parent();
                     String lastUrl = lastUrlElement.attr("href");
@@ -59,7 +87,7 @@ public class Scrapper {
                         //  SCRAPPING TITLE
                         String oTitle = offerDoc.getElementsByClass("myAdTitle").text();
                         System.out.println(oTitle);
-                        offerDataJSON.put("source_id", oTitle);
+                        offerDataJSON.put("title", oTitle);
 
 
                         //  SCRAPPING SOURCE ID
@@ -114,7 +142,7 @@ public class Scrapper {
         } while (pageNumber <= maxPageNumber);
 
 
-
+        System.out.println("Returning data...");
         return offersJSON;
     }
     public static JSONObject getOffersFromOtodom(String district) {
