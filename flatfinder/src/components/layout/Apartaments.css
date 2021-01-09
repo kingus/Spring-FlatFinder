@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Merriweather&family=Metrophobic&family=Noto+Sans&family=Roboto:wght@300&family=Rubik:wght@300&display=swap");
+
+.container {
+  background-color: #eff1f3;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  max-width: none;
+}
+
+.apartaments_list {
+  margin-top: 20px;
+  background-color: #eff1f3;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.apartament {
+  background-color: white;
+  width: 50vw;
+  height: 170px;
+  margin-top: 15px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px 1px #b6b6b6;
+  display: flex;
+  flex-direction: row;
+}
+
+.apartment_details {
+  background-color: white;
+  width: 50vw;
+  height: 270px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px 1px #b6b6b6;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+}
+
+.apartament_photo {
+  width: 210px;
+  height: 170px;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.google-map {
+  width: 410px;
+  height: 270px;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.apartament_info {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 90%;
+  height: 100%;
+}
+
+h3 {
+  font-size: 15px;
+  font-family: "Noto Sans";
+  margin: 4px;
+  font-weight: 300;
+  padding-left: 5px;
+}
+
+h2 {
+  font-size: 17px;
+  font-family: "Noto Sans";
+  margin: 5px;
+  padding-left: 5px;
+}
+
+.icon {
+  background-color: white;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+
+.contain {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  width: 100%;
+  align-items: flex-end;
+  border-radius: 10px;
+}
+
+.header a {
+  color: black;
+  text-decoration: none;
+}
+
+.header a:hover {
+  color: #494949;
+  text-decoration: none;
+}
+
+.footer-div {
+}
+
+.refresh:hover {
+  cursor: pointer;
+  color: #8f8f8f;
+}
+.refresh {
+  width: 75%;
+  color: #6e6e6e;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 30px;
+}
+.refresh:active {
+  cursor: pointer;
+  color: #7f7f7f;
+}
+
+.puff {
+  margin-top: 100px;
+}

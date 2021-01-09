@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 public class FlatfinderApplication {
 
     public static void main(String[] args) {
-        //String a = "ala";
         SpringApplication.run(FlatfinderApplication.class, args);
     }
 
