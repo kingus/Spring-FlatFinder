@@ -23,7 +23,7 @@ public class Main {
 
 
             try {
-                URL url = new URL("http://localhost:8080/api/offer");
+                URL url = new URL("http://localhost:8080/api/offers");
                 String readLine = null;
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
