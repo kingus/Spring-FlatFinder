@@ -18,7 +18,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/api/users")
+    @PostMapping("/register")
+//    @PostMapping("/api/users")
     public ResponseEntity addUser(@RequestBody UserRequest userRequest) {
         try{
             userService.addUser(userRequest);

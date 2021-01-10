@@ -1,10 +1,13 @@
 package com.wat.flatfinder.services;
 
+import com.wat.flatfinder.dtos.AuthorityRequest;
 import com.wat.flatfinder.dtos.UserRequest;
 import com.wat.flatfinder.dtos.UserResponse;
 import com.wat.flatfinder.entities.User;
+import com.wat.flatfinder.repositories.AuthorityRepository;
 import com.wat.flatfinder.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -14,20 +17,32 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final AuthorityService authorityService;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, AuthorityService authorityService) {
         this.userRepository = userRepository;
+        this.authorityService = authorityService;
     }
 
     @Override
     public void addUser(UserRequest userRequest) {
     User user = new User();
     user.setUsername(userRequest.getUsername());
+    String encodedPassword = new BCryptPasswordEncoder().encode(userRequest.getPassword());
+
     user.setEmail(userRequest.getEmail());
+    user.setPassword(encodedPassword);
+    user.setEnabled(true);
     user.setPrefferedDistrict(userRequest.getPreffered_district());
     user.setCreationDate(LocalDateTime.now());
+//    Boolean isPasswordCorrect = new BCryptPasswordEncoder().matches(userRequest.getPassword(), encodedPassword);
+
+    System.out.println(encodedPassword);
+//    System.out.println(isPasswordCorrect);
     userRepository.save(user);
+    authorityService.addAuthority(new AuthorityRequest(user.getUsername(), "ROLE_ADMIN"));
+
 
     }
     public void deleteUser(int id) {

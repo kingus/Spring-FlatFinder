@@ -15,7 +15,7 @@ public class SwaggerConfiguration {
     public Docket get() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .paths(PathSelectors.ant("/api/**"))
+                .paths(PathSelectors.ant("/**"))
                 .apis(RequestHandlerSelectors.basePackage("com.wat.flatfinder"))
                 .build();
     }
