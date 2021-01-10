@@ -12,9 +12,9 @@ public class Authority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="username", unique = true)
+    @Column(name="username")
     private String username;
 
-    @Column(name="authority", unique = true)
+    @Column(name="authority")
     private String authority;
 }
