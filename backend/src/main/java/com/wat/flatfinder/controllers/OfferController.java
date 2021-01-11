@@ -6,6 +6,9 @@ import com.wat.flatfinder.services.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +24,7 @@ public class OfferController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/api/offers")
-    public ResponseEntity addOffer(@RequestBody OfferRequest apartamentRequest) {
+    public ResponseEntity addOffer(@RequestBody OfferRequest apartamentRequest ) {
         offerService.addOffer(apartamentRequest);
         return new ResponseEntity(HttpStatus.OK);
     }
