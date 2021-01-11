@@ -70,7 +70,7 @@ const SearchBar = (props) => {
 
         <div className="search-description">
           <h5>Rooms</h5>
-          <div className="row">
+          <div className="row rooms">
             <div
               className="plus"
               onClick={() => {
@@ -237,7 +237,11 @@ const SearchBar = (props) => {
               }}
             >
               {districtsList.map((district) => {
-                return <option key={district}>{district}</option>;
+                return (
+                  <option id={district} value={district}>
+                    {district}
+                  </option>
+                );
               })}
             </select>
           </div>

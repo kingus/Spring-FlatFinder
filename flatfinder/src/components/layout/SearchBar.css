@@ -1,7 +1,7 @@
 .main-container {
-  margin-top: 30px;
+  padding-top: 30px;
   width: 100%;
-  /* height: 60px; */
+  height: 22vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,7 +10,7 @@
 
 .search-bar {
   width: 78%;
-  height: 120px;
+  height: 80px;
   background-color: white;
   border-radius: 50px;
   border-color: #dddddd;
@@ -55,7 +55,7 @@ input {
 .search-description {
   border-radius: 10px 0px 0px 10px;
   width: auto;
-  height: 40px;
+  height: 60px;
   border-color: #dddddd;
   border-width: 0px 1px 0px 0px;
   border-style: solid;
@@ -120,8 +120,8 @@ input {
   position: relative;
   display: flex;
   width: auto;
-  border-bottom: 1px solid #bbbbbb;
-  justify-content: center;
+  /* border-bottom: 1px solid #bbbbbb; */
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -169,4 +169,8 @@ select {
 select:focus {
   outline: none;
   border-color: white;
+}
+
+.rooms {
+  padding-top: 10px;
 }
