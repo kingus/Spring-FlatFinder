@@ -19,6 +19,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
+    @CrossOrigin(origins = "http://localhost:3000")
 //    @PostMapping("/api/users")
     public ResponseEntity addUser(@RequestBody UserRequest userRequest) {
         try{
@@ -31,6 +32,8 @@ public class UserController {
     }
 
     @DeleteMapping("/api/users/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+
     public ResponseEntity deleteUser(@PathVariable(value = "id") int id) {
         try {
             userService.deleteUser(id);
@@ -42,6 +45,8 @@ public class UserController {
 
     }
     @GetMapping("/api/users/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+
     public ResponseEntity getUser(@PathVariable(value = "id") int id) {
         try {
             return new ResponseEntity(userService.getUser(id),HttpStatus.OK);
