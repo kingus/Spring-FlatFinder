@@ -17,8 +17,12 @@ export const Navbar = () => {
   return (
     <div className="navbar">
       <div className="logo-container">
-        <img src={logo} alt="Logo" className="logo" />
-        <h1>Flat Finder</h1>
+        {/* <img src={logo} alt="Logo" className="logo" /> */}
+
+        <h1>
+          {" "}
+          <b>Flat Finder</b>
+        </h1>
       </div>
       <ul>
         <Link to="/">

@@ -9,9 +9,11 @@ import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 import thunk from "redux-thunk";
 import apartmentsReducer from "./store/reducers/apartments";
+import markersReducer from "./store/reducers/markers";
 
 const rootReducer = combineReducers({
   apartments: apartmentsReducer,
+  markers: markersReducer,
 });
 
 const store = createStore(
