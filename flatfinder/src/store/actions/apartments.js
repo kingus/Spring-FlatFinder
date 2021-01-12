@@ -3,16 +3,14 @@ export const GET_APARTMENTS = "GET_APARTMENTS";
 
 export const getApartments = () => {
   return async (dispatch, getState) => {
-    console.log("Action here!");
     let apartments = [];
     const config = {
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*",
+        Authorization: localStorage.getItem("token"),
       },
     };
 
-    await fetch("http://localhost:8080/api/offers")
+    await fetch("http://localhost:8080/api/offers", config)
       .then((response) => response.json())
       .then((json) => {
         console.log(json);

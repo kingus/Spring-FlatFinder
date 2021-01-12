@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GoogleMapReact from "google-map-react";
 import LocationPin from "./LocationPin";
 import { GOOGLE_MAP_API_KEY } from "../../constants/constants";
-import * as placeActions from "../../store/actions/places";
 
 const Apartament = (props) => {
   const [isFavourite, setIsFavourite] = useState(props.is_favourite);
