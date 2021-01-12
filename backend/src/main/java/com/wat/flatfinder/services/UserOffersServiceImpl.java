@@ -38,7 +38,7 @@ public class UserOffersServiceImpl implements UserOffersService{
                     .map(userOffers -> new UserOffersResponse
                             (userOffers.getOffer().getDistrict(), userOffers.getOffer().getArea(),
                                     userOffers.getOffer().getImgUrl(), userOffers.getOffer().getLatitude(), userOffers.getOffer().getLongitude(), userOffers.getOffer().getOfferUrl(),
-                                    userOffers.getOffer().getPrice(), userOffers.getOffer().getRooms(), userOffers.getOffer().getSource(), userOffers.getOffer().getSourceId(), userOffers.getOffer().getTitle(), userOffers.getNote())).collect(Collectors.toList());
+                                    userOffers.getOffer().getPrice(), userOffers.getOffer().getRooms(), userOffers.getOffer().getSource(), userOffers.getOffer().getSourceId(), userOffers.getOffer().getTitle(), userOffers.getNote(), userOffers.getId())).collect(Collectors.toList());
         }
         return new ArrayList<UserOffersResponse>();
     }
@@ -47,29 +47,18 @@ public class UserOffersServiceImpl implements UserOffersService{
     public void addUserOffers(UserOffersRequest userOffersRequest, String username) {
         UserOffers userOffers = new UserOffers();
         boolean isCorrect = true;
-        System.out.println(userOffersRequest.getOffer_id());
-        System.out.println(userOffersRequest.getNote());
-
         Optional<User> user = userRepository.findByUsername(username);
-        if (user.isPresent()){
+
+        Optional<UserOffers> userOffer = userOffersRepository.findByUserIdAndOfferId(user.get().getId(), userOffersRequest.getOffer_id());
+
+        if(userOffer.isEmpty()){
             userOffers.setUser(user.get());
-        }
-        System.out.println("userPresent");
-
-        if(offerRepository.findById(userOffersRequest.getOffer_id()).isPresent()){
             userOffers.setOffer(offerRepository.findById(userOffersRequest.getOffer_id()).get());
-            System.out.println("offerPresent");
-
-        }else{
-            isCorrect = false;
-            System.out.println("offernotPresent");
-
-        }
-
-        userOffers.setNote(userOffersRequest.getNote());
-        if (isCorrect){
+            userOffers.setNote(userOffersRequest.getNote());
             userOffersRepository.save(userOffers);
 
+        }else {
+            throw new IllegalArgumentException();
         }
     }
 
@@ -79,8 +68,10 @@ public class UserOffersServiceImpl implements UserOffersService{
         System.out.println(user_id);
         System.out.println("ID" + id);
         try{
-            UserOffers userOffer = userOffersRepository.findByUserIdAndOfferId(user_id, id);
-            userOffersRepository.delete(userOffer);
+            Optional<UserOffers> userOffer = userOffersRepository.findByUserIdAndOfferId(user_id, id);
+            if(userOffer.isPresent()){
+                userOffersRepository.delete(userOffer.get());
+            }
         }catch (Exception ex){
             throw new RuntimeException("User offer not found");
         }
@@ -91,10 +82,11 @@ public class UserOffersServiceImpl implements UserOffersService{
         System.out.println(user_id);
         System.out.println("ID" + id);
         try{
-            UserOffers userOffer = userOffersRepository.findByUserIdAndOfferId(user_id, id);
-            userOffer.setNote(updateNoteRequest.getNote());
-            userOffersRepository.save(userOffer);
-            System.out.println(userOffer.getNote());
+            Optional<UserOffers> userOffer = userOffersRepository.findByUserIdAndOfferId(user_id, id);
+            if (userOffer.isPresent()){
+                userOffer.get().setNote(updateNoteRequest.getNote());
+                userOffersRepository.save(userOffer.get());
+            }
         }catch (Exception ex){
             throw new RuntimeException("User offer not found");
         }

@@ -4,8 +4,10 @@ import com.wat.flatfinder.entities.UserOffers;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface UserOffersRepository extends CrudRepository<UserOffers, Integer> {
-    public UserOffers findByUserIdAndOfferId(int user_id, int offer_id);
+    Optional<UserOffers> findByUserIdAndOfferId(int user_id, int offer_id);
 
 }
