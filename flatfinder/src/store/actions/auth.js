@@ -25,6 +25,40 @@ export const login = (username, password) => {
   };
 };
 
+export const register = (email, username, password, preffered_district) => {
+  return async (dispatch, getState) => {
+    console.log("Register Action");
+    console.log(email);
+    console.log(username);
+    console.log(password);
+    console.log(preffered_district);
+    console.log("Register Action1");
+
+    const body = {
+      email: email,
+      username: username,
+      password: password,
+      preffered_district: preffered_district,
+    };
+    console.log(body);
+    axios
+      .post("http://localhost:8080/register", body)
+      .then(function (response) {
+        console.log(response.status);
+        console.log("register success");
+        dispatch({
+          type: REGISTER,
+        });
+      })
+      .catch(function (error) {
+        // handle error
+        console.log("Wrong REGISTER");
+        console.log(error);
+      })
+      .then(function () {});
+  };
+};
+
 export const checkIfAuthenticated = () => {
   console.log("sprawdzam stan zalogowania");
   return async (dispatch, getState) => {

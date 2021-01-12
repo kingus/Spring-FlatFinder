@@ -28,7 +28,6 @@
 }
 
 .mainContainer {
-  /* border: 2px blue solid; */
   background-color: #eff1f3;
   width: 100%;
   display: flex;
@@ -43,6 +42,16 @@
   flex-direction: column;
   overflow: scroll;
   justify-content: flex-start;
+}
+.fav_apartaments_list {
+  background-color: #eff1f3;
+  width: 70%;
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  justify-content: flex-start;
+  align-items: center;
 }
 .container {
   /* border: 2px green solid; */
@@ -242,4 +251,41 @@ h2 {
 
 #google-map {
   height: 100%;
+}
+
+.note_container {
+  /* border: 2px red solid; */
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  margin-top: 20vh;
+}
+.note_title {
+  /* border: 2px green solid; */
+  font-size: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  /* padding: 15px;
+  background-color: white;
+  box-shadow: 3px 3px 10px 1px #b6b6b6; */
+}
+.note_form {
+  /* border: 2px blue solid; */
+  /* height: 20vh;
+  width: 40vh; */
+  max-width: 100%;
+  max-height: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 3px 3px 10px 1px #b6b6b6;
+}
+.note_text_area {
+  border-style: inset;
+  border-width: 0px;
+  border-color: white;
+  height: 20vh;
 }

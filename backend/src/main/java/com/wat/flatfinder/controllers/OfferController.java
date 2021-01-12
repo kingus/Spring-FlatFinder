@@ -22,7 +22,7 @@ public class OfferController {
         this.offerService = apartamentService;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+//    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/api/offers")
     public ResponseEntity addOffer(@RequestBody OfferRequest apartamentRequest ) {
         offerService.addOffer(apartamentRequest);

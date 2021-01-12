@@ -41,9 +41,18 @@ export const Navbar = () => {
         </h1>
       </div>
       <ul>
-        <Link to="/">
-          <li className="">Home</li>
-        </Link>
+        {isAuthenticated && (
+          <Link to="/">
+            <li className="">Home</li>
+          </Link>
+        )}
+      </ul>
+      <ul>
+        {isAuthenticated && (
+          <Link to="/my_offers">
+            <li className="">My offers</li>
+          </Link>
+        )}
       </ul>
 
       <div
