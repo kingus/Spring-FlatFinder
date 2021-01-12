@@ -10,10 +10,12 @@ import ReduxThunk from "redux-thunk";
 import thunk from "redux-thunk";
 import apartmentsReducer from "./store/reducers/apartments";
 import markersReducer from "./store/reducers/markers";
+import authReducer from "./store/reducers/auth";
 
 const rootReducer = combineReducers({
   apartments: apartmentsReducer,
   markers: markersReducer,
+  auth: authReducer,
 });
 
 const store = createStore(

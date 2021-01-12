@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
-    @PostMapping("/login")
     @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/login")
     public void login(@RequestBody LoginRequest loginRequest){
     }
 }
