@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as authActions from "../../store/actions/auth";
@@ -6,7 +6,6 @@ import * as authActions from "../../store/actions/auth";
 import "./LoginBox.css";
 // import Navbar from "./Navbar";
 import flat from "../../images/flat.jpg";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
 // import { AuthContext } from "../contexts/AuthContext";
 // import Footer from "./Footer";
@@ -75,14 +74,7 @@ const LoginBox = () => {
                 ></input>
               </div>
               <div className="btn-div">
-                <button
-                  className="btn-login"
-                  type="submit"
-                  onClick={() => {
-                    // dispatch(authActions.login("grusza", "Natura1234"));
-                    // history.push("/");
-                  }}
-                >
+                <button className="btn-login" type="submit">
                   Login
                 </button>
                 {/* </Link> */}
@@ -90,7 +82,7 @@ const LoginBox = () => {
             </form>
 
             <div className="bottom-btns">
-              <Link to="/signup">
+              <Link to="/register">
                 <h5>Don't have an account?</h5>
                 <h6>Register</h6>
               </Link>

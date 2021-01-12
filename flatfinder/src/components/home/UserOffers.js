@@ -1,25 +1,20 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import Form from "./Form";
+// import Form from "./Form";
 import { useDispatch, useSelector } from "react-redux";
 import * as apartmentsActions from "../../store/actions/apartments";
 import SearchBar from "../layout/SearchBar";
-import { Circles, Oval, Puff } from "@agney/react-loading";
+import { Circles, Puff } from "@agney/react-loading";
 import "../layout/Apartaments.css";
 import Apartament from "../layout/Apartament";
-import { GOOGLE_MAP_API_KEY } from "../../constants/constants";
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
-import Map from "../map/Map";
+import { Form, TextArea } from "semantic-ui-react";
 
-const Home = () => {
-  const [currentOffer, setCurrentOffer] = useState({
-    lat: 52.2297,
-    lng: 21.0122,
-  });
+const UserOffers = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const apartments = useSelector((state) => state.apartments.apartments);
+  const apartments = useSelector((state) => state.apartments.fav_apartments);
   const fav_apartments = useSelector(
     (state) => state.apartments.fav_apartments
   );
+  const [currentOffer, setCurrentOffer] = useState({});
   const [filtered_apartaments, setFilteredApartaments] = useState([]);
 
   const [error, setError] = useState();
@@ -29,7 +24,6 @@ const Home = () => {
     setError(null);
     try {
       await dispatch(apartmentsActions.getFavApartments());
-      await dispatch(apartmentsActions.getApartments());
     } catch (err) {
       setError(err.message);
     }
@@ -84,14 +78,13 @@ const Home = () => {
           apartment.price <= price_max &&
           price_per_m_min <= apartment.price_per_m &&
           apartment.price_per_m <= price_per_m_max &&
-          apartment.district.toLowerCase().includes(district.toLowerCase())
+          apartment.place.toLowerCase().includes(district.toLowerCase())
         ) {
           return apartment;
         }
       })
     );
   };
-
   const ifApartmentIsFav = (obj, list) => {
     var i;
     for (i = 0; i < list.length; i++) {
@@ -104,32 +97,18 @@ const Home = () => {
   return (
     <div className="container">
       <div id="map"></div>
-      {/* <Map /> */}
-      {/* <GoogleMap
-        id="map"
-        mapContainerStyle={mapContainerStyle}
-        zoom={8}
-        center={center}
-        options={options}
-        onLoad={onMapLoad}
-      /> */}
-      <SearchBar
+      {/* <SearchBar
         handleClickSearch={() => {
           handleClickSearch(handleClickSearch);
         }}
-      ></SearchBar>
-      {/* <button onClick={refreshData}>REFRESH DATA</button> */}
-      {/* <div className="refresh" onClick={() => refreshData()}>
-        <FontAwesomeIcon icon={["fa", "sync"]} size="2x" />
-      </div> */}
+      ></SearchBar> */}
       {isLoading ? (
         <div className="puff">
-          <Oval width="100" />
-          {/* <div>Loading...</div> */}
+          <Puff width="100" />
         </div>
       ) : (
         <div className="mainContainer">
-          <div className="apartaments_list">
+          <div className="fav_apartaments_list">
             {apartments.map((apartment) => {
               // console.log(apartment.is_favourite);
               return (
@@ -165,28 +144,24 @@ const Home = () => {
                     show_details={false}
                     lat={apartment.latitude}
                     lng={apartment.longitude}
-                    // is_favourite={fav_apartments.forEach((fav_apartment) => {
-                    //   return fav_apartment.id == apartment.id ? true : false;
-                    // })}
-                    //   notify={notify}
-                    //   key={apartment.apartment_id}
-                    //   description={apartment.description}
-                    //   place={apartment.place}
-                    //   area={apartment.area}
-                    //   price_per_m={apartment.price_per_m}
-                    //   price={apartment.price}
-                    //   source={apartment.source}
-                    //   offer_url={apartment.offer_url}
-                    //   rooms={apartment.rooms}
-                    //   is_favourite={apartment.is_favourite}
-                    //   notify={notify}
                   />
                 </div>
               );
             })}
           </div>
-          <div className="mapContainer">
-            <Map center={currentOffer} />
+          <div className="note_container">
+            <div className="note_form">
+              <div className="note_title">Your note about offer</div>
+
+              <Form>
+                <textarea
+                  rows="35"
+                  className="note_text_area"
+                  placeholder="Note something..."
+                ></textarea>
+                {/* <TextArea rows={5} placeholder="Tell us more" /> */}
+              </Form>
+            </div>
           </div>
         </div>
       )}
@@ -208,4 +183,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default UserOffers;

@@ -2,7 +2,7 @@ import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
-import com.sun.tools.internal.ws.processor.model.Request;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
@@ -20,8 +20,6 @@ public class Main {
     public static void saveDataToDatabase(JSONArray offers) {
         for (int i = 0 ; i < offers.size(); i++) {
             JSONObject obj = (JSONObject) offers.get(i);
-
-
             try {
                 URL url = new URL("http://localhost:8080/api/offers");
                 String readLine = null;
@@ -54,8 +52,6 @@ public class Main {
             } catch (Exception exception) {
                 System.out.println("Exception POST Request: " + exception.getMessage());
             }
-
-
         }
     }
 
@@ -82,7 +78,7 @@ public class Main {
     public static void main(String[] args) {
 
         saveDataToDatabase(Scrapper.getOffersFromGumtree("rembertow"));
-        saveDataToDatabase(Scrapper.getOffersFromGumtree("wesola"));
+//        saveDataToDatabase(Scrapper.getOffersFromGumtree("wesola"));
         //malo ofert w tych dzielnicach, dobre do testów
 
         // Czas wykonywania - kilkanascie minut

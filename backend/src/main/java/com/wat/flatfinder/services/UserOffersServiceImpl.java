@@ -41,7 +41,6 @@ public class UserOffersServiceImpl implements UserOffersService{
                                     userOffers.getOffer().getPrice(), userOffers.getOffer().getRooms(), userOffers.getOffer().getSource(), userOffers.getOffer().getSourceId(), userOffers.getOffer().getTitle(), userOffers.getNote())).collect(Collectors.toList());
         }
         return new ArrayList<UserOffersResponse>();
-
     }
 
     @Override
