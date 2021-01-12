@@ -19,5 +19,5 @@ public class OfferResponse {
     private String rooms;
     private String source;
     private String source_id;
-//    private String title;
+    private String title;
 }

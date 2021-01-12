@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Merriweather&family=Metrophobic&family=Noto+Sans&family=Roboto:wght@300&family=Rubik:wght@300&display=swap");
+.material-icons.active {
+  color: #e72f2f;
+}
+
+.material-icons.grey {
+  color: #b6b6b6;
+}
+
+.material-icons.md-18 {
+  font-size: 18px;
+}
+.material-icons.md-24 {
+  font-size: 24px;
+}
+.material-icons.md-36 {
+  font-size: 36px;
+}
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
+.current_offer {
+  background-color: #e72f2f;
+
+  border-radius: 10px;
+  /* padding-top: -10px; */
+}
+
+.mainContainer {
+  /* border: 2px blue solid; */
+  background-color: #eff1f3;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.apartaments_list {
+  /* border: 2px red solid; */
+  background-color: #eff1f3;
+  width: 60%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  justify-content: flex-start;
+}
+.container {
+  /* border: 2px green solid; */
+  background-color: #eff1f3;
+  /* position: fixed; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* overflow-y: scroll; */
+  max-width: none;
+}
+
+.mapContainer {
+  /* border: 2px blue solid; */
+  display: flex;
+  height: 70vh;
+  width: 40%;
+}
+.nestedMapContainer {
+  /* border: 2px green solid; */
+  display: flex;
+  justify-content: space-between;
+
+  flex-direction: column;
+
+  /* background-color: white; */
+  width: 100%;
+  /* height: 100%; */
+}
+
+.apartament {
+  background-color: white;
+  width: 50vw;
+  height: 170px;
+  margin-top: 15px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px 1px #b6b6b6;
+  display: flex;
+  flex-direction: row;
+  justify-self: flex-start;
+}
+
+.apartment_details {
+  margin-left: 7px;
+  background-color: white;
+  width: 50vw;
+  height: 270px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px 1px #b6b6b6;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+}
+
+.apartament_photo {
+  width: 210px;
+  height: 170px;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.google-map {
+  width: 90%;
+  height: 100%;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.apartament_info {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 90%;
+  height: 100%;
+}
+
+h3 {
+  font-size: 15px;
+  font-family: "Noto Sans";
+  margin: 4px;
+  font-weight: 300;
+  padding-left: 5px;
+}
+
+h2 {
+  font-size: 17px;
+  font-family: "Noto Sans";
+  margin: 5px;
+  padding-left: 5px;
+}
+.icon_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-direction: column;
+
+  background-color: white;
+  /* width: 100%; */
+  height: 100%;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+
+  border-radius: 10px;
+}
+.place_icon_container {
+  /* border: 2px red solid; */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+
+  background-color: white;
+  /* width: 1%; */
+  /* height: 100%; */
+
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+
+  border-radius: 10px;
+}
+
+.icon {
+  /* border: 2px red solid; */
+
+  background-color: white;
+  margin-bottom: 15px;
+  margin-right: 15px;
+  pointer-events: none;
+}
+.mail_icon {
+  /* border: 2px red solid; */
+
+  background-color: white;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+
+.map_icon {
+  /* border: 2px red solid; */
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding-top: 5px;
+  background-color: white;
+  margin-bottom: 15px;
+  margin-right: 15px;
+  /* pointer-events: none; */
+
+  justify-content: center;
+  align-items: center;
+}
+
+.contain {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  width: 100%;
+  align-items: flex-end;
+  border-radius: 10px;
+  justify-content: space-between;
+}
+
+.header a {
+  color: black;
+  text-decoration: none;
+}
+
+.header a:hover {
+  color: #494949;
+  text-decoration: none;
+}
+
+.footer-div {
+}
+
+.refresh:hover {
+  cursor: pointer;
+  color: #8f8f8f;
+}
+.refresh {
+  width: 75%;
+  color: #6e6e6e;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 30px;
+}
+.refresh:active {
+  cursor: pointer;
+  color: #7f7f7f;
+}
+
+.puff {
+  margin-top: 100px;
+}
+
+#google-map {
+  height: 100%;
+}
