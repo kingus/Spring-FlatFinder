@@ -21,4 +21,5 @@ public class UserOffersResponse {
     private String source_id;
     private String title;
     private String note;
+    private int id;
 }

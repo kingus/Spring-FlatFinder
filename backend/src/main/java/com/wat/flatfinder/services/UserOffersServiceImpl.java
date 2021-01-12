@@ -40,7 +40,7 @@ public class UserOffersServiceImpl implements UserOffersService{
                 .map(userOffers -> new UserOffersResponse
                         (userOffers.getOffer().getDistrict(), userOffers.getOffer().getArea(),
                                 userOffers.getOffer().getImgUrl(), userOffers.getOffer().getLatitude(), userOffers.getOffer().getLongitude(),userOffers.getOffer().getOfferUrl(),
-                                userOffers.getOffer().getPrice(), userOffers.getOffer().getRooms(), userOffers.getOffer().getSource(), userOffers.getOffer().getSourceId(), userOffers.getOffer().getTitle(), userOffers.getNote())).collect(Collectors.toList());
+                                userOffers.getOffer().getPrice(), userOffers.getOffer().getRooms(), userOffers.getOffer().getSource(), userOffers.getOffer().getSourceId(), userOffers.getOffer().getTitle(), userOffers.getNote(), userOffers.getOffer().getId())).collect(Collectors.toList());
     }
 
     @Override

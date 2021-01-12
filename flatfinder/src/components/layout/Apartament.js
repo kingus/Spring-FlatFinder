@@ -8,6 +8,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faRegularHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as apartmentActions from "../../store/actions/apartments";
 import GoogleMapReact from "google-map-react";
 import LocationPin from "./LocationPin";
 import { GOOGLE_MAP_API_KEY } from "../../constants/constants";
@@ -15,7 +16,7 @@ import { GOOGLE_MAP_API_KEY } from "../../constants/constants";
 const Apartament = (props) => {
   const [isFavourite, setIsFavourite] = useState(props.is_favourite);
   const [isMailSended, setIsMailSended] = useState(false);
-  const [heart, setHeart] = useState(isFavourite ? "pink" : "#b6b6b6");
+  const [heart, setHeart] = useState(props.is_favourite ? "pink" : "#b6b6b6");
   library.add(faHeart, faRegularHeart);
   const dispatch = useDispatch();
 
@@ -29,10 +30,29 @@ const Apartament = (props) => {
     setIsFavourite(!isFavourite);
     if (isFavourite) {
       setHeart("pink");
+
+      dispatch(
+        apartmentActions.addApartmentToFav({
+          district: props.district,
+          area: props.area,
+          img_url: props.img_url,
+          latitude: props.lat,
+          longitude: props.lng,
+          offer_url: props.offer_url,
+          price: props.price,
+          rooms: props.rooms,
+          source: props.source,
+          source_id: props.source_id,
+          title: props.title,
+          note: "",
+          id: props.id,
+        })
+      );
     } else {
       setHeart("#b6b6b6");
+      dispatch(apartmentActions.removeApartmentFromFav(props.id));
     }
-    props.notify(isFavourite);
+    // props.notify(isFavourite);
   };
 
   return (
@@ -51,7 +71,8 @@ const Apartament = (props) => {
                 <h2>{props.description} </h2>
               </a>
             </div>
-            <h3>Dzielnica: {props.place}</h3>
+            {/* <h3>ID: {props.is_favourite}</h3> */}
+            <h3>Dzielnica: {props.district}</h3>
             <h3>Cena: {props.price} zł </h3>
             <h3>Cena za metr: {(props.price / props.area).toFixed(0)} zł</h3>
             <h3>
@@ -61,7 +82,7 @@ const Apartament = (props) => {
             <h3>Pokoje: {props.rooms}</h3>
           </div>
           <div className="icon_container">
-            <div className="icon">
+            <div className="mail_icon">
               <FontAwesomeIcon
                 icon={["far", "heart"]}
                 color={heart}
@@ -80,6 +101,7 @@ const Apartament = (props) => {
                       " i source id " +
                       props.source_id
                   );
+                  dispatch(apartmentActions.sendEmail(props.id));
                   setIsMailSended(true);
                 }
               }}

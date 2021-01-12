@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import "../login/LoginBox.css";
-import Navbar from "./Navbar";
 import flat from "../../images/flat.jpg";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import * as authActions from "../../store/actions/auth";
+import { useHistory } from "react-router-dom";
 
 const RegisterBox = () => {
-  const [accoutCreated, setAccountCreated] = useState(false);
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    username: "",
+    username: "szymon.gruszczynski@student.wat.edu.pl",
     email: "",
     password: "",
     re_password: "",
@@ -23,42 +26,26 @@ const RegisterBox = () => {
     e.preventDefault();
     console.log("SUBMIT");
     if (password === re_password) {
-      signup(username, email, password, re_password);
-      setAccountCreated(true);
+      console.log("Hasla sie zgadzaja");
+      dispatch(authActions.register(username, email, password, "wesola"));
+      // signup(formData.username, formData.email, formData.password, "wesola");
+    } else {
+      console.log("Password aren't the same");
     }
   };
 
-  if (accoutCreated) {
-    return <Redirect to="/login" />;
-  }
+  // return <Redirect to="/login" />;
 
-  const signup = (username, email, password, re_password) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+  const signup = (username, email, password, preffered_district) => {
+    console.log("Zostanie odpalona akcja");
 
-    const body = JSON.stringify({ username, email, password, re_password });
-
-    axios
-      .post("http://127.0.0.1:8000/auth/users/", body, config)
-      .then(function (response) {
-        // handle success
-        console.log(response);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });
+    dispatch(
+      authActions.register((username, email, password, preffered_district))
+    );
   };
 
   return (
     <div className="container">
-      <Navbar></Navbar>
       <div className="page-container">
         <div className="registerbox">
           <div className="photo-div-register">
@@ -123,7 +110,7 @@ const RegisterBox = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </div>
   );
 };
