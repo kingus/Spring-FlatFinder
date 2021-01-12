@@ -7,6 +7,7 @@ import com.wat.flatfinder.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -44,12 +45,12 @@ public class UserController {
         }
 
     }
-    @GetMapping("/api/users/{id}")
+    @GetMapping("/api/me")
     @CrossOrigin(origins = "http://localhost:3000")
 
-    public ResponseEntity getUser(@PathVariable(value = "id") int id) {
+    public ResponseEntity getUser(@AuthenticationPrincipal String username) {
         try {
-            return new ResponseEntity(userService.getUser(id),HttpStatus.OK);
+            return new ResponseEntity(userService.getUser(username),HttpStatus.OK);
         }
         catch (Exception exception){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

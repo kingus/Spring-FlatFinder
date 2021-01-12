@@ -36,25 +36,14 @@ public class UserServiceImpl implements UserService {
     user.setEnabled(true);
     user.setPrefferedDistrict(userRequest.getPreffered_district());
     user.setCreationDate(LocalDateTime.now());
-//    Boolean isPasswordCorrect = new BCryptPasswordEncoder().matches(userRequest.getPassword(), encodedPassword);
 
     System.out.println(encodedPassword);
-//    System.out.println(isPasswordCorrect);
     userRepository.save(user);
     authorityService.addAuthority(new AuthorityRequest(user.getUsername(), "ROLE_ADMIN"));
 
 
     }
     public void deleteUser(int id) {
-        //does not work
-        System.out.println(id);
-        for (User user:userRepository.findAll()
-             ) {
-
-            System.out.println(user);
-        }
-
-        System.out.println(userRepository.findById(id).isPresent());
 
         if (userRepository.findById(id).isPresent()) {
             userRepository.deleteById(id);
@@ -62,14 +51,12 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("User not found");
         }
     }
-    public UserResponse getUser(int id) {
-        System.out.println(id);
-        Optional<User> user = userRepository.findById(id);
+    public UserResponse getUser(String username) {
+        System.out.println(username);
+        Optional<User> user = userRepository.findByUsername(username);
 
         if (user.isPresent()) {
-//            UserResponse userResponse =
             return new UserResponse(user.get().getUsername(), user.get().getEmail(), user.get().getPrefferedDistrict());
-//            ;
         } else {
             throw new RuntimeException("User not found");
         }

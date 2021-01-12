@@ -33,7 +33,7 @@ public class EmailServiceImpl implements EmailService{
         Offer offer = offerRepository.findById(offerId).get();
         String subject = "FlatFinder - nowa oferta dla Ciebie";
         String text = "Sprawdź ofertę, która Cię zainteresowała!<br>" +offer.getOfferUrl()  +"<br><br><img src=" + offer.getImgUrl() + "></img>";
-        String userEmail = userRepository.findByUsername(username).getEmail();
+        String userEmail = userRepository.findByUsername(username).get().getEmail();
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);

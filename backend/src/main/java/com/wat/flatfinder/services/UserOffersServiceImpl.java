@@ -31,16 +31,17 @@ public class UserOffersServiceImpl implements UserOffersService{
     @Override
     public List<UserOffersResponse> getAll(String username) {
         System.out.println(username);
-        User user = userRepository.findByUsername(username);
-        int userId = user.getId();
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            return StreamSupport.stream(userOffersRepository.findAll().spliterator(), false)
+                    .filter(userOffers -> userOffers.getUser().getId() == user.get().getId())
+                    .map(userOffers -> new UserOffersResponse
+                            (userOffers.getOffer().getDistrict(), userOffers.getOffer().getArea(),
+                                    userOffers.getOffer().getImgUrl(), userOffers.getOffer().getLatitude(), userOffers.getOffer().getLongitude(), userOffers.getOffer().getOfferUrl(),
+                                    userOffers.getOffer().getPrice(), userOffers.getOffer().getRooms(), userOffers.getOffer().getSource(), userOffers.getOffer().getSourceId(), userOffers.getOffer().getTitle(), userOffers.getNote())).collect(Collectors.toList());
+        }
+        return new ArrayList<UserOffersResponse>();
 
-        System.out.println(user.getId());
-                return StreamSupport.stream(userOffersRepository.findAll().spliterator(), false)
-                .filter(userOffers -> userOffers.getUser().getId()==userId)
-                .map(userOffers -> new UserOffersResponse
-                        (userOffers.getOffer().getDistrict(), userOffers.getOffer().getArea(),
-                                userOffers.getOffer().getImgUrl(), userOffers.getOffer().getLatitude(), userOffers.getOffer().getLongitude(),userOffers.getOffer().getOfferUrl(),
-                                userOffers.getOffer().getPrice(), userOffers.getOffer().getRooms(), userOffers.getOffer().getSource(), userOffers.getOffer().getSourceId(), userOffers.getOffer().getTitle(), userOffers.getNote())).collect(Collectors.toList());
     }
 
     @Override
@@ -50,8 +51,10 @@ public class UserOffersServiceImpl implements UserOffersService{
         System.out.println(userOffersRequest.getOffer_id());
         System.out.println(userOffersRequest.getNote());
 
-//        User user = userRepository.findByUsername(username);
-        userOffers.setUser(userRepository.findByUsername(username));
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()){
+            userOffers.setUser(user.get());
+        }
         System.out.println("userPresent");
 
         if(offerRepository.findById(userOffersRequest.getOffer_id()).isPresent()){
@@ -73,7 +76,7 @@ public class UserOffersServiceImpl implements UserOffersService{
 
     @Override
     public void deleteUserOffer(int id, String username) {
-        int user_id = userRepository.findByUsername(username).getId();
+        int user_id = userRepository.findByUsername(username).get().getId();
         System.out.println(user_id);
         System.out.println("ID" + id);
         try{
@@ -85,7 +88,7 @@ public class UserOffersServiceImpl implements UserOffersService{
     }
     @Override
     public void updateUserOfferNote(int id, String username, UpdateNoteRequest updateNoteRequest) {
-        int user_id = userRepository.findByUsername(username).getId();
+        int user_id = userRepository.findByUsername(username).get().getId();
         System.out.println(user_id);
         System.out.println("ID" + id);
         try{
