@@ -3,6 +3,7 @@ export const GET_APARTMENTS = "GET_APARTMENTS";
 export const GET_FAV_APARTMENTS = "GET_FAV_APARTMENTS";
 export const ADD_APARTMENT_TO_FAV = "ADD_APARTMENT_TO_FAV";
 export const REMOVE_APARTMENT_FROM_FAV = "REMOVE_APARTMENT_FROM_FAV";
+export const UPDATE_NOTE = "UPDATE_NOTE";
 
 export const getApartments = () => {
   return async (dispatch, getState) => {
@@ -102,32 +103,6 @@ export const addApartmentToFav = (offer) => {
       })
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
-
-    //   console.log(offer);
-    //   const body = JSON.stringify({ offer_id: offer.id, note: "" });
-    //   const config = {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: localStorage.getItem("token"),
-    //     },
-    //     data: body,
-    //   };
-    //   console.log("config");
-    //   console.log(config);
-    //   axios
-    //     .post("http://localhost:8080/api/user-offers", config)
-    //     .then(function (response) {
-    //       console.log(response.status);
-    //       dispatch({
-    //         type: ADD_APARTMENT_TO_FAV,
-    //         offer: offer,
-    //       });
-    //     })
-    //     .catch(function (error) {
-    //       console.log("Error adding to fav");
-    //       console.log(error);
-    //     })
-    //     .then(function () {});
   };
 };
 
@@ -141,7 +116,7 @@ export const removeApartmentFromFav = (offer_id) => {
       headers: myHeaders,
       redirect: "follow",
     };
-
+    console.log("http://localhost:8080/api/user-offers/" + offer_id);
     fetch("http://localhost:8080/api/user-offers/" + offer_id, requestOptions)
       .then((response) => {
         console.log(response.status);
@@ -152,24 +127,37 @@ export const removeApartmentFromFav = (offer_id) => {
       })
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
+  };
+};
 
-    // const config = {
-    //   headers: {
-    //     Authorization: localStorage.getItem("token"),
-    //   },
-    // };
-    // axios
-    //   .delete("http://localhost:8080/api/user-offers/" + offer_id, config)
-    //   .then(function (response) {
-    //     console.log(response.status);
-    //     dispatch({
-    //       type: REMOVE_APARTMENT_FROM_FAV,
-    //       offer_id: offer_id,
-    //     });
-    //   })
-    //   .catch(function (error) {
-    //     // handle error
-    //   })
-    //   .then(function () {});
+export const updateNote = (id, note) => {
+  return async (dispatch, getState) => {
+    console.log("bede robil update");
+
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", localStorage.getItem("token"));
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({ note: note });
+    console.log(raw);
+    var requestOptions = {
+      method: "PATCH",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+    console.log("http://localhost:8080/api/user-offers/" + id);
+    fetch("http://localhost:8080/api/user-offers/" + id, requestOptions)
+      .then((response) => {
+        console.log("RESPONSE");
+        console.log(response);
+        dispatch({
+          type: UPDATE_NOTE,
+          id: id,
+          note: note,
+        });
+      })
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
   };
 };

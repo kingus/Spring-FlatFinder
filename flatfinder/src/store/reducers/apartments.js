@@ -3,6 +3,7 @@ import {
   REMOVE_APARTMENT_FROM_FAV,
   GET_APARTMENTS,
   GET_FAV_APARTMENTS,
+  UPDATE_NOTE,
 } from "../actions/apartments";
 
 const initialState = {
@@ -24,7 +25,7 @@ export default (state = initialState, action) => {
         fav_apartments: action.apartments,
       };
     case ADD_APARTMENT_TO_FAV:
-      console.log("Reducer here!");
+      console.log("Dodaje do ulubionych!");
       return {
         ...state,
         fav_apartments: state.fav_apartments.concat(action.offer),
@@ -33,10 +34,21 @@ export default (state = initialState, action) => {
       console.log("Usuwam z ulub");
       return {
         ...state,
-        fav_apartments: state.fav_apartments.concat(action.offer),
         fav_apartments: state.fav_apartments.filter(
-          (apartment) => apartment.id !== apartment.id
+          (apartment) => apartment.id !== action.offer_id
         ),
+      };
+    case UPDATE_NOTE:
+      console.log("Update note!");
+      let newFavApartments = state.fav_apartments;
+      newFavApartments.forEach((apartment) => {
+        if (apartment.id === action.id) {
+          apartment.note = action.note;
+        }
+      });
+      return {
+        ...state,
+        fav_apartments: newFavApartments,
       };
     // case ADD_EVENT:
     //   const newEvent = new Event(

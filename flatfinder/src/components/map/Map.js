@@ -72,7 +72,7 @@ const Map = (props) => {
       radius: "2000",
       type: ["transit_station"],
     };
-
+    const infowindow = new google.maps.InfoWindow();
     service = new google.maps.places.PlacesService(mapRef.current);
     service.nearbySearch(request, callback);
     function callback(results, status) {
@@ -83,7 +83,9 @@ const Map = (props) => {
           const newMarker = new google.maps.Marker({
             position: place.geometry.location,
             map,
+            animation: google.maps.Animation.DROP,
           });
+          console.log(place);
           //   setMarkers(markers.concat(newMarker));
         }
       }
@@ -110,7 +112,9 @@ const Map = (props) => {
           const newMarker = new google.maps.Marker({
             position: place.geometry.location,
             map,
+            animation: google.maps.Animation.DROP,
           });
+
           dispatch(markersAction.addMarker(newMarker));
         }
       }

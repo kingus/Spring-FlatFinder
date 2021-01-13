@@ -9,14 +9,29 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SearchBar.css";
+import Select from "react-select";
+
 const SearchBar = (props) => {
   const [districtsList, setDistrictsList] = useState([
-    // "",
-    "Bielany",
-    "Wola",
-    "Żoliborz",
-    "Mokotów",
+    { value: "bemowo", label: "Bemowo" },
+    { value: "bialoleka", label: "Białołeka" },
+    { value: "bielany", label: "Bielany" },
+    { value: "ochota", label: "Ochota" },
+    { value: "praga-poludnie", label: "Praga-południe" },
+    { value: "praga-polnoc", label: "Praga-północ" },
+    { value: "rembertow", label: "Rembertow" },
+    { value: "targowek", label: "Targowek" },
+    { value: "ursus", label: "Ursus" },
+    { value: "ursynow", label: "Ursynow" },
+    { value: "wawer", label: "Wawer" },
+    { value: "wesola", label: "Wesola" },
+    { value: "wilanow", label: "Wilanow" },
+    { value: "wola", label: "Wola" },
+    { value: "wlochy", label: "Włochy" },
+    { value: "srodmiescie", label: "Środmieście" },
+    { value: "zoliborz", label: "Żoliborz" },
   ]);
+  const [selectedDistricts, setSelectedDistricts] = useState();
 
   const [rooms, setRooms] = useState(0);
   const [area, setArea] = useState({
@@ -39,12 +54,15 @@ const SearchBar = (props) => {
   const handleChangeDescription = (enteredDescription) => {
     setDesctiption(enteredDescription);
   };
+  const handleChangeDistrict = (enteredDescription) => {
+    setDistrict(enteredDescription);
+  };
 
   return (
     <div className="main-container">
       <div className="search-bar">
         <div className="search-description">
-          <h5>Description</h5>
+          <h5>Title</h5>
           <div className="row">
             <input
               className="description-input"
@@ -68,7 +86,7 @@ const SearchBar = (props) => {
           </div>
         </div>
 
-        <div className="search-description">
+        {/* <div className="search-description">
           <h5>Rooms</h5>
           <div className="row rooms">
             <div
@@ -110,13 +128,13 @@ const SearchBar = (props) => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="search-description">
           <h5>Area</h5>
 
           <div className="row">
-            <div className="input-container">
+            <div className="input-container-area">
               <input
                 value={area.min}
                 className="area-input"
@@ -128,7 +146,7 @@ const SearchBar = (props) => {
             </div>
 
             <h5>-</h5>
-            <div className="input-container">
+            <div className="input-container-area">
               <input
                 value={area.max}
                 className="area-input"
@@ -153,7 +171,7 @@ const SearchBar = (props) => {
         <div className="search-description">
           <h5>Price</h5>
           <div className="row">
-            <div className="input-container">
+            <div className="input-container-price">
               <input
                 value={price.min}
                 className="price-input"
@@ -163,7 +181,7 @@ const SearchBar = (props) => {
             </div>
 
             <h5> - </h5>
-            <div className="input-container">
+            <div className="input-container-price">
               <input
                 className="price-input"
                 value={price.max}
@@ -188,7 +206,7 @@ const SearchBar = (props) => {
         <div className="search-description">
           <h5>Price per m</h5>
           <div className="row">
-            <div className="input-container">
+            <div className="input-container-price">
               <input
                 value={pricePerM.min}
                 className="price-input"
@@ -199,7 +217,7 @@ const SearchBar = (props) => {
               <h5>PLN</h5>
             </div>
             <h5> - </h5>
-            <div className="input-container">
+            <div className="input-container-price">
               <input
                 className="price-input"
                 value={pricePerM.max}
@@ -223,11 +241,55 @@ const SearchBar = (props) => {
             </div>
           </div>
         </div>
-
         <div className="search-description">
           <h5>Disctrict</h5>
-          <div className="select-district">
-            <select
+          <div className="row">
+            <input
+              className="description-input"
+              value={district}
+              onChange={(e) => {
+                handleChangeDistrict(e.target.value);
+              }}
+            ></input>
+            <div
+              className="close-icon"
+              onClick={() => {
+                setDistrict("");
+              }}
+            >
+              <FontAwesomeIcon
+                icon={["fa", "times"]}
+                size="xs"
+                color="#dddddd"
+              />
+            </div>
+          </div>
+        </div>
+        {/* <div className="search-description-select">
+          <h5>Disctrict</h5>
+
+          <div className="select-district"> */}
+        {/* <Select
+              // defaultValue={[colourOptions[2], colourOptions[3]]}
+              isMulti
+              value={selectedDistricts}
+              options={districtsList}
+              className="basic-multi-select district-select"
+              classNamePrefix="select"
+              onChange={handleChange}
+            /> */}
+        {/* <select
+              onChange={(e) => handleAddrTypeChange(e)}
+              className="browser-default custom-select"
+            >
+              {Add.map((address, key) => (
+                <option key={key} value={key}>
+                  {address}
+                </option>
+              ))}
+            </select> */}
+
+        {/* <select
               id="districts"
               name="districts"
               value={district}
@@ -243,15 +305,32 @@ const SearchBar = (props) => {
                   </option>
                 );
               })}
-            </select>
-          </div>
-        </div>
+            </select> */}
+        {/* </div> */}
+        {/* </div> */}
       </div>
       <div
         className="search-button"
-        onClick={() =>
-          props.handleClickSearch(description, area, price, district, pricePerM)
-        }
+        onClick={() => {
+          console.log("description");
+          console.log(description);
+          console.log("area");
+          console.log(area);
+          console.log("price");
+          console.log(price);
+          console.log("district");
+          console.log(district);
+          console.log("pricePerM");
+          console.log(pricePerM);
+          props.handleClickSearch(
+            description,
+            area,
+            price,
+            district,
+            pricePerM,
+            rooms
+          );
+        }}
       >
         <FontAwesomeIcon icon={["fa", "search"]} size="xs" color="white" />
       </div>
