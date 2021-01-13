@@ -5,10 +5,13 @@
   height: 8vh;
   display: flex;
   align-items: center;
-  -moz-box-shadow: 3px 3px 5px 6px #b6b6b6;
-  -webkit-box-shadow: 3px 3px 5px 6px #b6b6b6;
-  box-shadow: 3px 1px 5px 0px #b6b6b6;
+  -moz-box-shadow: 3px 3px 5px 6px grey;
+  -webkit-box-shadow: 3px 3px 5px 6px grey;
+  box-shadow: 3px 1px 5px 0px grey;
+  /* border-bottom: 0.3px #616161 solid; */
+  margin-bottom: 4px;
 }
+
 .logo-container {
   /* border: 2px red solid; */
   display: flex;

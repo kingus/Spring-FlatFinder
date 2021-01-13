@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../login/LoginBox.css";
 import flat from "../../images/flat.jpg";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import * as authActions from "../../store/actions/auth";
-import { useHistory } from "react-router-dom";
 
 const RegisterBox = () => {
-  const history = useHistory();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     username: "szymon.gruszczynski@student.wat.edu.pl",
@@ -26,22 +23,10 @@ const RegisterBox = () => {
     e.preventDefault();
     console.log("SUBMIT");
     if (password === re_password) {
-      console.log("Hasla sie zgadzaja");
       dispatch(authActions.register(username, email, password, "wesola"));
-      // signup(formData.username, formData.email, formData.password, "wesola");
     } else {
       console.log("Password aren't the same");
     }
-  };
-
-  // return <Redirect to="/login" />;
-
-  const signup = (username, email, password, preffered_district) => {
-    console.log("Zostanie odpalona akcja");
-
-    dispatch(
-      authActions.register((username, email, password, preffered_district))
-    );
   };
 
   return (
@@ -110,7 +95,6 @@ const RegisterBox = () => {
           </div>
         </div>
       </div>
-      {/* <Footer></Footer> */}
     </div>
   );
 };

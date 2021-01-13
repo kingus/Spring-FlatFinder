@@ -1,35 +1,24 @@
 /*global google*/
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
-import Search from "./Search";
+import { GoogleMap } from "@react-google-maps/api";
 import "../layout/Apartaments.css";
 import * as markersAction from "../../store/actions/markers";
 
-const google = window.google;
 let service;
-const libraries = ["places"];
 
 const mapContainerStyle = {
   height: "100%",
 
   width: "100%",
-  //   border: "2px red solid",
 };
 const options = {
   disableDefaultUI: true,
   zoomControl: true,
 };
-const center = {
-  lat: 52,
-  lng: 21,
-};
 
 const Map = (props) => {
-  const apartments = useSelector((state) => state.apartments.apartments);
-  const markers = useSelector((state) => state.markers.markers);
-
   const [publicTransportPlaces, setPublicTransportPlaces] = useState(false);
   const [educationalPlaces, setEducationalPlaces] = useState(false);
   const [hospitalPlaces, setHospitalPlaces] = useState(false);
@@ -62,36 +51,6 @@ const Map = (props) => {
     );
   };
 
-  const panTo = React.useCallback(({ lat, lng }) => {
-    mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(12);
-    let map = mapRef.current;
-
-    let request = {
-      location: { lat, lng },
-      radius: "2000",
-      type: ["transit_station"],
-    };
-    const infowindow = new google.maps.InfoWindow();
-    service = new google.maps.places.PlacesService(mapRef.current);
-    service.nearbySearch(request, callback);
-    function callback(results, status) {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        for (let i = 0; i < results.length; i++) {
-          let place = results[i];
-
-          const newMarker = new google.maps.Marker({
-            position: place.geometry.location,
-            map,
-            animation: google.maps.Animation.DROP,
-          });
-          console.log(place);
-          //   setMarkers(markers.concat(newMarker));
-        }
-      }
-    }
-  }, []);
-
   const getNearbyPlaces = (type) => {
     mapRef.current.panTo(props.center);
     let map = mapRef.current;
@@ -123,7 +82,6 @@ const Map = (props) => {
 
   return (
     <div className="nestedMapContainer">
-      {/* <Search panTo={panTo} /> */}
       <GoogleMap
         id="map"
         mapContainerStyle={mapContainerStyle}

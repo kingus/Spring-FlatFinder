@@ -1,10 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Merriweather&family=Metrophobic&family=Noto+Sans&family=Roboto:wght@300&family=Rubik:wght@300&display=swap");
 .material-icons.active {
+  fill: none;
+  background: white !important;
   color: #e72f2f;
 }
 
 .material-icons.grey {
+  /* color: #b6b6b6; */
+  fill: none;
   color: #b6b6b6;
+  background: white !important;
 }
 
 .material-icons.md-18 {
@@ -14,17 +19,16 @@
   font-size: 24px;
 }
 .material-icons.md-36 {
-  font-size: 36px;
+  font-size: 30px;
 }
 .material-icons.md-48 {
   font-size: 48px;
 }
 
 .current_offer {
-  background-color: #e72f2f;
-
+  /* background-color: #b6b6b6; */
   border-radius: 10px;
-  /* padding-top: -10px; */
+  box-shadow: 3px 3px 10px 1px #b6b6b6;
 }
 
 .mainContainer {
@@ -34,10 +38,9 @@
   flex-direction: row;
 }
 .apartaments_list {
-  /* border: 2px red solid; */
   background-color: #eff1f3;
   width: 60%;
-  height: 70vh;
+  height: 77vh;
   display: flex;
   flex-direction: column;
   overflow: scroll;
@@ -54,36 +57,26 @@
   align-items: center;
 }
 .container {
-  /* border: 2px green solid; */
   background-color: #eff1f3;
-  /* position: fixed; */
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* overflow-y: scroll; */
   max-width: none;
 }
 
 .mapContainer {
-  /* border: 2px blue solid; */
   display: flex;
-  height: 70vh;
+  height: 77vh;
   width: 40%;
   padding-top: 15px;
   border-radius: 10px;
 }
 .nestedMapContainer {
-  /* border: 2px green solid; */
   display: flex;
   justify-content: space-between;
-
   flex-direction: column;
-
-  /* background-color: white; */
   width: 100%;
-  /* height: 100%; */
 }
 
 .apartament {
@@ -156,9 +149,7 @@ h2 {
   justify-content: space-between;
   align-items: flex-end;
   flex-direction: column;
-
   background-color: white;
-  /* width: 100%; */
   height: 100%;
   padding-right: 10px;
   padding-bottom: 10px;
@@ -167,41 +158,31 @@ h2 {
   border-radius: 10px;
 }
 .place_icon_container {
-  /* border: 2px red solid; */
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: row;
-
   background-color: white;
-  /* width: 1%; */
-  /* height: 100%; */
-
   padding-right: 10px;
   padding-bottom: 10px;
   padding-top: 10px;
-
   border-radius: 10px;
 }
 
 .icon {
-  /* border: 2px red solid; */
-
   background-color: white;
   margin-bottom: 15px;
   margin-right: 15px;
   pointer-events: none;
 }
 .mail_icon {
-  /* border: 2px red solid; */
-
   background-color: white;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   margin-right: 15px;
+  margin-top: 8px;
 }
 
 .map_icon {
-  /* border: 2px red solid; */
   display: flex;
   width: 100%;
   height: 100%;
@@ -209,8 +190,6 @@ h2 {
   background-color: white;
   margin-bottom: 15px;
   margin-right: 15px;
-  /* pointer-events: none; */
-
   justify-content: center;
   align-items: center;
 }
@@ -263,7 +242,6 @@ h2 {
 }
 
 .note_container {
-  /* border: 2px red solid; */
   width: 30%;
   display: flex;
   flex-direction: column;
@@ -272,20 +250,14 @@ h2 {
   margin-top: 20vh;
 }
 .note_title {
-  /* border: 2px green solid; */
   font-size: 30px;
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 10px;
-  /* padding: 15px;
-  background-color: white;
-  box-shadow: 3px 3px 10px 1px #b6b6b6; */
 }
 .note_form {
-  /* border: 2px blue solid; */
-  /* height: 20vh;
-  width: 40vh; */
   max-width: 100%;
+  min-width: 60%;
   max-height: 100%;
   padding: 20px;
   border-radius: 10px;
@@ -297,6 +269,7 @@ h2 {
   border-width: 0px;
   border-color: white;
   height: 20vh;
+  width: 100%;
 }
 
 .btn-update {
