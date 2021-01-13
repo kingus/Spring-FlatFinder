@@ -103,7 +103,10 @@ public class Scrapper {
                         //  SCRAPPING ROOMS
                         Element oRoomsElement =  offerDoc.select("span:contains(Liczba pokoi)").first().siblingElements().first();
                         String oRooms = oRoomsElement.text();
-                        offerDataJSON.put("rooms", oRooms);
+                        oRooms = oRooms.substring(0, oRooms.charAt(' '));
+                        int oRoomsInt = Integer.parseInt(oRooms);
+
+                        offerDataJSON.put("rooms", oRoomsInt);
 
                         //  SCRAPPING PRICE
                         String oPrice = offerDoc.select("#wrapper > div:nth-child(1) > div.vip-header-and-details > div.vip-content-header > div.vip-title.clearfix > div > span > span").text();

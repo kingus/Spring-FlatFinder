@@ -27,31 +27,35 @@ const Apartament = (props) => {
   };
 
   const heartHandler = () => {
+    console.log("Bede usuwał: " + props.id);
+    dispatch(apartmentActions.removeApartmentFromFav(props.id));
     setIsFavourite(!isFavourite);
-    if (isFavourite) {
-      setHeart("pink");
 
-      dispatch(
-        apartmentActions.addApartmentToFav({
-          district: props.district,
-          area: props.area,
-          img_url: props.img_url,
-          latitude: props.lat,
-          longitude: props.lng,
-          offer_url: props.offer_url,
-          price: props.price,
-          rooms: props.rooms,
-          source: props.source,
-          source_id: props.source_id,
-          title: props.title,
-          note: "",
-          id: props.id,
-        })
-      );
-    } else {
-      setHeart("#b6b6b6");
-      dispatch(apartmentActions.removeApartmentFromFav(props.id));
-    }
+    // setIsFavourite(!isFavourite);
+    // if (isFavourite) {
+    //   setHeart("pink");
+
+    //   dispatch(
+    //     apartmentActions.addApartmentToFav({
+    //       district: props.district,
+    //       area: props.area,
+    //       img_url: props.img_url,
+    //       latitude: props.lat,
+    //       longitude: props.lng,
+    //       offer_url: props.offer_url,
+    //       price: props.price,
+    //       rooms: props.rooms,
+    //       source: props.source,
+    //       source_id: props.source_id,
+    //       title: props.title,
+    //       note: "",
+    //       id: props.id,
+    //     })
+    //   );
+    // } else {
+    //   setHeart("#b6b6b6");
+    //   dispatch(apartmentActions.removeApartmentFromFav(props.id));
+    // }
     // props.notify(isFavourite);
   };
 
@@ -71,7 +75,8 @@ const Apartament = (props) => {
                 <h2>{props.description} </h2>
               </a>
             </div>
-            {/* <h3>ID: {props.is_favourite}</h3> */}
+            {/* <h3>ID: {props.id}</h3> */}
+            <h4>{props.title}</h4>
             <h3>Dzielnica: {props.district}</h3>
             <h3>Cena: {props.price} zł </h3>
             <h3>Cena za metr: {(props.price / props.area).toFixed(0)} zł</h3>
@@ -82,14 +87,44 @@ const Apartament = (props) => {
             <h3>Pokoje: {props.rooms}</h3>
           </div>
           <div className="icon_container">
-            <div className="mail_icon">
-              <FontAwesomeIcon
-                icon={["far", "heart"]}
-                color={heart}
-                size="2x"
-                onClick={heartHandler}
-              />
-            </div>
+            {isFavourite ? (
+              <div className="mail_icon">
+                <FontAwesomeIcon
+                  icon={["far", "heart"]}
+                  color="pink"
+                  size="2x"
+                  onClick={heartHandler}
+                />
+              </div>
+            ) : (
+              <div className="mail_icon">
+                <FontAwesomeIcon
+                  icon={["far", "heart"]}
+                  color="#b6b6b6"
+                  size="2x"
+                  onClick={() => {
+                    dispatch(
+                      apartmentActions.addApartmentToFav({
+                        district: props.district,
+                        area: props.area,
+                        img_url: props.img_url,
+                        latitude: props.lat,
+                        longitude: props.lng,
+                        offer_url: props.offer_url,
+                        price: props.price,
+                        rooms: props.rooms,
+                        source: props.source,
+                        source_id: props.source_id,
+                        title: props.title,
+                        note: "",
+                        id: props.id,
+                      })
+                    );
+                    setIsFavourite(!isFavourite);
+                  }}
+                />
+              </div>
+            )}
             <div
               className="mail_icon"
               onClick={() => {

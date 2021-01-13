@@ -121,8 +121,7 @@ const UserOffers = () => {
                   onClick={() => {
                     setCurrentOffer({
                       id: apartment.id,
-                      lat: apartment.latitude,
-                      lng: apartment.longitude,
+                      note: apartment.note,
                     });
                   }}
                 >
@@ -158,7 +157,28 @@ const UserOffers = () => {
                   rows="35"
                   className="note_text_area"
                   placeholder="Note something..."
+                  value={currentOffer.note}
+                  onChange={(event) => {
+                    setCurrentOffer({
+                      ...currentOffer,
+                      note: event.target.value,
+                    });
+                  }}
                 ></textarea>
+                <button
+                  className="btn-update"
+                  onClick={() => {
+                    console.log(currentOffer.note);
+                    dispatch(
+                      apartmentsActions.updateNote(
+                        currentOffer.id,
+                        currentOffer.note
+                      )
+                    );
+                  }}
+                >
+                  Update
+                </button>
                 {/* <TextArea rows={5} placeholder="Tell us more" /> */}
               </Form>
             </div>

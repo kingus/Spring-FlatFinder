@@ -39,15 +39,17 @@ const Home = () => {
     setIsLoading(true);
     loadApartments().then(() => {
       setIsLoading(false);
+      setFilteredApartaments(apartments);
     });
   }, [dispatch, loadApartments]);
 
   const handleClickSearch = (
-    searchDescription,
+    title,
     area,
     price,
     district,
-    pricePerM
+    pricePerM,
+    rooms
   ) => {
     var area_min = area.min;
     var area_max = area.max;
@@ -55,40 +57,62 @@ const Home = () => {
     var price_max = price.max;
     var price_per_m_min = pricePerM.min;
     var price_per_m_max = pricePerM.max;
-    console.log(price_per_m_min);
-    console.log(price_per_m_max);
 
-    if (!(area_min || area_max)) {
+    if (!area_min) {
       area_min = 0;
+    }
+    if (!area_max) {
       area_max = 99999999;
     }
-    if (!(price_min || price_max)) {
+    if (!price_min) {
       price_min = 0;
+    }
+    if (!price_max) {
       price_max = 99999999;
     }
-    if (!(price_per_m_min || price_per_m_max)) {
+    if (!price_per_m_min) {
       price_per_m_min = 0;
+    }
+    if (!price_per_m_max) {
       price_per_m_max = 99999999;
     }
 
+    console.log("PARAMETRY: ");
+    console.log("price_per_m_min");
+    console.log(price_per_m_min);
+    console.log("price_per_m_max");
+    console.log(price_per_m_max);
+    console.log("price_min");
+    console.log(price_min);
+    console.log("price_max");
+    console.log(price_max);
+    console.log("area_min");
+    console.log(area_min);
+    console.log("area_max");
+    console.log(area_max);
+    console.log("rooms");
+    console.log(rooms);
+    console.log("rooms");
+    console.log(rooms);
+
     setFilteredApartaments(
-      apartments.filter((apartment) => {
-        console.log("TYYYY", apartment.price_per_m);
-        if (
-          apartment.description
-            .toLowerCase()
-            .includes(searchDescription.toLowerCase()) &&
+      apartments.filter(
+        (apartment) =>
+          // console.log("TYYYY", apartment.price / apartment.area);
+          // if (
+          apartment.title.toLowerCase().includes(title.toLowerCase()) &&
           area_min <= apartment.area &&
           apartment.area <= area_max &&
           price_min <= apartment.price &&
           apartment.price <= price_max &&
-          price_per_m_min <= apartment.price_per_m &&
-          apartment.price_per_m <= price_per_m_max &&
+          price_per_m_min <= apartment.price / apartment.area &&
+          apartment.price / apartment.area <= price_per_m_max &&
           apartment.district.toLowerCase().includes(district.toLowerCase())
-        ) {
-          return apartment;
-        }
-      })
+        // apartment.rooms.includes(rooms)
+        // ) {
+        //   return apartment;
+        // }
+      )
     );
   };
 
@@ -104,24 +128,14 @@ const Home = () => {
   return (
     <div className="container">
       <div id="map"></div>
-      {/* <Map /> */}
-      {/* <GoogleMap
-        id="map"
-        mapContainerStyle={mapContainerStyle}
-        zoom={8}
-        center={center}
-        options={options}
-        onLoad={onMapLoad}
-      /> */}
+
       <SearchBar
-        handleClickSearch={() => {
-          handleClickSearch(handleClickSearch);
-        }}
+        // handleClickSearch={() => {
+        //   handleClickSearch(handleClickSearch);
+        // }}
+        handleClickSearch={handleClickSearch}
       ></SearchBar>
-      {/* <button onClick={refreshData}>REFRESH DATA</button> */}
-      {/* <div className="refresh" onClick={() => refreshData()}>
-        <FontAwesomeIcon icon={["fa", "sync"]} size="2x" />
-      </div> */}
+
       {isLoading ? (
         <div className="puff">
           <Oval width="100" />
@@ -130,7 +144,7 @@ const Home = () => {
       ) : (
         <div className="mainContainer">
           <div className="apartaments_list">
-            {apartments.map((apartment) => {
+            {filtered_apartaments.map((apartment) => {
               // console.log(apartment.is_favourite);
               return (
                 <div
@@ -165,21 +179,6 @@ const Home = () => {
                     show_details={false}
                     lat={apartment.latitude}
                     lng={apartment.longitude}
-                    // is_favourite={fav_apartments.forEach((fav_apartment) => {
-                    //   return fav_apartment.id == apartment.id ? true : false;
-                    // })}
-                    //   notify={notify}
-                    //   key={apartment.apartment_id}
-                    //   description={apartment.description}
-                    //   place={apartment.place}
-                    //   area={apartment.area}
-                    //   price_per_m={apartment.price_per_m}
-                    //   price={apartment.price}
-                    //   source={apartment.source}
-                    //   offer_url={apartment.offer_url}
-                    //   rooms={apartment.rooms}
-                    //   is_favourite={apartment.is_favourite}
-                    //   notify={notify}
                   />
                 </div>
               );
