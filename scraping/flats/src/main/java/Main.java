@@ -76,8 +76,9 @@ public class Main {
         saveDataToDatabase(Scrapper.getOffersFromGumtree("zoliborz"));
     }
     public static void main(String[] args) {
+        saveDataToDatabase(Scrapper.getOffersFromGumtree("wlochy"));
 
-        saveDataToDatabase(Scrapper.getOffersFromGumtree("rembertow"));
+//        saveDataToDatabase(Scrapper.getOffersFromGumtree("rembertow"));
 //        saveDataToDatabase(Scrapper.getOffersFromGumtree("wesola"));
         //malo ofert w tych dzielnicach, dobre do testów
 
