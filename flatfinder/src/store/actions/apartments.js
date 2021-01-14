@@ -17,12 +17,9 @@ export const getApartments = () => {
     await fetch("http://localhost:8080/api/offers", config)
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         apartments = json;
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch((error) => {});
     dispatch({
       type: GET_APARTMENTS,
       apartments: apartments,
@@ -42,12 +39,9 @@ export const getFavApartments = () => {
     await fetch("http://localhost:8080/api/user-offers", config)
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         apartments = json;
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch((error) => {});
     dispatch({
       type: GET_FAV_APARTMENTS,
       apartments: apartments,
@@ -57,7 +51,6 @@ export const getFavApartments = () => {
 
 export const sendEmail = (offer_id) => {
   return async (dispatch, getState) => {
-    console.log("Send email Action");
     const config = {
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -66,14 +59,8 @@ export const sendEmail = (offer_id) => {
 
     axios
       .get("http://localhost:8080/api/send-email/" + offer_id, config)
-      .then(function (response) {
-        console.log(response.status);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log("Sending email error");
-        console.log(error);
-      })
+      .then(function (response) {})
+      .catch(function (error) {})
       .then(function () {});
   };
 };
@@ -95,7 +82,6 @@ export const addApartmentToFav = (offer) => {
 
     fetch("http://localhost:8080/api/user-offers", requestOptions)
       .then((response) => {
-        console.log(response.status);
         dispatch({
           type: ADD_APARTMENT_TO_FAV,
           offer: offer,
@@ -119,7 +105,6 @@ export const removeApartmentFromFav = (offer_id) => {
     console.log("http://localhost:8080/api/user-offers/" + offer_id);
     fetch("http://localhost:8080/api/user-offers/" + offer_id, requestOptions)
       .then((response) => {
-        console.log(response.status);
         dispatch({
           type: REMOVE_APARTMENT_FROM_FAV,
           offer_id: offer_id,
@@ -132,14 +117,11 @@ export const removeApartmentFromFav = (offer_id) => {
 
 export const updateNote = (id, note) => {
   return async (dispatch, getState) => {
-    console.log("bede robil update");
-
     var myHeaders = new Headers();
     myHeaders.append("Authorization", localStorage.getItem("token"));
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({ note: note });
-    console.log(raw);
     var requestOptions = {
       method: "PATCH",
       headers: myHeaders,
@@ -149,8 +131,6 @@ export const updateNote = (id, note) => {
     console.log("http://localhost:8080/api/user-offers/" + id);
     fetch("http://localhost:8080/api/user-offers/" + id, requestOptions)
       .then((response) => {
-        console.log("RESPONSE");
-        console.log(response);
         dispatch({
           type: UPDATE_NOTE,
           id: id,

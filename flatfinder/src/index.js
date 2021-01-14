@@ -7,7 +7,6 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
-import thunk from "redux-thunk";
 import apartmentsReducer from "./store/reducers/apartments";
 import markersReducer from "./store/reducers/markers";
 import authReducer from "./store/reducers/auth";
@@ -18,11 +17,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
 });
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(ReduxThunk)
-  // jakies firebasowe rzeczy w compose
-);
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
   <Provider store={store}>

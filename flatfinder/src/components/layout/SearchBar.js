@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import "./Apartaments.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faSearch,
@@ -9,7 +8,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SearchBar.css";
-import Select from "react-select";
 
 const SearchBar = (props) => {
   const [districtsList, setDistrictsList] = useState([
@@ -31,7 +29,6 @@ const SearchBar = (props) => {
     { value: "srodmiescie", label: "Środmieście" },
     { value: "zoliborz", label: "Żoliborz" },
   ]);
-  const [selectedDistricts, setSelectedDistricts] = useState();
 
   const [rooms, setRooms] = useState(0);
   const [area, setArea] = useState({
@@ -85,50 +82,6 @@ const SearchBar = (props) => {
             </div>
           </div>
         </div>
-
-        {/* <div className="search-description">
-          <h5>Rooms</h5>
-          <div className="row rooms">
-            <div
-              className="plus"
-              onClick={() => {
-                setRooms(rooms - 1);
-              }}
-            >
-              <FontAwesomeIcon
-                icon={["fa", "minus"]}
-                style={{ fontSize: "0.5em" }}
-                color="#dddddd"
-              />
-            </div>
-            <h5 value={rooms}>{rooms}</h5>
-
-            <div
-              className="plus"
-              onClick={() => {
-                setRooms(rooms + 1);
-              }}
-            >
-              <FontAwesomeIcon
-                icon={["fa", "plus"]}
-                color="#dddddd"
-                style={{ fontSize: "0.5em" }}
-              />
-            </div>
-            <div
-              className="close-icon"
-              onClick={() => {
-                setRooms(0);
-              }}
-            >
-              <FontAwesomeIcon
-                icon={["fa", "times"]}
-                size="xs"
-                color="#dddddd"
-              />
-            </div>
-          </div>
-        </div> */}
 
         <div className="search-description">
           <h5>Area</h5>
@@ -265,63 +218,10 @@ const SearchBar = (props) => {
             </div>
           </div>
         </div>
-        {/* <div className="search-description-select">
-          <h5>Disctrict</h5>
-
-          <div className="select-district"> */}
-        {/* <Select
-              // defaultValue={[colourOptions[2], colourOptions[3]]}
-              isMulti
-              value={selectedDistricts}
-              options={districtsList}
-              className="basic-multi-select district-select"
-              classNamePrefix="select"
-              onChange={handleChange}
-            /> */}
-        {/* <select
-              onChange={(e) => handleAddrTypeChange(e)}
-              className="browser-default custom-select"
-            >
-              {Add.map((address, key) => (
-                <option key={key} value={key}>
-                  {address}
-                </option>
-              ))}
-            </select> */}
-
-        {/* <select
-              id="districts"
-              name="districts"
-              value={district}
-              className="select-dist"
-              onChange={(e) => {
-                setDistrict(e.target.value);
-              }}
-            >
-              {districtsList.map((district) => {
-                return (
-                  <option id={district} value={district}>
-                    {district}
-                  </option>
-                );
-              })}
-            </select> */}
-        {/* </div> */}
-        {/* </div> */}
       </div>
       <div
         className="search-button"
         onClick={() => {
-          console.log("description");
-          console.log(description);
-          console.log("area");
-          console.log(area);
-          console.log("price");
-          console.log(price);
-          console.log("district");
-          console.log(district);
-          console.log("pricePerM");
-          console.log(pricePerM);
           props.handleClickSearch(
             description,
             area,

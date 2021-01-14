@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import Form from "./Form";
+import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as apartmentsActions from "../../store/actions/apartments";
 import SearchBar from "../layout/SearchBar";
-import { Circles, Oval, Puff } from "@agney/react-loading";
+import { Oval } from "@agney/react-loading";
 import "../layout/Apartaments.css";
 import Apartament from "../layout/Apartament";
-import { GOOGLE_MAP_API_KEY } from "../../constants/constants";
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+
 import Map from "../map/Map";
 
 const Home = () => {
@@ -22,25 +20,25 @@ const Home = () => {
   );
   const [filtered_apartaments, setFilteredApartaments] = useState([]);
 
-  const [error, setError] = useState();
   const dispatch = useDispatch();
 
   const loadApartments = useCallback(async () => {
-    setError(null);
     try {
       await dispatch(apartmentsActions.getFavApartments());
       await dispatch(apartmentsActions.getApartments());
-    } catch (err) {
-      setError(err.message);
-    }
-  }, [dispatch, setIsLoading, setError]);
+    } catch (err) {}
+  }, [dispatch]);
 
   useEffect(() => {
+    let mounted = true;
     setIsLoading(true);
     loadApartments().then(() => {
-      setIsLoading(false);
-      setFilteredApartaments(apartments);
+      if (mounted) {
+        setFilteredApartaments(apartments);
+        setIsLoading(false);
+      }
     });
+    return () => (mounted = false);
   }, [dispatch, loadApartments]);
 
   const handleClickSearch = (
@@ -77,29 +75,9 @@ const Home = () => {
       price_per_m_max = 99999999;
     }
 
-    console.log("PARAMETRY: ");
-    console.log("price_per_m_min");
-    console.log(price_per_m_min);
-    console.log("price_per_m_max");
-    console.log(price_per_m_max);
-    console.log("price_min");
-    console.log(price_min);
-    console.log("price_max");
-    console.log(price_max);
-    console.log("area_min");
-    console.log(area_min);
-    console.log("area_max");
-    console.log(area_max);
-    console.log("rooms");
-    console.log(rooms);
-    console.log("rooms");
-    console.log(rooms);
-
     setFilteredApartaments(
       apartments.filter(
         (apartment) =>
-          // console.log("TYYYY", apartment.price / apartment.area);
-          // if (
           apartment.title.toLowerCase().includes(title.toLowerCase()) &&
           area_min <= apartment.area &&
           apartment.area <= area_max &&
@@ -108,10 +86,6 @@ const Home = () => {
           price_per_m_min <= apartment.price / apartment.area &&
           apartment.price / apartment.area <= price_per_m_max &&
           apartment.district.toLowerCase().includes(district.toLowerCase())
-        // apartment.rooms.includes(rooms)
-        // ) {
-        //   return apartment;
-        // }
       )
     );
   };
@@ -127,25 +101,16 @@ const Home = () => {
   };
   return (
     <div className="container">
-      <div id="map"></div>
-
-      <SearchBar
-        // handleClickSearch={() => {
-        //   handleClickSearch(handleClickSearch);
-        // }}
-        handleClickSearch={handleClickSearch}
-      ></SearchBar>
-
+      {/* <div id="map"></div> */}
+      <SearchBar handleClickSearch={handleClickSearch}></SearchBar>
       {isLoading ? (
         <div className="puff">
           <Oval width="100" />
-          {/* <div>Loading...</div> */}
         </div>
       ) : (
         <div className="mainContainer">
           <div className="apartaments_list">
             {filtered_apartaments.map((apartment) => {
-              // console.log(apartment.is_favourite);
               return (
                 <div
                   className={
@@ -190,20 +155,6 @@ const Home = () => {
         </div>
       )}
     </div>
-
-    //
-
-    // <div className="container">
-    //   <Puff width="100" />
-    //   <div className="container">
-    //     <div className="row center-align">
-    //       <div className="col s7">
-    //         <Form />
-    //       </div>
-    //       <div className="col s5">notelist</div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 

@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as authActions from "../../store/actions/auth";
-
 import "./LoginBox.css";
-// import Navbar from "./Navbar";
 import flat from "../../images/flat.jpg";
 import { useHistory } from "react-router-dom";
-// import { AuthContext } from "../contexts/AuthContext";
-// import Footer from "./Footer";
 
 const LoginBox = () => {
   const history = useHistory();
@@ -32,8 +28,6 @@ const LoginBox = () => {
 
   const login = (username, password) => {
     dispatch(authActions.login(username, password));
-    //load_user();
-    // console.log(context.isAuthenticated);
   };
   useEffect(() => {
     dispatch(authActions.checkIfAuthenticated());
@@ -44,7 +38,6 @@ const LoginBox = () => {
 
   return (
     <div className="container">
-      {/* <Navbar></Navbar> */}
       <div className="page-container">
         <div className="loginbox">
           <div className="photo-div">
@@ -77,7 +70,6 @@ const LoginBox = () => {
                 <button className="btn-login" type="submit">
                   Login
                 </button>
-                {/* </Link> */}
               </div>
             </form>
 
@@ -90,7 +82,6 @@ const LoginBox = () => {
           </div>
         </div>
       </div>
-      {/* <Footer></Footer> */}
     </div>
   );
 };

@@ -1,17 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./Navbar.css";
-import logo from "../../images/logo.png";
-import heart from "../../images/heart.png";
 import logout_icon from "../../images/logout.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-
 import * as authActions from "../../store/actions/auth";
-// import { logOut } from "../actions/auth";
-// import { Redirect, Link } from "react-router-dom";
-// import { AuthContext } from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
-import { Link, NavLink, Redirect } from "react-router-dom";
 export const Navbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -33,8 +27,6 @@ export const Navbar = () => {
   return (
     <div className="navbar">
       <div className="logo-container">
-        {/* <img src={logo} alt="Logo" className="logo" /> */}
-
         <h1>
           {" "}
           <b>Flat Finder</b>
