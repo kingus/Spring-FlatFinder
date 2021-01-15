@@ -14,7 +14,9 @@ export const login = (username, password) => {
           type: LOGIN,
         });
       })
-      .catch(function (error) {})
+      .catch(function (error) {
+        console.log(error);
+      })
       .then(function () {});
   };
 };

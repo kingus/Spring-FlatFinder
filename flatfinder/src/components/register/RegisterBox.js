@@ -8,7 +8,7 @@ import * as authActions from "../../store/actions/auth";
 const RegisterBox = () => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    username: "szymon.gruszczynski@student.wat.edu.pl",
+    username: "",
     email: "",
     password: "",
     re_password: "",
@@ -23,7 +23,7 @@ const RegisterBox = () => {
     e.preventDefault();
     console.log("SUBMIT");
     if (password === re_password) {
-      dispatch(authActions.register(username, email, password, "wesola"));
+      dispatch(authActions.register(email, username, password, "wesola"));
     } else {
       console.log("Password aren't the same");
     }

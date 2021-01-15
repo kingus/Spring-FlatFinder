@@ -97,9 +97,6 @@ public class Scrapper {
 
                         Element oRoomsElement =  offerDoc.select("span:contains(Liczba pokoi)").first().siblingElements().first();
                         String oRooms = oRoomsElement.text();
-//                        oRooms = oRooms.substring(0, oRooms.charAt(' '));
-//                        int oRoomsInt = Integer.parseInt(oRooms);
-
                         offerDataJSON.put("rooms", oRooms);
 
 
@@ -140,53 +137,5 @@ public class Scrapper {
 
         System.out.println("Returning data...");
         return offersJSON;
-    }
-    public static JSONObject getOffersFromOtodom(String district) {
-        /*Document doc;
-        try {
-            doc = Jsoup.connect("https://www.otodom.pl/sprzedaz/mieszkanie/warszawa/wola/").get();
-//            Element content = doc.getElementById("content");
-            Elements offers = doc.getElementsByClass("offer-item-details");
-            System.out.println(offers);
-            for (Element offer : offers) {
-                String oTitle = offer.getElementsByClass("offer-item-title").text();
-                String oPlace = offer.getElementsByClass("text-nowrap").last().ownText();
-                String oArea = offer.getElementsByClass("hidden-xs offer-item-area").select("li").text();
-                String oPricePerM = offer.getElementsByClass("hidden-xs offer-item-price-per-m").select("li").text();
-                String oRooms = offer.getElementsByClass("offer-item-rooms hidden-xs").select("li").text();
-                String oUrl = offer.select("a").attr("href");
-/*  Strzał po współrzędne
-                URL url = new URL("https://maps.googleapis.com/maps/api/geocode/json?address=Warszawa,Wola&key=API_KEY");
-                String readLine = null;
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                //connection.setRequestMethod();
-                int responseCode = connection.getResponseCode();
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    BufferedReader in = new BufferedReader(
-                            new InputStreamReader(connection.getInputStream()));
-                    StringBuffer response = new StringBuffer();
-                    while ((readLine = in.readLine()) != null) {
-                        response.append(readLine);
-                    }
-                    in.close();
-                    System.out.println("JSON string result: " + response.toString());
-                } else {
-                    System.out.println("GET NOT WORKED");
-                }
-
-                System.out.println("TITLE " + oTitle);
-                System.out.println("PLACE " + oPlace);
-                System.out.println("AREA " + oArea);
-                System.out.println("pricePerM " + oPricePerM);
-                System.out.println("rooms " + oRooms);
-                System.out.println("url " + oUrl);
-            }
-        }
-        catch (Exception exception){
-
-        }
-        */
-        return new JSONObject();
     }
 }
