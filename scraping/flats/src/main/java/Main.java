@@ -21,8 +21,8 @@ public class Main {
         connection.setDoOutput(true);
     }
 
-        public static void saveDataToDatabase(JSONArray offers) throws IOException {
-            for (int i = 0 ; i < offers.size(); i++) {
+    public static void saveDataToDatabase(JSONArray offers) throws IOException {
+        for (int i = 0 ; i < offers.size(); i++) {
             JSONObject obj = (JSONObject) offers.get(i);
             configureConnection();
             try {
@@ -32,7 +32,7 @@ public class Main {
                     byte[] input = jsonInputString.getBytes("utf-8");
                     os.write(input, 0, input.length);
                 } catch (Exception nestedException) {
-                    System.out.println("EN: " + nestedException.getMessage());
+                    System.out.println("Setting output exception: " + nestedException.getMessage());
                 }
 
                 if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -40,7 +40,6 @@ public class Main {
                             new InputStreamReader(connection.getInputStream()));
                     in.close();
                 } else {
-                    System.out.println("POST DOES NOT WORK");
                 }
             } catch (Exception exception) {
                 System.out.println("Exception POST Request: " + exception.getMessage());

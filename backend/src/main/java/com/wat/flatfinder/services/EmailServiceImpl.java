@@ -1,6 +1,4 @@
 package com.wat.flatfinder.services;
-
-import com.wat.flatfinder.dtos.EmailRequest;
 import com.wat.flatfinder.entities.Offer;
 import com.wat.flatfinder.repositories.OfferRepository;
 import com.wat.flatfinder.repositories.UserRepository;
@@ -11,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.util.Optional;
+
 
 @Service
 public class EmailServiceImpl implements EmailService{
