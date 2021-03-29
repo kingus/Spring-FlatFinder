@@ -46,6 +46,8 @@
             android:text="@string/login" />
 
         <TextView
+            android:id="@+id/registerTextView"
+            android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/do_not_have_account"
