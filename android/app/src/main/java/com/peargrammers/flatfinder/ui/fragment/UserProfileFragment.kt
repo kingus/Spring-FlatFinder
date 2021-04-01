@@ -1,4 +1,4 @@
-package com.peargrammers.flatfinder.ui.fragments
+package com.peargrammers.flatfinder.ui.fragment
 
 import androidx.fragment.app.Fragment
 import com.peargrammers.flatfinder.R

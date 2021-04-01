@@ -1,16 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:background="@drawable/flat"
-    android:fitsSystemWindows="false"
-    android:gravity="center"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/profile"
-        android:textColor="@color/red" />
+    android:gravity="center_horizontal">
 
-</FrameLayout>
+    <FrameLayout
+        android:id="@+id/photoLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="320dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_gravity="top"
+            android:scaleType="centerCrop"
+            android:src="@drawable/flat" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/photo_medium"
+            android:layout_height="@dimen/photo_medium"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/standard_margin_8x"
+            android:src="@drawable/profile_image"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="@dimen/border_medium" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_margin="@dimen/standard_margin_0.5x"
+            android:fontFamily="@font/noto_sans_bold"
+            android:text="@string/username"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_font_size_large" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/dataLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/photoLayout"
+        android:layout_marginTop="@dimen/standard_margin_2x"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/standard_margin_4x"
+            android:paddingVertical="@dimen/standard_margin_2x">
+
+
+            <ImageView
+                style="@style/small_icon"
+                android:src="@drawable/ic_person"
+                app:tint="@color/light_grey" />
+
+            <TextView
+                style="@style/common_text_bold"
+                android:layout_width="@dimen/text_view_3x"
+                android:layout_height="wrap_content"
+                android:text="@string/first_name"
+                android:textColor="@color/light_grey" />
+
+            <TextView
+                style="@style/common_text"
+                android:layout_width="@dimen/text_view_4x"
+                android:layout_height="wrap_content"
+                android:text="@string/first_name" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/common_line"
+            android:layout_width="match_parent"
+            android:background="@color/dark_grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/standard_margin_4x"
+            android:paddingVertical="@dimen/standard_margin_2x">
+
+            <ImageView
+                style="@style/small_icon"
+                android:src="@drawable/ic_person"
+                app:tint="@color/light_grey" />
+
+            <TextView
+                style="@style/common_text_bold"
+                android:layout_width="@dimen/text_view_3x"
+                android:layout_height="wrap_content"
+                android:text="@string/last_name"
+                android:textColor="@color/light_grey" />
+
+            <TextView
+                style="@style/common_text"
+                android:layout_width="@dimen/text_view_4x"
+                android:layout_height="wrap_content"
+                android:text="@string/last_name" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/common_line"
+            android:layout_width="match_parent"
+            android:background="@color/dark_grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/standard_margin_4x"
+            android:paddingVertical="@dimen/standard_margin_2x">
+
+            <ImageView
+                style="@style/small_icon"
+                android:src="@drawable/ic_email"
+                app:tint="@color/light_grey" />
+
+            <TextView
+                style="@style/common_text_bold"
+                android:layout_width="@dimen/text_view_3x"
+                android:layout_height="wrap_content"
+                android:text="@string/email"
+                android:textColor="@color/light_grey" />
+
+            <TextView
+                style="@style/common_text"
+                android:layout_width="@dimen/text_view_4x"
+                android:layout_height="wrap_content"
+                android:text="@string/email" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/common_line"
+            android:layout_width="match_parent"
+            android:background="@color/dark_grey" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_margin_6x"
+            android:orientation="vertical">
+
+            <Button
+                style="@style/common_button_expanded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email" />
+
+            <Button
+                style="@style/common_button_expanded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

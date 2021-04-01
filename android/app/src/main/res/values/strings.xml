@@ -9,4 +9,10 @@
     <string name="favourites">Favourites</string>
     <string name="profile">Profile</string>
     <string name="offers">Offers</string>
+    <string name="district">District: %s</string>
+    <string name="price">Price: %s</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="email">Email</string>
+
 </resources>

@@ -1,12 +1,12 @@
-package com.peargrammers.flatfinder.ui.fragments
+package com.peargrammers.flatfinder.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.peargrammers.flatfinder.R
-import com.peargrammers.flatfinder.ui.activities.AuthActivity
-import com.peargrammers.flatfinder.ui.activities.HomeActivity
+import com.peargrammers.flatfinder.ui.activity.AuthActivity
+import com.peargrammers.flatfinder.ui.activity.HomeActivity
 import kotlinx.android.synthetic.main.login_activity.loginButton
 import kotlinx.android.synthetic.main.login_fragment.*
 

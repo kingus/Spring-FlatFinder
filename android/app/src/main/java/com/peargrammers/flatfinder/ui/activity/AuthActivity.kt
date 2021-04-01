@@ -1,13 +1,10 @@
-package com.peargrammers.flatfinder.ui.activities
+package com.peargrammers.flatfinder.ui.activity
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.peargrammers.flatfinder.R
-import com.peargrammers.flatfinder.ui.fragments.LoginFragment
+import com.peargrammers.flatfinder.ui.fragment.LoginFragment
 
 class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
