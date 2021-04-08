@@ -6,51 +6,27 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Scrapper {
-    static Map<String, String> districts;
-
-    static {
-        districts = new HashMap<String, String>();
-//        districts.put("bemowo", "v1c9073l3200009");
-//        districts.put("bialoleka", "v1c9073l3200010");
-//        districts.put("bielany", "v1c9073l3200011");
-//        districts.put("mokotow", "v1c9073l3200012");
-//        districts.put("ochota", "v1c9073l3200013");
-//        districts.put("praga-poludnie", "v1c9073l3200015");
-//        districts.put("praga-polnoc", "v1c9073l3200014");
-        districts.put("rembertow", "v1c9073l3200016");
-//        districts.put("targowek", "v1c9073l3200018");
-//        districts.put("ursus", "v1c9073l3200019");
-//        districts.put("ursynow", "v1c9073l3200020");
-//        districts.put("wawer", "v1c9073l3200021");
-        districts.put("wesola", "v1c9073l3200022");
-//        districts.put("wilanow", "v1c9073l3200023");
-//        districts.put("wola", "v1c9073l3200025");
-//        districts.put("wlochy", "v1c9073l3200024");
-//        districts.put("srodmiescie", "v1c9073l3200017");
-//        districts.put("zoliborz", "v1c9073l3200026");
-    }
+    public static Districts districts = Main.districts;
 
     public static JSONArray getOffersFromGumtree(String district) {
         JSONArray offersJSON = new JSONArray();
+
 
         int pageNumber = 1;
         int maxPageNumber = pageNumber;
         do {
             System.out.println("PAGE NUMBER: " + pageNumber);
             System.out.println(district);
-            System.out.println(districts.get(district));
+
             Document doc;
             try {
-                System.out.println("https://www.gumtree.pl/s-mieszkania-i-domy-sprzedam-i-kupie/" + district + "/page-" + Integer.toString(pageNumber) + "/" + districts.get(district) + "p" + Integer.toString(pageNumber));
-                doc = Jsoup.connect("https://www.gumtree.pl/s-mieszkania-i-domy-sprzedam-i-kupie/" + district + "/page-" + Integer.toString(pageNumber) + "/" + districts.get(district) + "p" + Integer.toString(pageNumber)).get();
+                System.out.println("https://www.gumtree.pl/s-mieszkania-i-domy-sprzedam-i-kupie/" + district + "/page-" + pageNumber + "/" + districts.getDistricts().get(district) + "p" + (pageNumber));
+                doc = Jsoup.connect("https://www.gumtree.pl/s-mieszkania-i-domy-sprzedam-i-kupie/" + district + "/page-" + pageNumber + "/" + districts.getDistricts().get(district) + "p" + (pageNumber)).get();
                 if (pageNumber == 1) {
                     Element lastUrlElement = doc.getElementsByClass("icon-double-angle-right").first().parent();
                     String lastUrl = lastUrlElement.attr("href");
-                    maxPageNumber = Integer.parseInt(lastUrl.substring(lastUrl.lastIndexOf("p")+1));
+                    maxPageNumber = Integer.parseInt(lastUrl.substring(lastUrl.lastIndexOf("p") + 1));
                     System.out.println(lastUrl);
                 }
 
@@ -64,7 +40,7 @@ public class Scrapper {
                         offerDataJSON.put("district", district);
 
                         String offerDocURL = offer.getElementsByClass("href-link tile-title-text").attr("href");
-                        offerDocURL = "https://www.gumtree.pl" +offerDocURL;
+                        offerDocURL = "https://www.gumtree.pl" + offerDocURL;
 
                         Document offerDoc = Jsoup.connect(offerDocURL).get();
 
@@ -89,13 +65,13 @@ public class Scrapper {
                         offerDataJSON.put("source_id", oSourceId);
 
 
-                        Element oAreaElement =  offerDoc.select("span:contains(Wielkość (m2))").first().siblingElements().first();
+                        Element oAreaElement = offerDoc.select("span:contains(Wielkość (m2))").first().siblingElements().first();
                         String oArea = oAreaElement.text();
                         System.out.println(oArea);
                         offerDataJSON.put("area", oArea);
 
 
-                        Element oRoomsElement =  offerDoc.select("span:contains(Liczba pokoi)").first().siblingElements().first();
+                        Element oRoomsElement = offerDoc.select("span:contains(Liczba pokoi)").first().siblingElements().first();
                         String oRooms = oRoomsElement.text();
                         offerDataJSON.put("rooms", oRooms);
 
@@ -115,19 +91,17 @@ public class Scrapper {
                             offerDataJSON.put("latitude", jsonGeoData.get("latitude"));
                             offerDataJSON.put("longitude", jsonGeoData.get("longitude"));
 
-                        }catch (Exception exception){
+                        } catch (Exception exception) {
                             System.out.println("Parsing coordinates exception: " + exception.getMessage());
                         }
                         offersJSON.add(offerDataJSON);
                         System.out.println(offerDataJSON);
                         System.out.println(offersJSON.size());
                     } catch (Exception exception) {
-                            System.out.println("Offer exception: " + exception.getMessage() + ". Wrong data, offer has been skipped");
-                            continue;
+                        System.out.println("Offer exception: " + exception.getMessage() + ". Wrong data, offer has been skipped");
                     }
                 }
-            }
-            catch (Exception exception){
+            } catch (Exception exception) {
                 System.out.println("Page exception: " + exception.getMessage() + ". Wrong data, page has been skipped");
                 continue;
             }
