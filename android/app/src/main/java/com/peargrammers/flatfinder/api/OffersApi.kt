@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 
 interface OffersApi {
-    @GET("offers")
+    @GET("api/offers")
     @Headers(
         "Content-Type: application/json;charset=utf-8",
         "Accept: application/json"

@@ -31,5 +31,10 @@ class RetrofitInstance {
             retrofit.create(
                 OffersApi::class.java)
         }
+
+        val authApi by lazy {
+            retrofit.create(
+                AuthApi::class.java)
+        }
     }
 }
