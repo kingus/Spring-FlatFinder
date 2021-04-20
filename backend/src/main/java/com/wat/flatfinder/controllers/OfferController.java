@@ -23,10 +23,12 @@ public class OfferController {
     }
 
 //    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/api/offers")
+
+    @PostMapping(value="/api/offers", consumes="application/json;charset=UTF-8")
     public ResponseEntity addOffer(@RequestBody OfferRequest apartamentRequest ) {
         try{
             offerService.addOffer(apartamentRequest);
+            System.out.println(apartamentRequest.getTitle());
             return new ResponseEntity(HttpStatus.OK);
         }catch (IllegalArgumentException ex){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
