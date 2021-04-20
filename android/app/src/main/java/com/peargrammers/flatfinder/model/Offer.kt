@@ -4,8 +4,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
-import java.time.LocalDate
-import java.util.*
 
 @Entity(tableName = "offer")
 data class Offer(
@@ -32,9 +30,5 @@ data class Offer(
     @SerializedName("source_id")
     var sourceId: String?,
     @SerializedName("title")
-    var title: String?,
-    @SerializedName("start_dttm")
-    var startDttm: LocalDate?,
-    @SerializedName("end_dttm")
-    var endDttm: LocalDate?
+    var title: String?
 ) : Serializable
