@@ -21,10 +21,11 @@ class OffersFragment : Fragment(R.layout.offers_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(TAG, activity.toString())
 
         Log.d(TAG, "onViewCreated")
 
-        viewModel = (activity as HomeActivity).viewModel
+        viewModel = (activity as HomeActivity).offerViewModel
         setupRecyclerView()
 
         viewModel.offers.observe(viewLifecycleOwner, Observer { response ->

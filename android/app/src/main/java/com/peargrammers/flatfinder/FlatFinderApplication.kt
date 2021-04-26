@@ -1,10 +1,13 @@
 package com.peargrammers.flatfinder
 
 import android.app.Application
+import android.content.SharedPreferences
 import com.peargrammers.flatfinder.repository.LoginRepository
 import com.peargrammers.flatfinder.repository.OfferRepository
+import com.peargrammers.flatfinder.repository.ProfileRepository
 import com.peargrammers.flatfinder.ui.viewmodel.LoginViewModelProviderFactory
 import com.peargrammers.flatfinder.ui.viewmodel.OfferViewModelProviderFactory
+import com.peargrammers.flatfinder.ui.viewmodel.ProfileViewModelProviderFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -27,6 +30,12 @@ class FlatFinderApplication : Application(), KodeinAware {
         bind() from singleton { LoginRepository() }
         bind() from provider {
             LoginViewModelProviderFactory(
+                instance()
+            )
+        }
+        bind() from singleton { ProfileRepository() }
+        bind() from provider {
+            ProfileViewModelProviderFactory(
                 instance()
             )
         }
