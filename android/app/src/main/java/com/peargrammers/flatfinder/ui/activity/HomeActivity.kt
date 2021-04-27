@@ -4,14 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.peargrammers.flatfinder.R
-import com.peargrammers.flatfinder.ui.viewmodel.OfferViewModel
-import com.peargrammers.flatfinder.ui.viewmodel.OfferViewModelProviderFactory
-import com.peargrammers.flatfinder.ui.viewmodel.ProfileViewModel
-import com.peargrammers.flatfinder.ui.viewmodel.ProfileViewModelProviderFactory
+import com.peargrammers.flatfinder.ui.viewmodel.*
 import kotlinx.android.synthetic.main.home_activity.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -22,8 +18,10 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
     override val kodein by kodein()
     lateinit var offerViewModel: OfferViewModel
     lateinit var profileViewModel: ProfileViewModel
+    lateinit var userOfferViewModel: UserOfferViewModel
     private val factory: OfferViewModelProviderFactory by instance()
     private val profileFactory: ProfileViewModelProviderFactory by instance()
+    private val userOfferFactory: UserOfferViewModelProviderFactory by instance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +32,8 @@ class HomeActivity : AppCompatActivity(), KodeinAware {
 
         offerViewModel = ViewModelProvider(this, factory).get(OfferViewModel::class.java)
         profileViewModel = ViewModelProvider(this, profileFactory).get(ProfileViewModel::class.java)
+        userOfferViewModel =
+            ViewModelProvider(this, userOfferFactory).get(UserOfferViewModel::class.java)
     }
 
 }

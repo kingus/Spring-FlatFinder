@@ -17,15 +17,14 @@ import com.peargrammers.flatfinder.utils.Resource
 class UserProfileFragment : Fragment(R.layout.user_profile_fragment) {
     private val TAG = UserProfileFragment::class.qualifiedName
     lateinit var viewModel: ProfileViewModel
-    lateinit var token: String
     lateinit var userPreferencesImpl: UserPreferencesImpl
-    private val KEY_AUTH = preferencesKey<String>("key_auth")
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as HomeActivity).profileViewModel
+
         Log.d(TAG, activity.toString())
+
         userPreferencesImpl = UserPreferencesImpl(requireContext())
 
         userPreferencesImpl.authToken.asLiveData().observe(viewLifecycleOwner, Observer { token ->

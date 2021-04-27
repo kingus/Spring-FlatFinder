@@ -13,7 +13,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient_background"/>
+        android:background="@drawable/gradient_background" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -48,7 +48,8 @@
                 style="@style/common_edit_text_expanded"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/password" />
+                android:hint="@string/password"
+                android:inputType="textPassword" />
 
             <Button
                 android:id="@+id/loginButton"

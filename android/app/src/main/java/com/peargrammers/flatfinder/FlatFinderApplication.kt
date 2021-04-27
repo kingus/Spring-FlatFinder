@@ -5,9 +5,11 @@ import com.peargrammers.flatfinder.datastore.UserPreferencesImpl
 import com.peargrammers.flatfinder.repository.LoginRepository
 import com.peargrammers.flatfinder.repository.OfferRepository
 import com.peargrammers.flatfinder.repository.ProfileRepository
+import com.peargrammers.flatfinder.repository.UserOffersRepository
 import com.peargrammers.flatfinder.ui.viewmodel.LoginViewModelProviderFactory
 import com.peargrammers.flatfinder.ui.viewmodel.OfferViewModelProviderFactory
 import com.peargrammers.flatfinder.ui.viewmodel.ProfileViewModelProviderFactory
+import com.peargrammers.flatfinder.ui.viewmodel.UserOfferViewModelProviderFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -37,6 +39,12 @@ class FlatFinderApplication : Application(), KodeinAware {
         bind() from singleton { UserPreferencesImpl(instance()) }
         bind() from provider {
             ProfileViewModelProviderFactory(
+                instance()
+            )
+        }
+        bind() from singleton { UserOffersRepository() }
+        bind() from provider {
+            UserOfferViewModelProviderFactory(
                 instance()
             )
         }

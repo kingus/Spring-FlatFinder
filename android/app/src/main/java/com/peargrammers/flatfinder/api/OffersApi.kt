@@ -1,11 +1,10 @@
 package com.peargrammers.flatfinder.api
 
 import com.peargrammers.flatfinder.dao.MeResponse
+import com.peargrammers.flatfinder.dao.UserOffersRequest
 import com.peargrammers.flatfinder.model.Offer
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Headers
+import retrofit2.http.*
 
 interface OffersApi {
     @GET("api/offers")
@@ -20,5 +19,10 @@ interface OffersApi {
     suspend fun getMe(
         @Header("Authorization") auth: String
     ): Response<MeResponse>
+
+    @GET("/api/user-offers")
+    suspend fun getUserOffers(
+        @Header("Authorization") auth: String
+    ): Response<List<Offer>>
 
 }
