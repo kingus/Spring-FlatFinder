@@ -80,6 +80,7 @@
                 android:textColor="@color/light_grey" />
 
             <TextView
+                android:id="@+id/firstNameTextView"
                 style="@style/common_text"
                 android:layout_width="@dimen/text_view_4x"
                 android:layout_height="wrap_content"
@@ -112,6 +113,7 @@
                 android:textColor="@color/light_grey" />
 
             <TextView
+                android:id="@+id/lastNameTextView"
                 style="@style/common_text"
                 android:layout_width="@dimen/text_view_4x"
                 android:layout_height="wrap_content"
@@ -144,6 +146,7 @@
                 android:textColor="@color/light_grey" />
 
             <TextView
+                android:id="@+id/emailTextView"
                 style="@style/common_text"
                 android:layout_width="@dimen/text_view_4x"
                 android:layout_height="wrap_content"

@@ -20,7 +20,7 @@ class RetrofitInstance {
                 .build()
 
             Retrofit.Builder()
-                .baseUrl("http://192.168.0.108:8080/")
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
@@ -29,12 +29,14 @@ class RetrofitInstance {
 
         val api by lazy {
             retrofit.create(
-                OffersApi::class.java)
+                OffersApi::class.java
+            )
         }
 
         val authApi by lazy {
             retrofit.create(
-                AuthApi::class.java)
+                AuthApi::class.java
+            )
         }
     }
 }

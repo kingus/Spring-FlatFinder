@@ -1,7 +1,7 @@
 package com.peargrammers.flatfinder
 
 import android.app.Application
-import android.content.SharedPreferences
+import com.peargrammers.flatfinder.datastore.UserPreferencesImpl
 import com.peargrammers.flatfinder.repository.LoginRepository
 import com.peargrammers.flatfinder.repository.OfferRepository
 import com.peargrammers.flatfinder.repository.ProfileRepository
@@ -34,6 +34,7 @@ class FlatFinderApplication : Application(), KodeinAware {
             )
         }
         bind() from singleton { ProfileRepository() }
+        bind() from singleton { UserPreferencesImpl(instance()) }
         bind() from provider {
             ProfileViewModelProviderFactory(
                 instance()

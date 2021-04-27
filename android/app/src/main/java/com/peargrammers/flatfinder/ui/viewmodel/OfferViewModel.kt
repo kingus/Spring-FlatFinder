@@ -10,7 +10,6 @@ import com.peargrammers.flatfinder.utils.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-
 class OfferViewModel(private val offerRepository: OfferRepository) : ViewModel() {
     val offers: MutableLiveData<Resource<List<Offer>>> = MutableLiveData()
 
@@ -20,13 +19,12 @@ class OfferViewModel(private val offerRepository: OfferRepository) : ViewModel()
         getOffers()
     }
 
-    fun getOffers() = viewModelScope.launch {
+    private fun getOffers() = viewModelScope.launch {
         Log.d(TAG, "getOffers()")
         offers.postValue(Resource.Loading())
         val response = offerRepository.getOffers()
         offers.postValue(handleOffersResponse(response))
     }
-
 
     private fun handleOffersResponse(response: Response<List<Offer>>): Resource<List<Offer>> {
 
@@ -37,4 +35,5 @@ class OfferViewModel(private val offerRepository: OfferRepository) : ViewModel()
         }
         return Resource.Error(response.message())
     }
+
 }
