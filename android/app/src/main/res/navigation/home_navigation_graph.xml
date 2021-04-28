@@ -22,6 +22,15 @@
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.peargrammers.flatfinder.ui.fragment.UserProfileFragment"
-        android:label="UserProfileFragment" />
+        android:label="UserProfileFragment" >
+        <action
+            android:id="@+id/action_userProfileFragment_to_authActivity"
+            app:destination="@id/authActivity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/authActivity"
+        android:name="com.peargrammers.flatfinder.ui.activity.AuthActivity"
+        android:label="AuthActivity" />
 
 </navigation>

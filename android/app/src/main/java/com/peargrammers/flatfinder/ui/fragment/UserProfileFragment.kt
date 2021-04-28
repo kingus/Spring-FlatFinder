@@ -10,9 +10,11 @@ import android.util.Log
 import androidx.datastore.preferences.preferencesKey
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
+import androidx.navigation.findNavController
 import com.peargrammers.flatfinder.datastore.UserPreferencesImpl
 import com.peargrammers.flatfinder.ui.viewmodel.ProfileViewModel
 import com.peargrammers.flatfinder.utils.Resource
+import kotlinx.coroutines.runBlocking
 
 class UserProfileFragment : Fragment(R.layout.user_profile_fragment) {
     private val TAG = UserProfileFragment::class.qualifiedName
@@ -29,11 +31,15 @@ class UserProfileFragment : Fragment(R.layout.user_profile_fragment) {
 
         userPreferencesImpl.authToken.asLiveData().observe(viewLifecycleOwner, Observer { token ->
 
-            if (token!=null) {
+            if (token != null) {
                 viewModel.getMe(token)
             }
 
         })
+
+        logoutButton.setOnClickListener {
+            logout()
+        }
 
         viewModel.userData.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
@@ -41,7 +47,7 @@ class UserProfileFragment : Fragment(R.layout.user_profile_fragment) {
                     Log.d(TAG, "Response")
                     usernameTextView.text = response.data?.username
                     emailTextView.text = response.data?.email
-
+                    districtTextView.text = response.data?.preffered_district
                 }
                 is Resource.Error -> {
                     response.message?.let { message ->
@@ -51,5 +57,12 @@ class UserProfileFragment : Fragment(R.layout.user_profile_fragment) {
             }
         })
 
+    }
+
+    fun logout() {
+        view?.findNavController()?.navigate(R.id.action_userProfileFragment_to_authActivity)
+        runBlocking {
+            userPreferencesImpl.saveAuthToken("")
+        }
     }
 }
