@@ -76,7 +76,7 @@
                 style="@style/common_text_bold"
                 android:layout_width="@dimen/text_view_3x"
                 android:layout_height="wrap_content"
-                android:text="@string/first_name"
+                android:text="@string/district"
                 android:textColor="@color/light_grey" />
 
             <TextView
@@ -84,40 +84,7 @@
                 style="@style/common_text"
                 android:layout_width="@dimen/text_view_4x"
                 android:layout_height="wrap_content"
-                android:text="@string/first_name" />
-
-        </LinearLayout>
-
-        <View
-            style="@style/common_line"
-            android:layout_width="match_parent"
-            android:background="@color/dark_grey" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingHorizontal="@dimen/standard_margin_4x"
-            android:paddingVertical="@dimen/standard_margin_2x">
-
-            <ImageView
-                style="@style/small_icon"
-                android:src="@drawable/ic_person"
-                app:tint="@color/light_grey" />
-
-            <TextView
-                style="@style/common_text_bold"
-                android:layout_width="@dimen/text_view_3x"
-                android:layout_height="wrap_content"
-                android:text="@string/last_name"
-                android:textColor="@color/light_grey" />
-
-            <TextView
-                android:id="@+id/lastNameTextView"
-                style="@style/common_text"
-                android:layout_width="@dimen/text_view_4x"
-                android:layout_height="wrap_content"
-                android:text="@string/last_name" />
+                android:text="@string/district" />
 
         </LinearLayout>
 
@@ -169,16 +136,15 @@
                 style="@style/common_button_expanded"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/email" />
+                android:text="@string/change_email" />
 
             <Button
                 style="@style/common_button_expanded"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/email" />
+                android:text="@string/logout" />
 
         </LinearLayout>
     </LinearLayout>
-
 
 </RelativeLayout>
