@@ -26,6 +26,11 @@ class OfferViewModel(private val offerRepository: OfferRepository) : ViewModel()
         offers.postValue(handleOffersResponse(response))
     }
 
+    fun sendEmail(auth: String, id: Int) = viewModelScope.launch {
+        Log.d(TAG, "sendEmail()")
+        val response = offerRepository.sendEmail(auth, id)
+    }
+
     private fun handleOffersResponse(response: Response<List<Offer>>): Resource<List<Offer>> {
 
         if (response.isSuccessful) {

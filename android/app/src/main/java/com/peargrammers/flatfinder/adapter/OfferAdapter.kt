@@ -12,7 +12,10 @@ import com.peargrammers.flatfinder.R
 import com.peargrammers.flatfinder.model.Offer
 import kotlinx.android.synthetic.main.offer_list_item.view.*
 
-class OfferAdapter : RecyclerView.Adapter<OfferAdapter.OfferViewHolder>() {
+
+class OfferAdapter(private val listener: OnItemClickListener) :
+    RecyclerView.Adapter<OfferAdapter.OfferViewHolder>() {
+    private val TAG = OfferAdapter::class.qualifiedName
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OfferViewHolder {
         val view =
@@ -39,7 +42,7 @@ class OfferAdapter : RecyclerView.Adapter<OfferAdapter.OfferViewHolder>() {
 
     override fun onBindViewHolder(holder: OfferViewHolder, position: Int) {
         val currentOffer = differ.currentList[position]
-        Log.d("currentOffer", "currentOffer")
+        Log.d("currentOffer", currentOffer.id.toString())
 
         holder.itemView.offerTitleTextView.text = currentOffer.title
         holder.itemView.districtTextView.text = String.format(
@@ -54,12 +57,36 @@ class OfferAdapter : RecyclerView.Adapter<OfferAdapter.OfferViewHolder>() {
         Glide.with(holder.itemView.context)
             .load(currentOffer.imgUrl)
             .centerCrop()
-            .into(holder.itemView.offerImage);
-
-        holder.itemView.offerLinearLayout.setOnClickListener {
-        }
+            .into(holder.itemView.offerImage)
 
     }
 
-    inner class OfferViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class OfferViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
+        init {
+            itemView.emailImageView.setOnClickListener(this)
+        }
+
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            val currentOffer = differ.currentList[position]
+
+            v?.emailImageView?.setBackgroundColor(itemView.context.getColor(R.color.red))
+            Log.d("change color ", position.toString())
+
+            Log.d(TAG, "onClick")
+            Log.d("position", position.toString())
+
+            if (position != RecyclerView.NO_POSITION) {
+                Log.d("if position", position.toString())
+                listener.onItemClick(currentOffer.id)
+            }
+
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(offerId: Int?)
+    }
 }

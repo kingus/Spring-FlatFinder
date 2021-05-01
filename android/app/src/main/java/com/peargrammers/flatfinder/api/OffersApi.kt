@@ -25,4 +25,9 @@ interface OffersApi {
         @Header("Authorization") auth: String
     ): Response<List<Offer>>
 
+    @GET("/api/send-email/{id}")
+    suspend fun sendEmail(
+        @Header("Authorization") auth: String, @Path("id") id: Int
+    )
+
 }

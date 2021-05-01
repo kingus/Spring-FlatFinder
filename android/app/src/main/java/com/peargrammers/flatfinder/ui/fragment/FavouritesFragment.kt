@@ -15,7 +15,7 @@ import com.peargrammers.flatfinder.ui.viewmodel.UserOfferViewModel
 import com.peargrammers.flatfinder.utils.Resource
 import kotlinx.android.synthetic.main.favourites_fragment.*
 
-class FavouritesFragment : Fragment(R.layout.favourites_fragment) {
+class FavouritesFragment : Fragment(R.layout.favourites_fragment), OfferAdapter.OnItemClickListener{
     private val TAG = FavouritesFragment::class.qualifiedName
     lateinit var viewModel: UserOfferViewModel
     lateinit var offersAdapter: OfferAdapter
@@ -59,11 +59,15 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment) {
 
 
     private fun setupRecyclerView() {
-        offersAdapter = OfferAdapter()
+        offersAdapter = OfferAdapter(this)
         rvOffers.apply {
             adapter = offersAdapter
             layoutManager = LinearLayoutManager(activity)
         }
+    }
+
+    override fun onItemClick(offerId: Int?) {
+        Log.d(TAG, "onItemClick")
     }
 
 }
