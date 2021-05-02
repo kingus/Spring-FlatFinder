@@ -82,7 +82,7 @@
 .apartament {
   background-color: white;
   width: 50vw;
-  height: 200px;
+  height: 300px;
   margin-top: 15px;
   border-radius: 10px;
   box-shadow: 3px 3px 10px 1px #b6b6b6;
@@ -104,8 +104,8 @@
 }
 
 .apartament_photo {
-  width: 210px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   border-radius: 10px 0px 0px 10px;
 }
 
