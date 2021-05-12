@@ -30,4 +30,9 @@ interface OffersApi {
         @Header("Authorization") auth: String, @Path("id") id: Int
     )
 
+    @POST("/api/user-offers")
+    suspend fun updateUserOffer(
+        @Header("Authorization") auth: String, @Body userOffersRequest: UserOffersRequest
+    )
+
 }

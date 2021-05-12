@@ -9,15 +9,18 @@ import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.peargrammers.flatfinder.R
 import com.peargrammers.flatfinder.adapter.OfferAdapter
+import com.peargrammers.flatfinder.dao.UserOffersRequest
 import com.peargrammers.flatfinder.datastore.UserPreferencesImpl
 import com.peargrammers.flatfinder.ui.activity.HomeActivity
 import com.peargrammers.flatfinder.ui.viewmodel.OfferViewModel
+import com.peargrammers.flatfinder.ui.viewmodel.UserOfferViewModel
 import com.peargrammers.flatfinder.utils.Resource
 import kotlinx.android.synthetic.main.home_fragment.rvOffers
 import kotlinx.android.synthetic.main.offers_fragment.*
 
 class OffersFragment : Fragment(R.layout.offers_fragment), OfferAdapter.OnItemClickListener {
     lateinit var viewModel: OfferViewModel
+    lateinit var userOfferViewModel: UserOfferViewModel
     lateinit var offersAdapter: OfferAdapter
     private val TAG = OffersFragment::class.qualifiedName
     lateinit var userPreferencesImpl: UserPreferencesImpl
@@ -32,6 +35,7 @@ class OffersFragment : Fragment(R.layout.offers_fragment), OfferAdapter.OnItemCl
 
 
         viewModel = (activity as HomeActivity).offerViewModel
+        userOfferViewModel = (activity as HomeActivity).userOfferViewModel
         setupRecyclerView()
 
         userPreferencesImpl = UserPreferencesImpl(requireContext())
@@ -81,9 +85,27 @@ class OffersFragment : Fragment(R.layout.offers_fragment), OfferAdapter.OnItemCl
         progressBar.visibility = View.VISIBLE
     }
 
-    override fun onItemClick(offerId: Int?) {
-        if (offerId != null) {
-            viewModel.sendEmail(token, offerId)
+    override fun onItemClick(offerId: Int?, view: View?) {
+
+        when (view?.id) {
+
+            R.id.emailImageView -> {
+
+                if (offerId != null) {
+                    viewModel.sendEmail(token, offerId)
+                }
+
+                Log.d(TAG, "emailImageView")
+
+            }
+
+            R.id.heartImageView -> {
+                Log.d(TAG, "heartImageView")
+                if (offerId != null) {
+                    val userOffersRequest = UserOffersRequest(offerId, "ABC")
+                    userOfferViewModel.updateUserOffers(token, userOffersRequest)
+                }
+            }
         }
         Log.d(TAG, "onItemClick")
         Log.d("offerId", offerId.toString())

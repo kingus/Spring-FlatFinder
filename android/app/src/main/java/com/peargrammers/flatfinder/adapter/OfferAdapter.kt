@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -54,6 +55,10 @@ class OfferAdapter(private val listener: OnItemClickListener) :
             currentOffer.price.toString()
         )
 
+//        holder.itemView.heartImageView.setOnClickListener {
+//            holder.itemView.heartImageView.setBackgroundColor(holder.itemView.context.getColor(R.color.red))
+//        }
+
         Glide.with(holder.itemView.context)
             .load(currentOffer.imgUrl)
             .centerCrop()
@@ -65,28 +70,25 @@ class OfferAdapter(private val listener: OnItemClickListener) :
         View.OnClickListener {
         init {
             itemView.emailImageView.setOnClickListener(this)
+            itemView.heartImageView.setOnClickListener(this)
         }
-
 
         override fun onClick(v: View?) {
             val position = adapterPosition
             val currentOffer = differ.currentList[position]
-
-            v?.emailImageView?.setBackgroundColor(itemView.context.getColor(R.color.red))
-            Log.d("change color ", position.toString())
 
             Log.d(TAG, "onClick")
             Log.d("position", position.toString())
 
             if (position != RecyclerView.NO_POSITION) {
                 Log.d("if position", position.toString())
-                listener.onItemClick(currentOffer.id)
+                listener.onItemClick(currentOffer.id, v)
             }
-
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(offerId: Int?)
+        fun onItemClick(offerId: Int?, view: View?)
     }
+
 }

@@ -37,7 +37,7 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment), OfferAdapter.
 
         })
 
-        viewModel.userOffers.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.offers.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
                     response.data?.let { offerResponse ->
@@ -66,8 +66,9 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment), OfferAdapter.
         }
     }
 
-    override fun onItemClick(offerId: Int?) {
+    override fun onItemClick(offerId: Int?, view: View?) {
         Log.d(TAG, "onItemClick")
     }
+
 
 }
