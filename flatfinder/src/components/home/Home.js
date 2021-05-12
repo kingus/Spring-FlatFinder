@@ -4,7 +4,7 @@ import * as apartmentsActions from "../../store/actions/apartments";
 import SearchBar from "../layout/SearchBar";
 import { Oval } from "@agney/react-loading";
 import "../layout/Apartaments.css";
-import Apartament from "../layout/Apartament";
+import ApartmentTile from "../layout/ApartmentTile";
 
 import Map from "../map/Map";
 
@@ -126,7 +126,7 @@ const Home = () => {
                     });
                   }}
                 >
-                  <Apartament
+                  <ApartmentTile
                     key={apartment.id}
                     id={apartment.id}
                     description={apartment.description}

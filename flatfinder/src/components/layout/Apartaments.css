@@ -79,17 +79,7 @@
   width: 100%;
 }
 
-.apartament {
-  background-color: white;
-  width: 50vw;
-  height: 300px;
-  margin-top: 15px;
-  border-radius: 10px;
-  box-shadow: 3px 3px 10px 1px #b6b6b6;
-  display: flex;
-  flex-direction: row;
-  justify-self: flex-start;
-}
+
 
 .apartment_details {
   margin-left: 7px;
@@ -103,11 +93,7 @@
   align-self: center;
 }
 
-.apartament_photo {
-  width: 300px;
-  height: 300px;
-  border-radius: 10px 0px 0px 10px;
-}
+
 
 .google-map {
   width: 90%;
@@ -115,48 +101,7 @@
   border-radius: 10px 0px 0px 10px;
 }
 
-.apartament_info {
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  width: 90%;
-  height: 100%;
-}
 
-h3 {
-  font-size: 15px;
-  font-family: "Noto Sans";
-  margin: 4px;
-  font-weight: 300;
-  padding-left: 5px;
-}
-h4 {
-  font-size: 17px;
-  font-family: "Noto Sans";
-  margin: 4px;
-  font-weight: 700;
-  padding-left: 5px;
-}
-
-h2 {
-  font-size: 17px;
-  font-family: "Noto Sans";
-  margin: 5px;
-  padding-left: 5px;
-}
-.icon_container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-direction: column;
-  background-color: white;
-  height: 100%;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-
-  border-radius: 10px;
-}
 .place_icon_container {
   display: flex;
   justify-content: space-evenly;
@@ -194,25 +139,9 @@ h2 {
   align-items: center;
 }
 
-.contain {
-  display: flex;
-  flex-direction: row;
-  background-color: white;
-  width: 100%;
-  align-items: flex-end;
-  border-radius: 10px;
-  justify-content: space-between;
-}
 
-.header a {
-  color: black;
-  text-decoration: none;
-}
 
-.header a:hover {
-  color: #494949;
-  text-decoration: none;
-}
+
 
 .footer-div {
 }
