@@ -7,8 +7,39 @@ import "../layout/Apartaments.css";
 import ApartmentTile from "../layout/ApartmentTile";
 
 import Map from "../map/Map";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  main_home_container: {
+    backgroundColor: '#eff1f3',
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    maxWidth: 'none',
+
+  },
+  under_searchbar_container: {
+    backgroundColor: '#eff1f3',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  apartments_list: {
+    backgroundColor: '#eff1f3',
+    width: '60%',
+    height: '77vh',
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'scroll',
+    justifyContent: 'flex-start',
+    border: '3px solid red'
+
+  }
+});
 
 const Home = () => {
+  const classes = useStyles();
   const [currentOffer, setCurrentOffer] = useState({
     lat: 52.2297,
     lng: 21.0122,
@@ -18,7 +49,7 @@ const Home = () => {
   const fav_apartments = useSelector(
     (state) => state.apartments.fav_apartments
   );
-  const [filtered_apartaments, setFilteredApartaments] = useState([]);
+  const [filtered_apartments, setFilteredApartments] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -34,7 +65,7 @@ const Home = () => {
     setIsLoading(true);
     loadApartments().then(() => {
       if (mounted) {
-        setFilteredApartaments(apartments);
+        setFilteredApartments(apartments);
         setIsLoading(false);
       }
     });
@@ -49,12 +80,12 @@ const Home = () => {
     pricePerM,
     rooms
   ) => {
-    var area_min = area.min;
-    var area_max = area.max;
-    var price_min = price.min;
-    var price_max = price.max;
-    var price_per_m_min = pricePerM.min;
-    var price_per_m_max = pricePerM.max;
+    let area_min = area.min;
+    let area_max = area.max;
+    let price_min = price.min;
+    let price_max = price.max;
+    let price_per_m_min = pricePerM.min;
+    let price_per_m_max = pricePerM.max;
 
     if (!area_min) {
       area_min = 0;
@@ -75,7 +106,7 @@ const Home = () => {
       price_per_m_max = 99999999;
     }
 
-    setFilteredApartaments(
+    setFilteredApartments(
       apartments.filter(
         (apartment) =>
           apartment.title.toLowerCase().includes(title.toLowerCase()) &&
@@ -90,33 +121,34 @@ const Home = () => {
     );
   };
 
-  const ifApartmentIsFav = (obj, list) => {
-    var i;
-    for (i = 0; i < list.length; i++) {
-      if (list[i].id === obj.id) {
+  const ifApartmentIsFav = (apartment, fav_apartments) => {
+    let i;
+    for (i = 0; i < fav_apartments.length; i++) {
+      if (fav_apartments[i].id === apartment.id) {
         return true;
       }
     }
     return false;
   };
   return (
-    <div className="container">
-      {/* <div id="map"></div> */}
+    <div className={classes.main_home_container}>
       <SearchBar handleClickSearch={handleClickSearch}></SearchBar>
       {isLoading ? (
         <div className="puff">
           <Oval width="100" />
         </div>
       ) : (
-        <div className="mainContainer">
-          <div className="apartaments_list">
-            {filtered_apartaments.map((apartment) => {
+        <div className={classes.under_searchbar_container}>
+          <div className={classes.apartments_list}>
+            {filtered_apartments.map((apartment) => {
               return (
                 <div
                   className={
                     currentOffer.id === apartment.id
-                      ? "apartments_container current_offer"
-                      : "apartments_container"
+                    ? "apartments_container current_offer"
+                    : "apartments_container"
+                    // ? classes.apartments_list
+                    // : classes.apartments_list
                   }
                   onClick={() => {
                     setCurrentOffer({

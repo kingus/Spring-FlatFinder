@@ -31,21 +31,8 @@
   box-shadow: 3px 3px 10px 1px #b6b6b6;
 }
 
-.mainContainer {
-  background-color: #eff1f3;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-.apartaments_list {
-  background-color: #eff1f3;
-  width: 60%;
-  height: 77vh;
-  display: flex;
-  flex-direction: column;
-  overflow: scroll;
-  justify-content: flex-start;
-}
+
+
 .fav_apartaments_list {
   background-color: #eff1f3;
   width: 70%;
@@ -55,14 +42,6 @@
   overflow: scroll;
   justify-content: flex-start;
   align-items: center;
-}
-.container {
-  background-color: #eff1f3;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  max-width: none;
 }
 
 .mapContainer {
