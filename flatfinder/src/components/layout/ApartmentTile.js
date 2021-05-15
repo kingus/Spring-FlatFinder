@@ -17,19 +17,18 @@ const useStyles = makeStyles({
     justifySelf: 'flex-start',
     backgroundColor: 'white',
     width: '50vw',
-    height: '300px',
+    height: '250px',
     // marginTop: '15px',
     borderRadius: '10px',
     boxShadow: '3px 3px 10px 1px #b6b6b6',
     '&:hover': {
       backgroundColor: '#d5c8c8',
-
     }
   },
   apartment_tile_right_part: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     backgroundColor: 'white',
     width: '100%',
     alignItems: 'flex-end',
@@ -42,18 +41,20 @@ const useStyles = makeStyles({
   apartment_info: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'flex-start',
     width: '90%',
     height: '100%',
   },
   apartment_photo: {
     width: '300px',
-    height: '300px',
+    height: '250px',
     borderRadius: '10px 0px 0px 10px',
   },
   apartment_details_header: {
     padding: '4px',
     fontWeight: '700',
     paddingLeft: '35px',
+    height: '20%'
 
   },
   apartment_details_header_text: {
@@ -65,7 +66,6 @@ const useStyles = makeStyles({
     }
   },
   property_row: {
-
     display: 'flex',
     flexDirection: 'row',
     height: '30px',
@@ -73,8 +73,6 @@ const useStyles = makeStyles({
   },
   property_row_key: {
     fontWeight: 'bolder',
-
-
   },
   property_row_value: {
     marginLeft: '5px'
@@ -85,9 +83,9 @@ const useStyles = makeStyles({
     alignItems: 'flex-end',
     flexDirection: 'column',
     height: '100%',
-    paddingRight: '10px',
-    paddingBottom: '10px',
-    paddingTop: '10px',
+    paddingRight: '15px',
+    paddingBottom: '15px',
+    paddingTop: '15px',
     borderRadius: '10px',
     '&:hover': {
       backgroundColor: '#d5c8c8',

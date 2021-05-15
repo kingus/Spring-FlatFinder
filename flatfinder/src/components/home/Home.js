@@ -5,7 +5,7 @@ import SearchBar from "../layout/SearchBar";
 import { Oval } from "@agney/react-loading";
 import "../layout/Apartaments.css";
 import ApartmentTile from "../layout/ApartmentTile";
-
+import clsx from 'clsx'
 import Map from "../map/Map";
 import {makeStyles} from "@material-ui/core/styles";
 
@@ -28,13 +28,32 @@ const useStyles = makeStyles({
   apartments_list: {
     backgroundColor: '#eff1f3',
     width: '60%',
-    height: '77vh',
+    height: '76.5vh',
     display: 'flex',
     flexDirection: 'column',
     overflow: 'scroll',
+    overflowX: 'hidden',
     justifyContent: 'flex-start',
-    border: '3px solid red'
-
+    alignItems: 'center',
+  },
+  apartment_offer: {
+    marginTop: '15px',
+  },
+  current_offer: {
+    /* background-color: #b6b6b6; */
+    borderRadius: '10px',
+    boxShadow: '3px 3px 10px 1px #b6b6b6',
+  },
+  puff: {
+    marginTop: '100px',
+  },
+  map_container: {
+    display: 'flex',
+    justifyContent: 'center',
+    height: '77vh',
+    width: '40%',
+    paddingTop: '15px',
+    borderRadius: '10px',
   }
 });
 
@@ -134,7 +153,7 @@ const Home = () => {
     <div className={classes.main_home_container}>
       <SearchBar handleClickSearch={handleClickSearch}></SearchBar>
       {isLoading ? (
-        <div className="puff">
+        <div className={classes.puff}>
           <Oval width="100" />
         </div>
       ) : (
@@ -143,13 +162,10 @@ const Home = () => {
             {filtered_apartments.map((apartment) => {
               return (
                 <div
-                  className={
-                    currentOffer.id === apartment.id
-                    ? "apartments_container current_offer"
-                    : "apartments_container"
-                    // ? classes.apartments_list
-                    // : classes.apartments_list
-                  }
+                  className={clsx({
+                    [classes.apartment_offer] : true,
+                    [classes.current_offer] : currentOffer.id === apartment.id,
+                  })}
                   onClick={() => {
                     setCurrentOffer({
                       id: apartment.id,
@@ -181,7 +197,7 @@ const Home = () => {
               );
             })}
           </div>
-          <div className="mapContainer">
+          <div className={classes.map_container}>
             <Map center={currentOffer} />
           </div>
         </div>

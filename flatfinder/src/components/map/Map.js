@@ -5,20 +5,62 @@ import { useDispatch } from "react-redux";
 import { GoogleMap } from "@react-google-maps/api";
 import "../layout/Apartaments.css";
 import * as markersAction from "../../store/actions/markers";
+import {makeStyles} from "@material-ui/core/styles";
+import clsx from "clsx";
 
 let service;
 
 const mapContainerStyle = {
   height: "100%",
-
   width: "100%",
+  borderRadius: '25px 25px 0px 0px',
+  border: '2px solid white',
+  borderBottom: 'none'
 };
+const useStyles = makeStyles({
+  nestedMapContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    width: '90%',
+    height: '95%',
+    boxShadow: '3px 3px 10px 1px #b6b6b6',
+    borderRadius: '25px'
+
+
+  },
+  place_icon_container: {
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    paddingRight: '10px',
+    paddingBottom: '10px',
+    paddingTop: '10px',
+    borderRadius: '0px 0px 25px 25px',
+  },
+  map_icon: {
+    display: 'flex',
+    width: '100%',
+    height: '100%',
+    paddingTop: '5px',
+    backgroundColor: 'white',
+    marginBottom: '15px',
+    marginRight: '15px',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+
+});
+
 const options = {
   disableDefaultUI: true,
   zoomControl: true,
 };
 
 const Map = (props) => {
+  const classes = useStyles();
   const [publicTransportPlaces, setPublicTransportPlaces] = useState(false);
   const [educationalPlaces, setEducationalPlaces] = useState(false);
   const [hospitalPlaces, setHospitalPlaces] = useState(false);
@@ -81,7 +123,7 @@ const Map = (props) => {
   };
 
   return (
-    <div className="nestedMapContainer">
+    <div className={classes.nestedMapContainer}>
       <GoogleMap
         id="map"
         mapContainerStyle={mapContainerStyle}
@@ -90,9 +132,9 @@ const Map = (props) => {
         options={options}
         onLoad={onMapLoad}
       />
-      <div className="place_icon_container">
+      <div className={classes.place_icon_container}>
         <div
-          className="map_icon"
+          className={classes.map_icon}
           onClick={() => {
             if (publicTransportPlaces) {
               dispatch(markersAction.removeMarkers());
@@ -108,15 +150,16 @@ const Map = (props) => {
           }}
         >
           <i
-            className={
-              publicTransportPlaces ? "material-icons active" : "material-icons"
-            }
+            className={clsx({
+              ["material-icons"] : true,
+              ["active"] : publicTransportPlaces,
+            })}
           >
             commute
           </i>
         </div>
         <div
-          className="map_icon"
+          className={classes.map_icon}
           onClick={() => {
             if (educationalPlaces) {
               dispatch(markersAction.removeMarkers());
@@ -131,15 +174,16 @@ const Map = (props) => {
           }}
         >
           <i
-            className={
-              educationalPlaces ? "material-icons active" : "material-icons"
-            }
+            className={clsx({
+              ["material-icons"] : true,
+              ["active"] : educationalPlaces,
+            })}
           >
             school
           </i>
         </div>
         <div
-          className="map_icon"
+          className={classes.map_icon}
           onClick={() => {
             if (hospitalPlaces) {
               dispatch(markersAction.removeMarkers());
@@ -154,15 +198,16 @@ const Map = (props) => {
           }}
         >
           <i
-            className={
-              hospitalPlaces ? "material-icons active" : "material-icons"
-            }
+            className={clsx({
+              ["material-icons"] : true,
+              ["active"] : hospitalPlaces,
+            })}
           >
             local_hospital
           </i>
         </div>
         <div
-          className="map_icon"
+          className={classes.map_icon}
           onClick={() => {
             if (shopPlaces) {
               dispatch(markersAction.removeMarkers());
@@ -178,7 +223,10 @@ const Map = (props) => {
           }}
         >
           <i
-            className={shopPlaces ? "material-icons active" : "material-icons"}
+            className={clsx({
+              ["material-icons"] : true,
+              ["active"] : shopPlaces,
+            })}
           >
             storefront
           </i>
