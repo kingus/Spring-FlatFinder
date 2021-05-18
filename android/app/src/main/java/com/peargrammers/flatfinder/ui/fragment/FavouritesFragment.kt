@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.peargrammers.flatfinder.R
 import com.peargrammers.flatfinder.adapter.UserOfferAdapter
@@ -66,28 +67,47 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
     }
 
     override fun onItemClick(offer: UserOffer, view: View?) {
+        Log.d("onItemClick", view.toString())
 
         when (view?.id) {
 
             R.id.emailImageView -> {
 
-                offerViewModel.sendEmail(token, offer.id)
                 Log.d(TAG, "emailImageView")
+                offerViewModel.sendEmail(token, offer.id)
 
             }
 
             R.id.heartImageView -> {
+
                 Log.d(TAG, "heartImageView")
-                val userOffersRequest = UserOffersRequest(offer.id, "ABC")
+                val userOffersRequest = UserOffersRequest(offer.id, "")
+
                 if (!offer.isFavourite) {
+
                     offerViewModel.deleteOffer(offer)
                     offerViewModel.deleteUserOffer(token, offer.id)
+
                 } else {
+
                     offerViewModel.saveOffer(offer)
                     offerViewModel.updateUserOffers(token, userOffersRequest)
+
                 }
+
+            }
+            else -> {
+
+                val bundle = Bundle().apply {
+                    putSerializable("offer", offer)
+                }
+
+                findNavController().navigate(
+                    R.id.action_favouritesFragment_to_offerFragment,
+                    bundle
+                )
+
             }
         }
-        Log.d(TAG, "onItemClick")
     }
 }

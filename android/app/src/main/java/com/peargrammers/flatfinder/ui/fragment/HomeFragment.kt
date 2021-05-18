@@ -28,7 +28,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 //        offersAdapter = OfferAdapter()
 //        rvOffers.apply {
 //            adapter = offersAdapter
-//            layoutManager = LinearLayoutManager(activity)
+//            layoutargumentManager = LinearLayoutManager(activity)
 //        }
 //    }
 
