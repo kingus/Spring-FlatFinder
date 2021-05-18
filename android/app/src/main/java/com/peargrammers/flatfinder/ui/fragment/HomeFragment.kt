@@ -13,23 +13,23 @@ import kotlinx.android.synthetic.main.home_fragment.*
 
 class HomeFragment : Fragment(R.layout.home_fragment) {
     lateinit var viewModel: OfferViewModel
-    lateinit var offersAdapter: OfferAdapter
+//    lateinit var offersAdapter: OfferAdapter
     private val TAG = HomeFragment::class.qualifiedName
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "onViewCreated")
         viewModel = (activity as HomeActivity).offerViewModel
-        setupRecyclerView()
+//        setupRecyclerView()
 
     }
-
-    private fun setupRecyclerView() {
-        offersAdapter = OfferAdapter()
-        rvOffers.apply {
-            adapter = offersAdapter
-            layoutManager = LinearLayoutManager(activity)
-        }
-    }
+//
+//    private fun setupRecyclerView() {
+//        offersAdapter = OfferAdapter()
+//        rvOffers.apply {
+//            adapter = offersAdapter
+//            layoutManager = LinearLayoutManager(activity)
+//        }
+//    }
 
 }

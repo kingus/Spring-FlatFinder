@@ -2,6 +2,7 @@ package com.peargrammers.flatfinder
 
 import android.app.Application
 import com.peargrammers.flatfinder.datastore.UserPreferencesImpl
+import com.peargrammers.flatfinder.db.OfferDatabase
 import com.peargrammers.flatfinder.repository.LoginRepository
 import com.peargrammers.flatfinder.repository.OfferRepository
 import com.peargrammers.flatfinder.repository.ProfileRepository
@@ -22,11 +23,11 @@ class FlatFinderApplication : Application(), KodeinAware {
 
     override val kodein: Kodein = Kodein.lazy {
         import(androidXModule(this@FlatFinderApplication))
-
-        bind() from singleton { OfferRepository() }
+        bind() from singleton { OfferDatabase(this@FlatFinderApplication) }
+        bind() from singleton { OfferRepository(instance()) }
         bind() from provider {
             OfferViewModelProviderFactory(
-                instance()
+                instance(), instance()
             )
         }
         bind() from singleton { LoginRepository() }

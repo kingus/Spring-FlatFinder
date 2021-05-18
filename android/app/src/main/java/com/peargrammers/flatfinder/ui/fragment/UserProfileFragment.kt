@@ -38,7 +38,7 @@ class UserProfileFragment : Fragment(R.layout.user_profile_fragment) {
         })
 
         logoutButton.setOnClickListener {
-            logout()
+            logout(view)
         }
 
         viewModel.userData.observe(viewLifecycleOwner, Observer { response ->
@@ -59,8 +59,8 @@ class UserProfileFragment : Fragment(R.layout.user_profile_fragment) {
 
     }
 
-    fun logout() {
-        view?.findNavController()?.navigate(R.id.action_userProfileFragment_to_authActivity)
+    private fun logout(view: View) {
+        view.findNavController().navigate(R.id.action_userProfileFragment_to_authActivity)
         runBlocking {
             userPreferencesImpl.saveAuthToken("")
         }

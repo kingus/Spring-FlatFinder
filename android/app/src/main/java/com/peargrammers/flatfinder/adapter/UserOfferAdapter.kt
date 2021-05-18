@@ -9,13 +9,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.peargrammers.flatfinder.R
-import com.peargrammers.flatfinder.model.Offer
+import com.peargrammers.flatfinder.model.UserOffer
 import kotlinx.android.synthetic.main.offer_list_item.view.*
 
-
-class OfferAdapter(private val listener: OnItemClickListener) :
-    RecyclerView.Adapter<OfferAdapter.OfferViewHolder>() {
-    private val TAG = OfferAdapter::class.qualifiedName
+class UserOfferAdapter(private val listener: OnItemClickListener) :
+    RecyclerView.Adapter<UserOfferAdapter.OfferViewHolder>() {
+    private val TAG = UserOfferAdapter::class.qualifiedName
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OfferViewHolder {
         val view =
@@ -23,12 +22,12 @@ class OfferAdapter(private val listener: OnItemClickListener) :
         return OfferViewHolder(view)
     }
 
-    private val differCallback = object : DiffUtil.ItemCallback<Offer>() {
-        override fun areItemsTheSame(oldItem: Offer, newItem: Offer): Boolean {
-            return oldItem.offerUrl == newItem.offerUrl
+    private val differCallback = object : DiffUtil.ItemCallback<UserOffer>() {
+        override fun areItemsTheSame(oldItem: UserOffer, newItem: UserOffer): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Offer, newItem: Offer): Boolean {
+        override fun areContentsTheSame(oldItem: UserOffer, newItem: UserOffer): Boolean {
             return oldItem == newItem
         }
     }
@@ -42,7 +41,10 @@ class OfferAdapter(private val listener: OnItemClickListener) :
 
     override fun onBindViewHolder(holder: OfferViewHolder, position: Int) {
         val currentOffer = differ.currentList[position]
-        Log.d("currentOffer", currentOffer.id.toString())
+        Log.d(
+            "currentOffer",
+            currentOffer.id.toString() + "isFav " + currentOffer.isFavourite.toString()
+        )
 
         holder.itemView.offerTitleTextView.text = currentOffer.title
         holder.itemView.districtTextView.text = String.format(
@@ -54,9 +56,15 @@ class OfferAdapter(private val listener: OnItemClickListener) :
             currentOffer.price.toString()
         )
 
-//        holder.itemView.heartImageView.setOnClickListener {
-//            holder.itemView.heartImageView.setBackgroundColor(holder.itemView.context.getColor(R.color.red))
-//        }
+        when {
+            currentOffer.isFavourite -> holder.itemView.heartImageView.setColorFilter(
+                holder.itemView.context.getColor(
+                    R.color.red
+                )
+            )
+
+            else -> holder.itemView.heartImageView.setColorFilter(holder.itemView.context.getColor(R.color.grey))
+        }
 
         Glide.with(holder.itemView.context)
             .load(currentOffer.imgUrl)
@@ -76,18 +84,39 @@ class OfferAdapter(private val listener: OnItemClickListener) :
             val position = adapterPosition
             val currentOffer = differ.currentList[position]
 
-            Log.d(TAG, "onClick")
-            Log.d("position", position.toString())
+            when (v?.id) {
+
+                R.id.emailImageView -> {
+                    v.emailImageView.setColorFilter(
+                        itemView.context.getColor(
+                            R.color.red
+                        )
+                    )
+                }
+
+                R.id.heartImageView -> {
+                    currentOffer.isFavourite = !currentOffer.isFavourite
+                    Log.d(TAG, "heartImageView onClick")
+                    when {
+                        currentOffer.isFavourite -> v.heartImageView.setColorFilter(
+                            itemView.context.getColor(
+                                R.color.red
+                            )
+                        )
+
+                        else -> itemView.heartImageView.setColorFilter(itemView.context.getColor(R.color.grey))
+                    }
+                }
+            }
 
             if (position != RecyclerView.NO_POSITION) {
-                Log.d("if position", position.toString())
                 listener.onItemClick(currentOffer, v)
             }
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(offer: Offer?, view: View?)
+        fun onItemClick(offer: UserOffer, view: View?)
     }
 
 }

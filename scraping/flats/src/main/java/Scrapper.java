@@ -48,12 +48,15 @@ public class Scrapper {
                         System.out.println(oOfferUrl);
                         offerDataJSON.put("offer_url", oOfferUrl);
 
-
                         Element oOfferImgElement = offer.select("source[type*=image/jpeg]").first();
                         String oOfferImg = oOfferImgElement.attr("data-srcset");
                         System.out.println(oOfferImg);
-                        offerDataJSON.put("img_url", oOfferImg);
+                        offerDataJSON.put("small_img_url", oOfferImg);
 
+
+                        String oLargeUrl = offerDoc.select("#wrapper > div:nth-child(1) > div.vip-header-and-details > div.vip-content-header > div.vip-gallery > div > div.main-bg > div > img").attr("src");
+                        System.out.println("oLargeUrl: " + oLargeUrl);
+                        offerDataJSON.put("img_url", oLargeUrl);
 
                         String oTitle = offerDoc.getElementsByClass("myAdTitle").text();
                         System.out.println(oTitle);

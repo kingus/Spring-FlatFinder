@@ -4,29 +4,53 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.peargrammers.flatfinder.model.Offer
+import com.peargrammers.flatfinder.dao.UserOffersRequest
+import com.peargrammers.flatfinder.model.UserOffer
 import com.peargrammers.flatfinder.repository.OfferRepository
+import com.peargrammers.flatfinder.repository.UserOffersRepository
 import com.peargrammers.flatfinder.utils.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class OfferViewModel(private val offerRepository: OfferRepository) : ViewModel() {
-    val offers: MutableLiveData<Resource<List<Offer>>> = MutableLiveData()
+class OfferViewModel(
+    private val offerRepository: OfferRepository,
+    private val userOffersRepository: UserOffersRepository
+) : ViewModel() {
+    val offers: MutableLiveData<Resource<List<UserOffer>>> = MutableLiveData()
 
     private val TAG = OfferViewModel::class.qualifiedName
 
     init {
-        getOffers()
     }
 
-    private fun getOffers() = viewModelScope.launch {
+    fun getOffers(auth: String) = viewModelScope.launch {
         Log.d(TAG, "getOffers()")
         offers.postValue(Resource.Loading())
-        val response = offerRepository.getOffers()
+        val response = offerRepository.getOffers(auth)
         offers.postValue(handleOffersResponse(response))
     }
 
-    private fun handleOffersResponse(response: Response<List<Offer>>): Resource<List<Offer>> {
+    fun getFavouriteOffers(auth: String) = viewModelScope.launch {
+        Log.d(TAG, "getFavouriteOffers()")
+        val response = userOffersRepository.getUserOffers(auth)
+        response.body()?.map {
+            it.isFavourite = true
+            saveOffer(it)
+            Log.d("it isFav", it.isFavourite.toString())
+        }
+    }
+
+    fun sendEmail(auth: String, id: Int) = viewModelScope.launch {
+        Log.d(TAG, "sendEmail()")
+        val response = offerRepository.sendEmail(auth, id)
+    }
+
+    fun deleteUserOffer(auth: String, id: Int) = viewModelScope.launch {
+        Log.d(TAG, "sendEmail()")
+        val response = offerRepository.deleteUserOffer(auth, id)
+    }
+
+    private fun handleOffersResponse(response: Response<List<UserOffer>>): Resource<List<UserOffer>> {
 
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
@@ -35,5 +59,23 @@ class OfferViewModel(private val offerRepository: OfferRepository) : ViewModel()
         }
         return Resource.Error(response.message())
     }
+
+    fun getSavedOffers() = offerRepository.getSavedOffers()
+
+    fun saveOffer(offer: UserOffer) = viewModelScope.launch {
+        offerRepository.insert(offer)
+    }
+
+    fun deleteOffer(offer: UserOffer) = viewModelScope.launch {
+        offerRepository.delete(offer)
+    }
+
+    fun updateUserOffers(token: String, userOffersRequest: UserOffersRequest) =
+        viewModelScope.launch {
+            Log.d(TAG, "updateUserOffers()")
+            Log.d(TAG, userOffersRequest.note)
+            Log.d(TAG, userOffersRequest.offer_id.toString())
+            val response = userOffersRepository.updateUserOffer(token, userOffersRequest)
+        }
 
 }
