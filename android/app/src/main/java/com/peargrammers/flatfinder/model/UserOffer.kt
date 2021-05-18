@@ -1,38 +1,36 @@
 package com.peargrammers.flatfinder.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
+@Entity(tableName = "user_offer")
 data class UserOffer(
-    var id: Int? = null,
-    var district: String?,
-    var area: Float?,
-    var imgUrl: String?,
-    var latitude: Double?,
-    var longitude: Double?,
-    var offerUrl: String?,
-    var price: Float?,
-    var rooms: String?,
-    var source: String?,
-    var sourceId: String?,
-    var title: String?,
-    @SerializedName("is_favourite")
-    var isFavourite: Boolean?
-) : Serializable {
-    constructor(userOffer: UserOffer, isFavourite: Boolean) : this(
-        userOffer.id,
-        userOffer.district,
-        userOffer.area,
-        userOffer.imgUrl,
-        userOffer.latitude,
-        userOffer.longitude,
-        userOffer.offerUrl,
-        userOffer.price,
-        userOffer.rooms,
-        userOffer.source,
-        userOffer.sourceId,
-        userOffer.title,
-        isFavourite
-    )
-}
-
+    @PrimaryKey(autoGenerate = true)
+    var id: Int,
+    @SerializedName("district")
+    var district: String,
+    @SerializedName("area")
+    var area: Float,
+    @SerializedName("img_url")
+    var imgUrl: String,
+    @SerializedName("latitude")
+    var latitude: Double,
+    @SerializedName("longitude")
+    var longitude: Double,
+    @SerializedName("offer_url")
+    var offerUrl: String,
+    @SerializedName("price")
+    var price: Float,
+    @SerializedName("rooms")
+    var rooms: String,
+    @SerializedName("source")
+    var source: String,
+    @SerializedName("source_id")
+    var sourceId: String,
+    @SerializedName("title")
+    var title: String,
+    @SerializedName("favourite")
+    var isFavourite: Boolean = true
+) : Serializable
