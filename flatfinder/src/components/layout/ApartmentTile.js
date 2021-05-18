@@ -35,7 +35,6 @@ const useStyles = makeStyles({
     borderRadius: '10px',
     '&:hover': {
       backgroundColor: '#d5c8c8',
-
     }
   },
   apartment_info: {
@@ -54,8 +53,7 @@ const useStyles = makeStyles({
     padding: '4px',
     fontWeight: '700',
     paddingLeft: '35px',
-    height: '20%'
-
+    height: '15%',
   },
   apartment_details_header_text: {
     color: 'black',
@@ -82,15 +80,15 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     flexDirection: 'column',
-    height: '100%',
+    height: '90%',
     paddingRight: '15px',
     paddingBottom: '15px',
-    paddingTop: '15px',
+    // paddingTop: '15px',
     borderRadius: '10px',
     '&:hover': {
       backgroundColor: '#d5c8c8',
-
     },
+    // border: "1px solid red"
   },
   icon: {
     color: '#b6b6b6',
@@ -141,7 +139,7 @@ const ApartmentTile = (props) => {
         <div className={classes.apartment_tile_right_part}>
           <div className={classes.apartment_info}>
             <div className={classes.apartment_details_header}>
-              <a href={props.offer_url}>
+              <a href={props.offer_url} style={{textDecoration: "none"}}>
                 {/*<h2>{props.description} </h2>*/}
                 <p className={classes.apartment_details_header_text}>{props.title}</p>
               </a>

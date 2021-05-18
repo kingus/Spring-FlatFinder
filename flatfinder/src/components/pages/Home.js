@@ -45,6 +45,11 @@ const useStyles = makeStyles({
     boxShadow: '3px 3px 10px 1px #b6b6b6',
   },
   puff: {
+    display: 'flex',
+    width: '100%',
+    height:'70vh',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
     marginTop: '100px',
   },
   map_container: {
@@ -135,7 +140,8 @@ const Home = () => {
           apartment.price <= price_max &&
           price_per_m_min <= apartment.price / apartment.area &&
           apartment.price / apartment.area <= price_per_m_max &&
-          apartment.district.toLowerCase().includes(district.toLowerCase())
+          // apartment.district.toLowerCase().includes(district.toLowerCase())
+          district.toLowerCase().includes(apartment.district.toLowerCase())
       )
     );
   };
