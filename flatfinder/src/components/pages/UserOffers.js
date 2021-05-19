@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as apartmentsActions from "../../store/actions/apartments";
 import { Puff } from "@agney/react-loading";
 import "../layout/Apartaments.css";
-import Apartament from "../layout/Apartament";
+import ApartmentTile from "../layout/ApartmentTile";
 import { Form } from "semantic-ui-react";
 
 const UserOffers = () => {
@@ -63,7 +63,7 @@ const UserOffers = () => {
                     });
                   }}
                 >
-                  <Apartament
+                  <ApartmentTile
                     key={apartment.id}
                     id={apartment.id}
                     description={apartment.description}

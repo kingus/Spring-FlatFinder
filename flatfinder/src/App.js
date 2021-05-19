@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/layout/Navbar";
-import Home from "./components/home/Home";
-import UserOffers from "./components/home/UserOffers";
+import Home from "./components/pages/Home";
+import UserOffers from "./components/pages/UserOffers";
 import LoginBox from "./components/login/Login";
 import RegisterBox from "./components/register/RegisterBox";
 
