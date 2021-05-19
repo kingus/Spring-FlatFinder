@@ -5,8 +5,136 @@ import { Puff } from "@agney/react-loading";
 import "../layout/Apartaments.css";
 import ApartmentTile from "../layout/ApartmentTile";
 import { Form } from "semantic-ui-react";
+import {makeStyles} from "@material-ui/core/styles";
+import clsx from "clsx";
+
+const useStyles = makeStyles({
+  main_home_container: {
+    backgroundColor: '#eff1f3',
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    maxWidth: 'none',
+
+  },
+  under_searchbar_container: {
+    backgroundColor: '#eff1f3',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  apartments_list: {
+    backgroundColor: '#eff1f3',
+    width: '60%',
+    height: '91.5vh',
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'scroll',
+    overflowX: 'hidden',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  apartment_offer: {
+    marginTop: '15px',
+  },
+  current_offer: {
+    /* background-color: #b6b6b6; */
+    borderRadius: '10px',
+    boxShadow: '3px 3px 10px 1px #b6b6b6',
+  },
+  puff: {
+    display: 'flex',
+    width: '100%',
+    height:'70vh',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    marginTop: '100px',
+  },
+  // note_container: {
+  //   width: '30%',
+  //   display: 'flex',
+  //   flexDirection: 'column',
+  //   justifyItems: 'center',
+  //   alignItems: 'center',
+  //   marginTop: '20vh',
+  // },
+  note_container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: '100%',
+    width: '40%',
+    // paddingTop: '15px',
+    borderRadius: '10px',
+    // border: '3px solid green',
+
+  },
+  note_form: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: "70%",
+    height: '80%',
+    padding: '20px',
+    borderRadius: '10px',
+    backgroundColor: 'white',
+    boxShadow: '3px 3px 10px 1px #b6b6b6',
+    // border: '1px solid blue',
+  },
+  note_title: {
+    // border: '1px solid red',
+    fontSize: '30px',
+    // marginTop: '10px',
+    // marginBottom: '10px',
+    borderRadius: '10px',
+  },
+  note_text_area: {
+    display: 'flex',
+    alignSelf: 'center',
+    padding: "10px",
+    height: '60%',
+    minWidth: '90%',
+    maxWidth: '90%',
+    resize: 'none',
+    borderRadius: '10px',
+    border: '2px solid #616161',
+    '&:focus': {
+      outline: "none",
+      border: '2px solid #616161',
+    },
+  },
+  btn_update: {
+    background: "rgba(0, 0, 0, 0.3)",
+    backgroundColor: "red",
+    // backgroundColor: "#616161",
+    fontSize: "18px",
+    letterSpacing: "1px",
+    color: "white",
+    cursor: "pointer",
+    fontFamily: "Noto Sans",
+    textAlign: "center",
+    flex: "1",
+    border: 'none',
+    // border: "1px solid #545454",
+    borderRadius: "10px",
+    maxHeight: "50px",
+    width: '90%',
+
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
+    '&:focus': {
+      outline: "none",
+      borderRadius: "10px"
+    },
+  },
+});
 
 const UserOffers = () => {
+  const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
   const apartments = useSelector((state) => state.apartments.fav_apartments);
   const fav_apartments = useSelector(
@@ -39,29 +167,28 @@ const UserOffers = () => {
   };
 
   return (
-    <div className="container">
+    <div className={classes.main_home_container}>
       <div id="map"></div>
       {isLoading ? (
-        <div className="puff">
+        <div className={classes.puff}>
           <Puff width="100" />
         </div>
       ) : (
-        <div className="mainContainer">
-          <div className="fav_apartaments_list">
+        <div className={classes.under_searchbar_container}>
+          <div className={classes.apartments_list}>
             {apartments.map((apartment) => {
               return (
                 <div
-                  className={
-                    currentOffer.id === apartment.id
-                      ? "apartments_container current_offer"
-                      : "apartments_container"
-                  }
-                  onClick={() => {
-                    setCurrentOffer({
-                      id: apartment.id,
-                      note: apartment.note,
-                    });
-                  }}
+                    className={clsx({
+                      [classes.apartment_offer] : true,
+                      [classes.current_offer] : currentOffer.id === apartment.id,
+                    })}
+                    onClick={() => {
+                      setCurrentOffer({
+                        id: apartment.id,
+                        note: apartment.note,
+                      });
+                    }}
                 >
                   <ApartmentTile
                     key={apartment.id}
@@ -86,14 +213,15 @@ const UserOffers = () => {
               );
             })}
           </div>
-          <div className="note_container">
-            <div className="note_form">
-              <div className="note_title">Note</div>
+          <div className={classes.note_container}>
+            {/*<div className={classes.note_form}>*/}
 
-              <Form>
+
+              <Form className={classes.note_form}>
+                <div className={classes.note_title}>Note</div>
                 <textarea
                   rows="35"
-                  className="note_text_area"
+                  className={classes.note_text_area}
                   placeholder="Note something..."
                   value={currentOffer.note}
                   onChange={(event) => {
@@ -102,9 +230,9 @@ const UserOffers = () => {
                       note: event.target.value,
                     });
                   }}
-                ></textarea>
+                />
                 <button
-                  className="btn-update"
+                  className={classes.btn_update}
                   onClick={() => {
                     dispatch(
                       apartmentsActions.updateNote(
@@ -117,7 +245,7 @@ const UserOffers = () => {
                   Update
                 </button>
               </Form>
-            </div>
+            {/*</div>*/}
           </div>
         </div>
       )}

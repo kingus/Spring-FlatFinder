@@ -14,7 +14,7 @@ const mapContainerStyle = {
   height: "100%",
   width: "100%",
   borderRadius: '25px 25px 0px 0px',
-  border: '2px solid white',
+  // border: '3px solid white',
   borderBottom: 'none'
 };
 const useStyles = makeStyles({
@@ -25,7 +25,8 @@ const useStyles = makeStyles({
     width: '90%',
     height: '95%',
     boxShadow: '3px 3px 10px 1px #b6b6b6',
-    borderRadius: '25px'
+    borderRadius: '25px',
+    border: '3px solid white',
 
 
   },

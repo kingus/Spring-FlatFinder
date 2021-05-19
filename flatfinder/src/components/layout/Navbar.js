@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 import * as authActions from "../../store/actions/auth";
 import { Link } from "react-router-dom";
 
+
+// navbar is styling from external css file because easiest way to styling list elements
 export const Navbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();

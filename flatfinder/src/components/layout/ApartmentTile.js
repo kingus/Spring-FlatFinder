@@ -18,12 +18,8 @@ const useStyles = makeStyles({
     backgroundColor: 'white',
     width: '50vw',
     height: '250px',
-    // marginTop: '15px',
     borderRadius: '10px',
     boxShadow: '3px 3px 10px 1px #b6b6b6',
-    '&:hover': {
-      backgroundColor: '#d5c8c8',
-    }
   },
   apartment_tile_right_part: {
     display: 'flex',
@@ -32,7 +28,7 @@ const useStyles = makeStyles({
     backgroundColor: 'white',
     width: '100%',
     alignItems: 'flex-end',
-    borderRadius: '10px',
+    borderRadius: '0px 10px 10px 0px',
     '&:hover': {
       backgroundColor: '#d5c8c8',
     }
@@ -95,12 +91,15 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'flex-start',
     alignSelf: 'left',
+    cursor: 'pointer',
   },
   icon_mail_sent: {
     color: 'red',
     display: 'flex',
     alignItems: 'flex-start',
     alignSelf: 'left',
+    cursor: 'pointer',
+    fontSize: '30px'
   }
 });
 
@@ -202,11 +201,11 @@ const ApartmentTile = (props) => {
             >
                 {isMailSent ? (
                     <div className={classes.icon_mail_sent}>
-                      <i className="material-icons md-36">mark_email_read</i>
+                      <i className="material-icons md-30">mark_email_read</i>
                     </div>
                 ) : (
                     <div className={classes.icon}>
-                      <i className="material-icons md-36 ">forward_to_inbox</i>
+                      <i className="material-icons md-30">forward_to_inbox</i>
                     </div>
                 )}
 
