@@ -26,32 +26,32 @@ public class Offer {
     @Column(name="latitude")
     private double latitude;
 
-    @Column(name="longitude")
+    @Column(name = "longitude")
     private double longitude;
 
-    @Column(name="offer_url")
+    @Column(name = "offer_url")
     private String offerUrl;
 
-    @Column(name="price")
+    @Column(name = "price")
     private float price;
 
-    @Column(name="rooms")
+    @Column(name = "rooms")
     private String rooms;
 
-    @Column(name="source")
+    @Column(name = "source")
     private String source;
 
     @Column(name="source_id", unique = true)
     private String sourceId;
 
-    @Column(name="title")
+    @Column(name = "title")
     private String title;
 
-    @Column(name="start_dttm")
+    @Column(name = "start_dttm")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime startDttm;
 
-    @Column(name="end_dttm")
+    @Column(name = "end_dttm")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime endDttm;
 
