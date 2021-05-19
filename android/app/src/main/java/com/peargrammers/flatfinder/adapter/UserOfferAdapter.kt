@@ -78,6 +78,7 @@ class UserOfferAdapter(private val listener: OnItemClickListener) :
         init {
             itemView.emailImageView.setOnClickListener(this)
             itemView.heartImageView.setOnClickListener(this)
+            itemView.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {

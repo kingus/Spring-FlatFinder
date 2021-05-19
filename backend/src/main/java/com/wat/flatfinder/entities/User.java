@@ -16,22 +16,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="username", unique = true)
+    @Column(name = "username", unique = true)
     private String username;
 
-    @Column(name="email", unique = true)
+    @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
 
-    @Column(name="enabled")
+    @Column(name = "enabled")
     private boolean enabled;
 
-    @Column(name="preffered_district")
+    @Column(name = "preffered_district")
     private String prefferedDistrict;
 
-    @Column(name="creation_date")
+    @Column(name = "creation_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime creationDate;
 

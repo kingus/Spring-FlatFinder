@@ -12,25 +12,54 @@
     <fragment
         android:id="@+id/offersFragment"
         android:name="com.peargrammers.flatfinder.ui.fragment.OffersFragment"
-        android:label="OffersFragment" />
+        android:label="OffersFragment" >
+        <action
+            android:id="@+id/action_offersFragment_to_offerFragment"
+            app:destination="@id/offerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
     <fragment
         android:id="@+id/favouritesFragment"
         android:name="com.peargrammers.flatfinder.ui.fragment.FavouritesFragment"
-        android:label="FavouritesFragment" />
+        android:label="FavouritesFragment">
+        <action
+            android:id="@+id/action_favouritesFragment_to_offerFragment"
+            app:destination="@id/offerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.peargrammers.flatfinder.ui.fragment.UserProfileFragment"
-        android:label="UserProfileFragment" >
+        android:label="UserProfileFragment">
         <action
             android:id="@+id/action_userProfileFragment_to_authActivity"
-            app:destination="@id/authActivity" />
+            app:destination="@id/authActivity"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <activity
         android:id="@+id/authActivity"
         android:name="com.peargrammers.flatfinder.ui.activity.AuthActivity"
         android:label="AuthActivity" />
+
+    <fragment
+        android:id="@+id/offerFragment"
+        android:name="com.peargrammers.flatfinder.ui.fragment.OfferFragment"
+        android:label="OfferFragment">
+        <argument
+            android:name="offer"
+            app:argType="com.peargrammers.flatfinder.model.UserOffer" />
+    </fragment>
 
 </navigation>

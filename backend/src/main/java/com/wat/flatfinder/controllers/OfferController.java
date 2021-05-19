@@ -18,8 +18,8 @@ public class OfferController {
     private final OfferService offerService;
 
     @Autowired
-    public OfferController(OfferService apartamentService) {
-        this.offerService = apartamentService;
+    public OfferController(OfferService offerService) {
+        this.offerService = offerService;
     }
 
 //    @CrossOrigin(origins = "http://localhost:3000")
@@ -39,5 +39,10 @@ public class OfferController {
     @GetMapping("/api/offers")
     public ResponseEntity<List<UserResponse>> getAll() {
         return new ResponseEntity(offerService.getAll(), HttpStatus.OK);
+    }
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/api/offers-all")
+    public ResponseEntity<List<UserResponse>> getAllOffers(@AuthenticationPrincipal String username) {
+        return new ResponseEntity(offerService.getAllOffers(username), HttpStatus.OK);
     }
 }

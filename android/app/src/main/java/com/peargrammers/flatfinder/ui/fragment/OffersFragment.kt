@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.peargrammers.flatfinder.R
 import com.peargrammers.flatfinder.adapter.UserOfferAdapter
@@ -108,6 +109,18 @@ class OffersFragment : Fragment(R.layout.offers_fragment), UserOfferAdapter.OnIt
                     offerViewModel.saveOffer(offer)
                     offerViewModel.updateUserOffers(token, userOffersRequest)
                 }
+            }
+            else -> {
+
+                val bundle = Bundle().apply {
+                    putSerializable("offer", offer)
+                }
+
+                findNavController().navigate(
+                    R.id.action_offersFragment_to_offerFragment,
+                    bundle
+                )
+
             }
         }
         Log.d(TAG, "onItemClick")
