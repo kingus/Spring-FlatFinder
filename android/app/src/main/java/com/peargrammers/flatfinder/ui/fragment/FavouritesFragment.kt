@@ -2,7 +2,9 @@ package com.peargrammers.flatfinder.ui.fragment
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
@@ -11,12 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.peargrammers.flatfinder.R
 import com.peargrammers.flatfinder.adapter.UserOfferAdapter
 import com.peargrammers.flatfinder.dao.UserOffersRequest
+import com.peargrammers.flatfinder.databinding.FavouritesFragmentBinding
 import com.peargrammers.flatfinder.datastore.UserPreferencesImpl
 import com.peargrammers.flatfinder.model.UserOffer
 import com.peargrammers.flatfinder.ui.activity.HomeActivity
 import com.peargrammers.flatfinder.ui.viewmodel.OfferViewModel
 import com.peargrammers.flatfinder.ui.viewmodel.UserOfferViewModel
-import kotlinx.android.synthetic.main.favourites_fragment.*
 
 class FavouritesFragment : Fragment(R.layout.favourites_fragment),
     UserOfferAdapter.OnItemClickListener {
@@ -26,6 +28,18 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
     lateinit var offersAdapter: UserOfferAdapter
     lateinit var userPreferencesImpl: UserPreferencesImpl
     lateinit var token: String
+
+    private var _binding: FavouritesFragmentBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FavouritesFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,7 +74,7 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
 
     private fun setupRecyclerView() {
         offersAdapter = UserOfferAdapter(this)
-        rvOffers.apply {
+        binding.rvOffers.apply {
             adapter = offersAdapter
             layoutManager = LinearLayoutManager(activity)
         }

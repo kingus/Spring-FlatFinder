@@ -37,8 +37,13 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <include layout="@layout/text_input"/>
-            <include layout="@layout/password_text_input"/>
+            <include
+                android:id="@+id/loginLayout"
+                layout="@layout/text_input" />
+
+            <include
+                android:id="@+id/passwordLayout"
+                layout="@layout/password_text_input" />
 
             <Button
                 android:id="@+id/loginButton"

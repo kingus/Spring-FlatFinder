@@ -9,18 +9,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.peargrammers.flatfinder.R
+import com.peargrammers.flatfinder.databinding.OfferListItemBinding
 import com.peargrammers.flatfinder.model.Offer
-import kotlinx.android.synthetic.main.offer_list_item.view.*
 
 
 class OfferAdapter(private val listener: OnItemClickListener) :
     RecyclerView.Adapter<OfferAdapter.OfferViewHolder>() {
     private val TAG = OfferAdapter::class.qualifiedName
 
+    private var _binding: OfferListItemBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OfferViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.offer_list_item, parent, false)
-        return OfferViewHolder(view)
+
+        _binding = OfferListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return OfferViewHolder(binding.root)
     }
 
     private val differCallback = object : DiffUtil.ItemCallback<Offer>() {
@@ -44,32 +48,28 @@ class OfferAdapter(private val listener: OnItemClickListener) :
         val currentOffer = differ.currentList[position]
         Log.d("currentOffer", currentOffer.id.toString())
 
-        holder.itemView.offerTitleTextView.text = currentOffer.title
-        holder.itemView.districtTextView.text = String.format(
+        binding.offerTitleTextView.text = currentOffer.title
+        binding.districtTextView.text = String.format(
             holder.itemView.context.getString(R.string.district),
             currentOffer.district
         )
-        holder.itemView.priceTextView.text = String.format(
+        binding.priceTextView.text = String.format(
             holder.itemView.context.getString(R.string.price),
             currentOffer.price.toString()
         )
 
-//        holder.itemView.heartImageView.setOnClickListener {
-//            holder.itemView.heartImageView.setBackgroundColor(holder.itemView.context.getColor(R.color.red))
-//        }
-
         Glide.with(holder.itemView.context)
             .load(currentOffer.imgUrl)
             .centerCrop()
-            .into(holder.itemView.offerImage)
+            .into(binding.offerImage)
 
     }
 
     inner class OfferViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         init {
-            itemView.emailImageView.setOnClickListener(this)
-            itemView.heartImageView.setOnClickListener(this)
+            binding.emailImageView.setOnClickListener(this)
+            binding.heartImageView.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {

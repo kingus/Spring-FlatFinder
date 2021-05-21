@@ -1,15 +1,15 @@
-<com.google.android.material.textfield.TextInputLayout android:id="@+id/loginTextInputLayout"
+<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/loginTextInputLayout"
     style="@style/TextInputLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/standard_margin_0.5x"
-    app:boxBackgroundMode="filled"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    app:boxBackgroundMode="filled">
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/loginTextInputET"
-        style="@style/PasswordTextInputEditText"
+        android:id="@+id/textInputET"
+        style="@style/TextInputEditText"
         android:layout_width="@dimen/edit_text_width"
         android:layout_height="wrap_content"
         android:hint="@string/username"
