@@ -14,6 +14,8 @@ import com.peargrammers.flatfinder.ui.activity.AuthActivity
 import com.peargrammers.flatfinder.ui.viewmodel.LoginViewModel
 import com.peargrammers.flatfinder.utils.Resource
 import kotlinx.android.synthetic.main.login_fragment.*
+import kotlinx.android.synthetic.main.password_text_input.*
+import kotlinx.android.synthetic.main.text_input.*
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment(R.layout.login_fragment) {
@@ -32,8 +34,8 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
         loginButton.setOnClickListener {
             Log.d(TAG, "loginButton.setOnClickListener")
 
-            username = loginEditText.text.toString()
-            password = passwordEditText.text.toString()
+            username = loginTextInputET.text.toString()
+            password = passwordTextInputET.text.toString()
 
             viewModel.postLogin(LoginRequest(username, password))
         }
