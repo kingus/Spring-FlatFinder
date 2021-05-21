@@ -6,6 +6,7 @@
     <string name="password">Password</string>
     <string name="re_password">Repeat password</string>
     <string name="do_not_have_account">Don\'t have an account? REGISTER</string>
+    <string name="already_have_account">Already have an account? LOGIN</string>
     <string name="favourites">Favourites</string>
     <string name="profile">Profile</string>
     <string name="offers">Offers</string>
@@ -17,5 +18,7 @@
     <string name="district">District</string>
     <string name="logout">Log out</string>
     <string name="change_email">Change email</string>
+    <string name="register_success">Your account has been created successfully.</string>
+    <string name="register_failed">Your account couldn\'t been created. Try again.</string>
 
 </resources>

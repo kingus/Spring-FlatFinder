@@ -37,23 +37,31 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <include layout="@layout/text_input" />
+            <include
+                android:id="@+id/loginLayout"
+                layout="@layout/username_text_input" />
 
-            <include layout="@layout/password_text_input" />
+            <include
+                android:id="@+id/emailLayout"
+                layout="@layout/email_text_input" />
+
+            <include
+                android:id="@+id/passwordLayout"
+                layout="@layout/password_text_input" />
 
             <Button
-                android:id="@+id/loginButton"
+                android:id="@+id/registerButton"
                 style="@style/common_button_expanded"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/login" />
+                android:text="@string/register" />
 
             <TextView
-                android:id="@+id/registerTextView"
+                android:id="@+id/loginTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:text="@string/do_not_have_account"
+                android:text="@string/already_have_account"
                 android:textColor="@color/white" />
 
         </LinearLayout>

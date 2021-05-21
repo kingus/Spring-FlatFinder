@@ -14,13 +14,13 @@ import com.peargrammers.flatfinder.dao.LoginRequest
 import com.peargrammers.flatfinder.databinding.LoginFragmentBinding
 import com.peargrammers.flatfinder.datastore.UserPreferencesImpl
 import com.peargrammers.flatfinder.ui.activity.AuthActivity
-import com.peargrammers.flatfinder.ui.viewmodel.LoginViewModel
+import com.peargrammers.flatfinder.ui.viewmodel.AuthViewModel
 import com.peargrammers.flatfinder.utils.Resource
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment(R.layout.login_fragment) {
     private val TAG = LoginFragment::class.qualifiedName
-    lateinit var viewModel: LoginViewModel
+    lateinit var viewModel: AuthViewModel
     lateinit var username: String
     lateinit var password: String
     lateinit var userPreferencesImpl: UserPreferencesImpl

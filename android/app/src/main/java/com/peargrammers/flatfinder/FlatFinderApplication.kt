@@ -3,7 +3,7 @@ package com.peargrammers.flatfinder
 import android.app.Application
 import com.peargrammers.flatfinder.datastore.UserPreferencesImpl
 import com.peargrammers.flatfinder.db.OfferDatabase
-import com.peargrammers.flatfinder.repository.LoginRepository
+import com.peargrammers.flatfinder.repository.AuthRepository
 import com.peargrammers.flatfinder.repository.OfferRepository
 import com.peargrammers.flatfinder.repository.ProfileRepository
 import com.peargrammers.flatfinder.repository.UserOffersRepository
@@ -30,7 +30,7 @@ class FlatFinderApplication : Application(), KodeinAware {
                 instance(), instance()
             )
         }
-        bind() from singleton { LoginRepository() }
+        bind() from singleton { AuthRepository() }
         bind() from provider {
             LoginViewModelProviderFactory(
                 instance()
