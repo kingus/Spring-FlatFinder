@@ -21,4 +21,6 @@ class OfferRepository(val offerDatabase: OfferDatabase) {
 
     fun getSavedOffers() = offerDatabase.getOfferDao().getAll()
 
+    fun searchUserOffers(query: String) = offerDatabase.getOfferDao().searchUserOffer(query)
+
 }

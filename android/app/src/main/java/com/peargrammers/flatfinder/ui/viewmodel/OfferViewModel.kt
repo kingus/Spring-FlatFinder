@@ -1,9 +1,7 @@
 package com.peargrammers.flatfinder.ui.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.peargrammers.flatfinder.dao.UserOffersRequest
 import com.peargrammers.flatfinder.model.UserOffer
 import com.peargrammers.flatfinder.repository.OfferRepository
@@ -77,5 +75,8 @@ class OfferViewModel(
             Log.d(TAG, userOffersRequest.offer_id.toString())
             val response = userOffersRepository.updateUserOffer(token, userOffersRequest)
         }
+    fun searchUserOffer(searchQuery: String) : LiveData<List<UserOffer>>{
+        return offerRepository.searchUserOffers(searchQuery).asFlow().asLiveData()
+    }
 
 }

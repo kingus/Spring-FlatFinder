@@ -2,9 +2,8 @@ package com.peargrammers.flatfinder.ui.fragment
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
@@ -43,11 +42,27 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         userOfferViewModel = (activity as HomeActivity).userOfferViewModel
         offerViewModel = (activity as HomeActivity).offerViewModel
         userPreferencesImpl = UserPreferencesImpl(requireContext())
         setupRecyclerView()
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    searchUserOffers(query)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                return false
+            }
+        })
+        binding.searchView.setOnCloseListener {
+            binding.searchView.clearFocus()
+            getAllUserOffers()
+        }
 
         userPreferencesImpl.authToken.asLiveData().observe(viewLifecycleOwner, Observer { token ->
 
@@ -57,10 +72,7 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
 
         })
 
-        offerViewModel.getSavedOffers().observe(viewLifecycleOwner, Observer { offers ->
-            offersAdapter.differ.submitList(offers)
-        })
-
+        getAllUserOffers()
 
         userPreferencesImpl.authToken.asLiveData().observe(viewLifecycleOwner, Observer { auth ->
 
@@ -69,6 +81,15 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
             }
 
         })
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.search_menu, menu)
+//
+//        val search = menu.findItem(R.menu.search_menu)
+//        val searchView = search.actionView as SearchView
+//        searchView.isSubmitButtonEnabled = true
     }
 
 
@@ -123,5 +144,23 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
 
             }
         }
+    }
+
+    private fun searchUserOffers(query: String) {
+        val searchQuery = "%$query%"
+        Log.d("QUERY ", query)
+        offerViewModel.searchUserOffer(searchQuery).observe(viewLifecycleOwner, Observer { offers ->
+            offers.map {
+                Log.d("OFFERS ", it.title.toString())
+            }
+            offersAdapter.differ.submitList(offers)
+        })
+    }
+
+    private fun getAllUserOffers(): Boolean {
+        offerViewModel.getSavedOffers().observe(viewLifecycleOwner, Observer { offers ->
+            offersAdapter.differ.submitList(offers)
+        })
+        return true
     }
 }
