@@ -10,7 +10,7 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.peargrammers.flatfinder.R
-import com.peargrammers.flatfinder.adapter.UserOfferAdapter
+import com.peargrammers.flatfinder.adapter.OfferAdapter
 import com.peargrammers.flatfinder.dao.UserOffersRequest
 import com.peargrammers.flatfinder.databinding.FavouritesFragmentBinding
 import com.peargrammers.flatfinder.datastore.UserPreferencesImpl
@@ -20,11 +20,11 @@ import com.peargrammers.flatfinder.ui.viewmodel.OfferViewModel
 import com.peargrammers.flatfinder.ui.viewmodel.UserOfferViewModel
 
 class FavouritesFragment : Fragment(R.layout.favourites_fragment),
-    UserOfferAdapter.OnItemClickListener {
+    OfferAdapter.OnItemClickListener {
     private val TAG = FavouritesFragment::class.qualifiedName
     lateinit var userOfferViewModel: UserOfferViewModel
     lateinit var offerViewModel: OfferViewModel
-    lateinit var offersAdapter: UserOfferAdapter
+    lateinit var offersAdapter: OfferAdapter
     lateinit var userPreferencesImpl: UserPreferencesImpl
     lateinit var token: String
 
@@ -52,25 +52,17 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
                 if (query != null) {
                     searchUserOffers(query)
                 }
-                return false
+                return true
             }
 
             override fun onQueryTextChange(query: String?): Boolean {
-                return false
+                return true
             }
         })
+
         binding.searchView.setOnCloseListener {
-            binding.searchView.clearFocus()
             getAllUserOffers()
         }
-
-        userPreferencesImpl.authToken.asLiveData().observe(viewLifecycleOwner, Observer { token ->
-
-            if (token != null) {
-                offerViewModel.getFavouriteOffers(token)
-            }
-
-        })
 
         getAllUserOffers()
 
@@ -84,21 +76,35 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.search_menu, menu)
-//
-//        val search = menu.findItem(R.menu.search_menu)
-//        val searchView = search.actionView as SearchView
-//        searchView.isSubmitButtonEnabled = true
-    }
-
-
     private fun setupRecyclerView() {
-        offersAdapter = UserOfferAdapter(this)
+        offersAdapter = OfferAdapter(listOf(), offerViewModel, this)
         binding.rvOffers.apply {
             adapter = offersAdapter
             layoutManager = LinearLayoutManager(activity)
         }
+        binding.rvOffers.setItemViewCacheSize(1000)
+        offersAdapter.notifyDataSetChanged()
+    }
+
+
+    private fun searchUserOffers(query: String) {
+        val searchQuery = "%$query%"
+        Log.d("QUERY ", query)
+        offerViewModel.searchUserOffer(searchQuery).observe(viewLifecycleOwner, Observer { offers ->
+            offers.map {
+                Log.d("OFFERS ", it.title)
+            }
+            offersAdapter.items = offers
+            offersAdapter.notifyDataSetChanged()
+        })
+    }
+
+    private fun getAllUserOffers(): Boolean {
+        offerViewModel.getSavedOffers().observe(viewLifecycleOwner, Observer { offers ->
+            offersAdapter.items = offers
+            offersAdapter.notifyDataSetChanged()
+        })
+        return true
     }
 
     override fun onItemClick(offer: UserOffer, view: View?) {
@@ -141,26 +147,10 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
                     R.id.action_favouritesFragment_to_offerFragment,
                     bundle
                 )
-
             }
+
         }
+
     }
 
-    private fun searchUserOffers(query: String) {
-        val searchQuery = "%$query%"
-        Log.d("QUERY ", query)
-        offerViewModel.searchUserOffer(searchQuery).observe(viewLifecycleOwner, Observer { offers ->
-            offers.map {
-                Log.d("OFFERS ", it.title.toString())
-            }
-            offersAdapter.differ.submitList(offers)
-        })
-    }
-
-    private fun getAllUserOffers(): Boolean {
-        offerViewModel.getSavedOffers().observe(viewLifecycleOwner, Observer { offers ->
-            offersAdapter.differ.submitList(offers)
-        })
-        return true
-    }
 }

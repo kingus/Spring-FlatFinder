@@ -8,7 +8,7 @@ import com.peargrammers.flatfinder.model.UserOffer
 
 @Database(
     entities = [UserOffer::class],
-    version = 2
+    version = 3
 )
 abstract class OfferDatabase : RoomDatabase() {
     abstract fun getOfferDao(): OfferDAO

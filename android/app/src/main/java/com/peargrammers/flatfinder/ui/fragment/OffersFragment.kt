@@ -11,6 +11,7 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.peargrammers.flatfinder.R
+import com.peargrammers.flatfinder.adapter.OfferAdapter
 import com.peargrammers.flatfinder.adapter.UserOfferAdapter
 import com.peargrammers.flatfinder.dao.UserOffersRequest
 import com.peargrammers.flatfinder.databinding.OffersFragmentBinding
@@ -20,10 +21,10 @@ import com.peargrammers.flatfinder.ui.activity.HomeActivity
 import com.peargrammers.flatfinder.ui.viewmodel.OfferViewModel
 import com.peargrammers.flatfinder.utils.Resource
 
-class OffersFragment : Fragment(R.layout.offers_fragment), UserOfferAdapter.OnItemClickListener {
+class OffersFragment : Fragment(R.layout.offers_fragment), OfferAdapter.OnItemClickListener {
     lateinit var viewModel: OfferViewModel
     lateinit var offerViewModel: OfferViewModel
-    lateinit var userOfferAdapter: UserOfferAdapter
+    lateinit var offerAdapter: OfferAdapter
     private val TAG = OffersFragment::class.qualifiedName
     lateinit var userPreferencesImpl: UserPreferencesImpl
     lateinit var token: String
@@ -65,8 +66,8 @@ class OffersFragment : Fragment(R.layout.offers_fragment), UserOfferAdapter.OnIt
             when (response) {
                 is Resource.Success -> {
                     response.data?.let { offerResponse ->
-                        userOfferAdapter.differ.submitList(offerResponse)
-
+                        offerAdapter.items = offerResponse
+                        offerAdapter.notifyDataSetChanged()
                     }
                 }
                 is Resource.Error -> {
@@ -84,11 +85,12 @@ class OffersFragment : Fragment(R.layout.offers_fragment), UserOfferAdapter.OnIt
     }
 
     private fun setupRecyclerView() {
-        userOfferAdapter = UserOfferAdapter(this)
+        offerAdapter = OfferAdapter(listOf(), this)
         binding.rvOffers.apply {
-            adapter = userOfferAdapter
+            adapter = offerAdapter
             layoutManager = LinearLayoutManager(activity)
         }
+        binding.rvOffers.setItemViewCacheSize(1000)
     }
 
     private fun hideProgressBar() {
@@ -106,8 +108,6 @@ class OffersFragment : Fragment(R.layout.offers_fragment), UserOfferAdapter.OnIt
             R.id.emailImageView -> {
 
                 viewModel.sendEmail(token, offer.id)
-
-
                 Log.d(TAG, "emailImageView")
 
             }

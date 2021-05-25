@@ -16,7 +16,6 @@ class UserOfferAdapter(private val listener: OnItemClickListener) :
     RecyclerView.Adapter<UserOfferAdapter.OfferViewHolder>() {
     private val TAG = UserOfferAdapter::class.qualifiedName
 
-
     private var _binding: OfferListItemBinding? = null
     private val binding get() = _binding!!
 
@@ -44,10 +43,16 @@ class UserOfferAdapter(private val listener: OnItemClickListener) :
 
     override fun getItemCount(): Int {
         Log.d("getItemCount", differ.currentList.size.toString())
+        differ.currentList.forEach {
+            Log.d("item", it.title)
+
+        }
         return differ.currentList.size
     }
 
     override fun onBindViewHolder(holder: OfferViewHolder, position: Int) {
+        holder.setIsRecyclable(false);
+
         val currentOffer = differ.currentList[position]
         Log.d(
             "currentOffer",
