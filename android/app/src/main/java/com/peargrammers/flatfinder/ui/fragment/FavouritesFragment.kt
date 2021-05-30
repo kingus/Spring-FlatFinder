@@ -10,6 +10,7 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.peargrammers.flatfinder.R
+import com.peargrammers.flatfinder.adapter.FavOfferAdapter
 import com.peargrammers.flatfinder.adapter.OfferAdapter
 import com.peargrammers.flatfinder.dao.AddUserOfferRequest
 import com.peargrammers.flatfinder.databinding.FavouritesFragmentBinding
@@ -21,11 +22,11 @@ import com.peargrammers.flatfinder.ui.viewmodel.OfferViewModel
 import com.peargrammers.flatfinder.ui.viewmodel.UserOfferViewModel
 
 class FavouritesFragment : Fragment(R.layout.favourites_fragment),
-    OfferAdapter.OnItemClickListener {
+    FavOfferAdapter.OnItemClickListener {
     private val TAG = FavouritesFragment::class.qualifiedName
     lateinit var userOfferViewModel: UserOfferViewModel
     lateinit var offerViewModel: OfferViewModel
-    lateinit var offersAdapter: OfferAdapter
+    lateinit var offersAdapter: FavOfferAdapter
     lateinit var userPreferencesImpl: UserPreferencesImpl
     lateinit var token: String
 
@@ -78,7 +79,7 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
     }
 
     private fun setupRecyclerView() {
-        offersAdapter = OfferAdapter(listOf(), this)
+        offersAdapter = FavOfferAdapter(listOf(), this)
         binding.rvOffers.apply {
             adapter = offersAdapter
             layoutManager = LinearLayoutManager(activity)
@@ -139,7 +140,11 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
 
             }
 
-            R.id.offerTitleTextView -> {
+            R.id.editImageView -> {
+                showChangeNoteDialog(offer)
+            }
+
+            else -> {
                 val bundle = Bundle().apply {
                     putSerializable("offer", offer)
                 }
@@ -149,17 +154,12 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
                     bundle
                 )
             }
-            else -> {
-                Log.d(TAG, "else")
-                showChangeNoteDialog(offer)
-
-            }
 
         }
 
     }
 
-    fun showChangeNoteDialog(offer: UserOffer) {
+    private fun showChangeNoteDialog(offer: UserOffer) {
         val dialog = ChangeNoteDialog(offer, token)
         activity?.supportFragmentManager?.let { dialog.show(it, "OfferNoteDialog") }
     }
