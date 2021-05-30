@@ -20,5 +20,9 @@
     <string name="change_email">Change email</string>
     <string name="register_success">Your account has been created successfully.</string>
     <string name="register_failed">Your account couldn\'t been created. Try again.</string>
+    <string name="change_offer_note">Change offer note</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="save_button">Save</string>
+    <string name="note_label">Note</string>
 
 </resources>

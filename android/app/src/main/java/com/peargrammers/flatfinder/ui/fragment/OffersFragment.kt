@@ -12,8 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.peargrammers.flatfinder.R
 import com.peargrammers.flatfinder.adapter.OfferAdapter
-import com.peargrammers.flatfinder.adapter.UserOfferAdapter
-import com.peargrammers.flatfinder.dao.UserOffersRequest
+import com.peargrammers.flatfinder.dao.AddUserOfferRequest
 import com.peargrammers.flatfinder.databinding.OffersFragmentBinding
 import com.peargrammers.flatfinder.datastore.UserPreferencesImpl
 import com.peargrammers.flatfinder.model.UserOffer
@@ -114,13 +113,13 @@ class OffersFragment : Fragment(R.layout.offers_fragment), OfferAdapter.OnItemCl
 
             R.id.heartImageView -> {
                 Log.d(TAG, "heartImageView")
-                val userOffersRequest = UserOffersRequest(offer.id, "")
+                val addUserOfferRequest = AddUserOfferRequest(offer.id, "")
                 if (!offer.isFavourite) {
                     offerViewModel.deleteOffer(offer)
                     offerViewModel.deleteUserOffer(token, offer.id)
                 } else {
                     offerViewModel.saveOffer(offer)
-                    offerViewModel.updateUserOffers(token, userOffersRequest)
+                    offerViewModel.addUserOffers(token, addUserOfferRequest)
                 }
             }
             else -> {

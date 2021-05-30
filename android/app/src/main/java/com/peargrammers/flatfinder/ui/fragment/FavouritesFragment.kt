@@ -11,11 +11,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.peargrammers.flatfinder.R
 import com.peargrammers.flatfinder.adapter.OfferAdapter
-import com.peargrammers.flatfinder.dao.UserOffersRequest
+import com.peargrammers.flatfinder.dao.AddUserOfferRequest
 import com.peargrammers.flatfinder.databinding.FavouritesFragmentBinding
 import com.peargrammers.flatfinder.datastore.UserPreferencesImpl
 import com.peargrammers.flatfinder.model.UserOffer
 import com.peargrammers.flatfinder.ui.activity.HomeActivity
+import com.peargrammers.flatfinder.ui.dialog.ChangeNoteDialog
 import com.peargrammers.flatfinder.ui.viewmodel.OfferViewModel
 import com.peargrammers.flatfinder.ui.viewmodel.UserOfferViewModel
 
@@ -77,7 +78,7 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
     }
 
     private fun setupRecyclerView() {
-        offersAdapter = OfferAdapter(listOf(), offerViewModel, this)
+        offersAdapter = OfferAdapter(listOf(), this)
         binding.rvOffers.apply {
             adapter = offersAdapter
             layoutManager = LinearLayoutManager(activity)
@@ -122,7 +123,7 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
             R.id.heartImageView -> {
 
                 Log.d(TAG, "heartImageView")
-                val userOffersRequest = UserOffersRequest(offer.id, "")
+                val addUserOfferRequest = AddUserOfferRequest(offer.id, "")
 
                 if (!offer.isFavourite) {
 
@@ -132,13 +133,13 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
                 } else {
 
                     offerViewModel.saveOffer(offer)
-                    offerViewModel.updateUserOffers(token, userOffersRequest)
+                    offerViewModel.addUserOffers(token, addUserOfferRequest)
 
                 }
 
             }
-            else -> {
 
+            R.id.offerTitleTextView -> {
                 val bundle = Bundle().apply {
                     putSerializable("offer", offer)
                 }
@@ -148,9 +149,19 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
                     bundle
                 )
             }
+            else -> {
+                Log.d(TAG, "else")
+                showChangeNoteDialog(offer)
+
+            }
 
         }
 
+    }
+
+    fun showChangeNoteDialog(offer: UserOffer) {
+        val dialog = ChangeNoteDialog(offer, token)
+        activity?.supportFragmentManager?.let { dialog.show(it, "OfferNoteDialog") }
     }
 
 }

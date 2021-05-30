@@ -2,6 +2,7 @@ package com.peargrammers.flatfinder.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.peargrammers.flatfinder.dao.AddUserOfferRequest
 import com.peargrammers.flatfinder.dao.UserOffersRequest
 import com.peargrammers.flatfinder.model.UserOffer
 import com.peargrammers.flatfinder.repository.OfferRepository
@@ -68,12 +69,24 @@ class OfferViewModel(
         offerRepository.delete(offer)
     }
 
-    fun updateUserOffers(token: String, userOffersRequest: UserOffersRequest) =
+    fun updateOffer(offer: UserOffer) = viewModelScope.launch {
+        offerRepository.update(offer)
+    }
+
+    fun updateUserOffers(token: String, offerId: Int, userOffersRequest: UserOffersRequest) =
         viewModelScope.launch {
             Log.d(TAG, "updateUserOffers()")
             Log.d(TAG, userOffersRequest.note)
-            Log.d(TAG, userOffersRequest.offer_id.toString())
-            val response = userOffersRepository.updateUserOffer(token, userOffersRequest)
+            val response = userOffersRepository.updateUserOffer(token, offerId, userOffersRequest)
+            Log.d(TAG, response.toString())
+        }
+
+    fun addUserOffers(token: String, addUserOfferRequest: AddUserOfferRequest) =
+        viewModelScope.launch {
+            Log.d(TAG, "updateUserOffers()")
+            Log.d(TAG, addUserOfferRequest.note)
+            val response = userOffersRepository.addUserOffer(token, addUserOfferRequest)
+            Log.d(TAG, response.toString())
         }
     fun searchUserOffer(searchQuery: String) : LiveData<List<UserOffer>>{
         return offerRepository.searchUserOffers(searchQuery).asFlow().asLiveData()

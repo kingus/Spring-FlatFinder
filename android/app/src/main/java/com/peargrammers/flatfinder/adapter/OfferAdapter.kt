@@ -12,7 +12,7 @@ import com.peargrammers.flatfinder.model.UserOffer
 
 class OfferAdapter(
     var items: List<UserOffer>,
-    private val listener: OfferAdapter.OnItemClickListener
+    private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<OfferAdapter.OfferViewHolder>() {
 
     private val TAG = OfferAdapter::class.qualifiedName
@@ -79,7 +79,6 @@ class OfferAdapter(
         }
 
         override fun onClick(v: View) {
-            v.setBackgroundColor(itemView.context.getColor(R.color.red))
 
             val position = adapterPosition
             val currentOffer = items[position]
@@ -96,7 +95,6 @@ class OfferAdapter(
                     Log.d(TAG, "heartImageView onClick")
                     currentOffer.isFavourite = !currentOffer.isFavourite
                     notifyDataSetChanged()
-
                 }
             }
 

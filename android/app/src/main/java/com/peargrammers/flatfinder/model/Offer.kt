@@ -30,5 +30,7 @@ data class Offer(
     @SerializedName("source_id")
     var sourceId: String?,
     @SerializedName("title")
-    var title: String?
+    var title: String?,
+    @SerializedName("note")
+    var note: String?
 ) : Serializable

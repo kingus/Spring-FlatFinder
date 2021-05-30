@@ -34,5 +34,7 @@ data class UserOffer(
     @SerializedName("favourite")
     var isFavourite: Boolean = true,
     @SerializedName("email")
-    var isEmailSent: Boolean = true
+    var isEmailSent: Boolean = true,
+    @SerializedName("note")
+    var note: String?
 ) : Serializable

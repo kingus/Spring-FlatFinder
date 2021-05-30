@@ -33,10 +33,10 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true // for data binding
+        viewBinding = true // for view binding
     }
-    viewBinding.enabled = true
 }
 
 dependencies {

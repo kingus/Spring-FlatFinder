@@ -13,4 +13,6 @@
     <color name="light_grey">#929292</color>
     <color name="red">#dd0303</color>
     <color name="design_dark_default_color_background">#121212</color>
+    <color name="translucent_black">#E6353535</color>
+
 </resources>

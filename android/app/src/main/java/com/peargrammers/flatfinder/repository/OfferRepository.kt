@@ -17,6 +17,8 @@ class OfferRepository(val offerDatabase: OfferDatabase) {
 
     suspend fun insert(offer: UserOffer) = offerDatabase.getOfferDao().insert(offer)
 
+    suspend fun update(offer: UserOffer) = offerDatabase.getOfferDao().update(offer)
+
     suspend fun delete(offer: UserOffer) = offerDatabase.getOfferDao().delete(offer)
 
     fun getSavedOffers() = offerDatabase.getOfferDao().getAll()

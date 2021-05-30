@@ -16,6 +16,9 @@ interface OfferDAO {
     @Delete
     suspend fun delete(offer: UserOffer)
 
+    @Update
+    suspend fun update(offer: UserOffer)
+
     @Query("SELECT * FROM user_offer WHERE title LIKE :searchQuery")
     fun searchUserOffer(searchQuery: String): LiveData<List<UserOffer>>
 }
