@@ -72,9 +72,19 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 
         viewModel.loginStatus.observe(viewLifecycleOwner, Observer { status ->
             when (status) {
+                Status.STATUS_OK.code -> Toast.makeText(
+                    context,
+                    getString(R.string.login_success),
+                    Toast.LENGTH_LONG
+                ).show()
                 Status.INTERNAL_SERVER_ERROR.code -> Toast.makeText(
                     context,
                     getString(R.string.login_internal_error),
+                    Toast.LENGTH_LONG
+                ).show()
+                Status.UNAUTHORIZED.code -> Toast.makeText(
+                    context,
+                    getString(R.string.wrong_login_password_label),
                     Toast.LENGTH_LONG
                 ).show()
                 else -> Toast.makeText(

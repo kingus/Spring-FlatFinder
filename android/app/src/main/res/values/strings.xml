@@ -25,4 +25,6 @@
     <string name="cancel_button">Cancel</string>
     <string name="save_button">Save</string>
     <string name="note_label">Note</string>
+    <string name="wrong_login_password_label">Wrong email or password</string>
+    <string name="login_success">Login successful</string>
 </resources>

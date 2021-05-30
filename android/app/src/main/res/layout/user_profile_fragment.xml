@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal">
 
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="?attr/progressBarStyle"
@@ -59,6 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/photoLayout"
+        android:layout_marginTop="@dimen/standard_margin_4x"
         android:orientation="vertical">
 
         <LinearLayout
@@ -133,7 +133,7 @@
             android:layout_gravity="center"
             android:gravity="bottom"
             android:orientation="vertical"
-            android:layout_marginBottom="@dimen/standard_margin_4x">
+            android:layout_marginBottom="@dimen/standard_margin_8x">
 
             <Button
                 android:id="@+id/logoutButton"
