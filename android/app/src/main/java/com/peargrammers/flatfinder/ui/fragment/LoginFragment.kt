@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -16,6 +18,7 @@ import com.peargrammers.flatfinder.datastore.UserPreferencesImpl
 import com.peargrammers.flatfinder.ui.activity.AuthActivity
 import com.peargrammers.flatfinder.ui.viewmodel.AuthViewModel
 import com.peargrammers.flatfinder.utils.Resource
+import com.peargrammers.flatfinder.utils.Status
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment(R.layout.login_fragment) {
@@ -64,18 +67,21 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
                     }
                     view.findNavController().navigate(R.id.action_loginFragment_to_homeActivity2)
                 }
+            }
+        })
 
-                is Resource.Error -> {
-                    Log.d(TAG, "error")
-                    response.message?.let { message ->
-                        Log.e(TAG, "An error occured $message")
-                    }
-                }
-
-                is Resource.Loading -> {
-                    Log.d(TAG, "progress")
-                }
-
+        viewModel.loginStatus.observe(viewLifecycleOwner, Observer { status ->
+            when (status) {
+                Status.INTERNAL_SERVER_ERROR.code -> Toast.makeText(
+                    context,
+                    getString(R.string.login_internal_error),
+                    Toast.LENGTH_LONG
+                ).show()
+                else -> Toast.makeText(
+                    context,
+                    getString(R.string.register_failed),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         })
 

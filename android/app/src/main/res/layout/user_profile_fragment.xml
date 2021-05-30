@@ -5,6 +5,17 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal">
 
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:theme="@style/ProgressBarTheme"
+        android:visibility="invisible" />
+
     <FrameLayout
         android:id="@+id/photoLayout"
         android:layout_width="wrap_content"
@@ -46,10 +57,8 @@
     <LinearLayout
         android:id="@+id/dataLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/photoLayout"
-        android:layout_marginTop="@dimen/standard_margin_2x"
-        android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
@@ -58,7 +67,6 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/standard_margin_4x"
             android:paddingVertical="@dimen/standard_margin_2x">
-
 
             <ImageView
                 style="@style/small_icon"
@@ -121,23 +129,18 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/standard_margin_8x"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/changeEmailButton"
-                style="@style/common_button_expanded"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/change_email" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/standard_margin_4x">
 
             <Button
                 android:id="@+id/logoutButton"
                 style="@style/common_button_expanded"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/logout" />
+                android:text="@string/logout"/>
 
         </LinearLayout>
     </LinearLayout>

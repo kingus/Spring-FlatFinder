@@ -14,14 +14,21 @@ import retrofit2.Response
 class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
     val token: MutableLiveData<Resource<String>> = MutableLiveData()
     val registerStatus: MutableLiveData<Int> = MutableLiveData()
+    val loginStatus: MutableLiveData<Int> = MutableLiveData()
 
     private val TAG = AuthViewModel::class.qualifiedName
 
     fun postLogin(loginRequest: LoginRequest) = viewModelScope.launch {
         Log.d(TAG, "postLogin()")
         token.postValue(Resource.Loading())
-        val response = authRepository.postLogin(loginRequest)
-        token.postValue(handleTokenResponse(response))
+        try{
+            val response = authRepository.postLogin(loginRequest)
+            token.postValue(handleTokenResponse(response))
+            loginStatus.postValue(response.code())
+        }catch (exception : Exception){
+            loginStatus.postValue(500)
+        }
+
     }
 
     fun postRegister(registerRequest: RegisterRequest) = viewModelScope.launch {

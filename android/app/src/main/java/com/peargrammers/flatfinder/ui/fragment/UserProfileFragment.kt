@@ -61,11 +61,16 @@ class UserProfileFragment : Fragment(R.layout.user_profile_fragment) {
                     binding.usernameTextView.text = response.data?.username
                     binding.emailTextView.text = response.data?.email
                     binding.districtTextView.text = response.data?.preffered_district
+                    hideProgressBar()
                 }
                 is Resource.Error -> {
                     response.message?.let { message ->
                         Log.e(TAG, "An error occured $message")
                     }
+                    hideProgressBar()
+                }
+                is Resource.Loading -> {
+                    showProgressBar()
                 }
             }
         })
@@ -77,5 +82,13 @@ class UserProfileFragment : Fragment(R.layout.user_profile_fragment) {
         runBlocking {
             userPreferencesImpl.saveAuthToken("")
         }
+    }
+
+    private fun hideProgressBar() {
+        binding.progressBar.visibility = View.INVISIBLE
+    }
+
+    private fun showProgressBar() {
+        binding.progressBar.visibility = View.VISIBLE
     }
 }
