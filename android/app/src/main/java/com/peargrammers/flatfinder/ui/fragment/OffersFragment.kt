@@ -67,6 +67,7 @@ class OffersFragment : Fragment(R.layout.offers_fragment), OfferAdapter.OnItemCl
                     response.data?.let { offerResponse ->
                         offerAdapter.items = offerResponse
                         offerAdapter.notifyDataSetChanged()
+                        hideProgressBar()
                     }
                 }
                 is Resource.Error -> {
