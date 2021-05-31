@@ -5,11 +5,22 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="@dimen/common_search_view_width"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_search"
+        android:theme="@style/WallSearchView"
+        android:layout_marginTop="@dimen/standard_margin_6x"
+        >
+
+    </androidx.appcompat.widget.SearchView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvOffers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/standard_margin_8x"
+        android:layout_marginTop="@dimen/standard_margin_2x"
         android:clipToPadding="false"
         android:paddingBottom="50dp" />
 

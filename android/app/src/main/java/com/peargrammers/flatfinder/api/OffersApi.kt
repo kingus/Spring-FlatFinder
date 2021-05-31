@@ -1,5 +1,6 @@
 package com.peargrammers.flatfinder.api
 
+import com.peargrammers.flatfinder.dao.AddUserOfferRequest
 import com.peargrammers.flatfinder.dao.MeResponse
 import com.peargrammers.flatfinder.dao.UserOffersRequest
 import com.peargrammers.flatfinder.model.UserOffer
@@ -31,9 +32,17 @@ interface OffersApi {
         @Header("Authorization") auth: String, @Path("id") id: Int
     )
 
-    @POST("/api/user-offers")
+    @PATCH("/api/user-offers/{id}")
     suspend fun updateUserOffer(
-        @Header("Authorization") auth: String, @Body userOffersRequest: UserOffersRequest
+        @Header("Authorization") auth: String,
+        @Path("id") id: Int,
+        @Body userOffersRequest: UserOffersRequest
+    )
+
+    @POST("/api/user-offers")
+    suspend fun addUserOffer(
+        @Header("Authorization") auth: String,
+        @Body addUserOfferRequest: AddUserOfferRequest
     )
 
     @DELETE("/api/user-offers/{id}")

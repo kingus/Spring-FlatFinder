@@ -7,29 +7,30 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.peargrammers.flatfinder.R
-import com.peargrammers.flatfinder.databinding.OfferListItemBinding
+import com.peargrammers.flatfinder.databinding.FavOfferListItemBinding
 import com.peargrammers.flatfinder.model.UserOffer
 import kotlin.math.roundToInt
 
-class OfferAdapter(
+class FavOfferAdapter(
     var items: List<UserOffer>,
     private val listener: OnItemClickListener
-) : RecyclerView.Adapter<OfferAdapter.OfferViewHolder>() {
+) : RecyclerView.Adapter<FavOfferAdapter.FavOfferViewHolder>() {
 
-    private val TAG = OfferAdapter::class.qualifiedName
-    private var _binding: OfferListItemBinding? = null
+    private val TAG = FavOfferAdapter::class.qualifiedName
+    private var _binding: FavOfferListItemBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OfferViewHolder {
-        _binding = OfferListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return OfferViewHolder(binding.root)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavOfferViewHolder {
+        _binding =
+            FavOfferListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return FavOfferViewHolder(binding.root)
     }
 
     override fun getItemCount(): Int {
         return items.size
     }
 
-    override fun onBindViewHolder(holder: OfferViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavOfferViewHolder, position: Int) {
         holder.setIsRecyclable(false)
         val currentOffer = items[position]
 
@@ -39,8 +40,6 @@ class OfferAdapter(
             holder.itemView.context.getString(R.string.district_param),
             currentOffer.district.capitalize()
         )
-
-        Log.d("DISTRICT ", currentOffer.district)
 
         binding.priceTextView.text = String.format(
             holder.itemView.context.getString(R.string.price),
@@ -72,12 +71,13 @@ class OfferAdapter(
 
     }
 
-    inner class OfferViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+    inner class FavOfferViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
 
         init {
             binding.emailImageView.setOnClickListener(this)
             binding.heartImageView.setOnClickListener(this)
+            binding.editImageView.setOnClickListener(this)
             itemView.setOnClickListener(this)
         }
 
@@ -99,6 +99,11 @@ class OfferAdapter(
                     currentOffer.isFavourite = !currentOffer.isFavourite
                     notifyDataSetChanged()
                 }
+
+                R.id.editImageView -> {
+                    Log.d(TAG, "editImageView onClick")
+                }
+
             }
 
             if (position != RecyclerView.NO_POSITION) {

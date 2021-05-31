@@ -65,5 +65,56 @@
         <item name="android:layout_margin">@dimen/standard_margin</item>
     </style>
 
+    <!--    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">-->
+    <!--        <item name="boxStrokeColor">@color/text_input_box_stroke</item>-->
+    <!--        <item name="boxBackgroundColor">@color/teal_200</item>-->
+    <!--        <item name="hintTextColor">@color/dark_grey</item>-->
+
+    <!--    </style>-->
+
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxStrokeColor">@color/medium_grey</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="android:textColorHint">@color/medium_grey</item>
+        <item name="hintTextColor">@color/medium_grey</item>
+    </style>
+
+    <style name="TextInputEditText" parent="ThemeOverlay.MaterialComponents.TextInputEditText.FilledBox">
+        <item name="android:layout_width">272dp</item>
+        <item name="android:textColor">@color/medium_grey</item>
+        <item name="boxStrokeColor">@color/medium_grey</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="android:textColorHint">@color/medium_grey</item>
+        <item name="hintTextColor">@color/medium_grey</item>
+    </style>
+
+    <style name="PasswordTextInputEditText" parent="ThemeOverlay.MaterialComponents.TextInputEditText.FilledBox">
+        <item name="android:textColor">@color/medium_grey</item>
+    </style>
+
+    <style name="WallSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="colorControlActivated">#FFffffff</item>
+    </style>
+
+    <style name="MyThemeOverlayAlertDialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Dialog.Rounded
+        </item>
+    </style>
+
+    <style name="CustomDialog" parent="android:Theme.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/translucent_black</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MyApp.Dialog.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="ProgressBarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorAccent">@color/red</item>
+    </style>
 </resources>
 

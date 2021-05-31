@@ -5,10 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.peargrammers.flatfinder.model.UserOffer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @Database(
     entities = [UserOffer::class],
-    version = 2
+    version = 4
 )
 abstract class OfferDatabase : RoomDatabase() {
     abstract fun getOfferDao(): OfferDAO

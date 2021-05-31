@@ -6,16 +6,25 @@
     <string name="password">Password</string>
     <string name="re_password">Repeat password</string>
     <string name="do_not_have_account">Don\'t have an account? REGISTER</string>
+    <string name="already_have_account">Already have an account? LOGIN</string>
     <string name="favourites">Favourites</string>
     <string name="profile">Profile</string>
     <string name="offers">Offers</string>
     <string name="district_param">District: %s</string>
-    <string name="price">Price: %s</string>
+    <string name="price">Price: %s zł</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="email">Email</string>
     <string name="district">District</string>
     <string name="logout">Log out</string>
     <string name="change_email">Change email</string>
-
+    <string name="register_success">Your account has been created successfully.</string>
+    <string name="register_failed">Your account couldn\'t been created. Try again.</string>
+    <string name="login_internal_error">We have a server error. Try again later.</string>
+    <string name="change_offer_note">Change offer note</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="save_button">Save</string>
+    <string name="note_label">Note</string>
+    <string name="wrong_login_password_label">Wrong email or password</string>
+    <string name="login_success">Login successful</string>
 </resources>

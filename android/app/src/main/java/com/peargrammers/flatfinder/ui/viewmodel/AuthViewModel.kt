@@ -5,21 +5,35 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.peargrammers.flatfinder.dao.LoginRequest
-import com.peargrammers.flatfinder.repository.LoginRepository
+import com.peargrammers.flatfinder.dao.RegisterRequest
+import com.peargrammers.flatfinder.repository.AuthRepository
 import com.peargrammers.flatfinder.utils.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
     val token: MutableLiveData<Resource<String>> = MutableLiveData()
+    val registerStatus: MutableLiveData<Int> = MutableLiveData()
+    val loginStatus: MutableLiveData<Int> = MutableLiveData()
 
-    private val TAG = LoginViewModel::class.qualifiedName
+    private val TAG = AuthViewModel::class.qualifiedName
 
     fun postLogin(loginRequest: LoginRequest) = viewModelScope.launch {
         Log.d(TAG, "postLogin()")
         token.postValue(Resource.Loading())
-        val response = loginRepository.postLogin(loginRequest)
-        token.postValue(handleTokenResponse(response))
+        try{
+            val response = authRepository.postLogin(loginRequest)
+            token.postValue(handleTokenResponse(response))
+            loginStatus.postValue(response.code())
+        }catch (exception : Exception){
+            loginStatus.postValue(500)
+        }
+
+    }
+
+    fun postRegister(registerRequest: RegisterRequest) = viewModelScope.launch {
+        val response = authRepository.postRegister(registerRequest)
+        registerStatus.postValue(response.code())
     }
 
     private fun handleTokenResponse(response: Response<Void>): Resource<String> {

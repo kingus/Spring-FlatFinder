@@ -1,6 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/flat" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_background" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            style="@style/main_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="@dimen/standard_margin_8x"
+            android:text="@string/app_name" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="@dimen/standard_margin_8x"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/loginLayout"
+                layout="@layout/username_text_input" />
+
+            <include
+                android:id="@+id/emailLayout"
+                layout="@layout/email_text_input" />
+
+            <include
+                android:id="@+id/passwordLayout"
+                layout="@layout/password_text_input" />
+
+            <Button
+                android:id="@+id/registerButton"
+                style="@style/common_button_expanded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/register" />
+
+            <TextView
+                android:id="@+id/loginTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="@string/already_have_account"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+</RelativeLayout>

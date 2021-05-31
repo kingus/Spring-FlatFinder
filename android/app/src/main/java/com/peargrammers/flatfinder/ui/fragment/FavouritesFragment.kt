@@ -2,68 +2,112 @@ package com.peargrammers.flatfinder.ui.fragment
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.peargrammers.flatfinder.R
-import com.peargrammers.flatfinder.adapter.UserOfferAdapter
-import com.peargrammers.flatfinder.dao.UserOffersRequest
+import com.peargrammers.flatfinder.adapter.FavOfferAdapter
+import com.peargrammers.flatfinder.adapter.OfferAdapter
+import com.peargrammers.flatfinder.dao.AddUserOfferRequest
+import com.peargrammers.flatfinder.databinding.FavouritesFragmentBinding
 import com.peargrammers.flatfinder.datastore.UserPreferencesImpl
 import com.peargrammers.flatfinder.model.UserOffer
 import com.peargrammers.flatfinder.ui.activity.HomeActivity
+import com.peargrammers.flatfinder.ui.dialog.ChangeNoteDialog
 import com.peargrammers.flatfinder.ui.viewmodel.OfferViewModel
 import com.peargrammers.flatfinder.ui.viewmodel.UserOfferViewModel
-import kotlinx.android.synthetic.main.favourites_fragment.*
 
 class FavouritesFragment : Fragment(R.layout.favourites_fragment),
-    UserOfferAdapter.OnItemClickListener {
+    FavOfferAdapter.OnItemClickListener {
     private val TAG = FavouritesFragment::class.qualifiedName
     lateinit var userOfferViewModel: UserOfferViewModel
     lateinit var offerViewModel: OfferViewModel
-    lateinit var offersAdapter: UserOfferAdapter
+    lateinit var offersAdapter: FavOfferAdapter
     lateinit var userPreferencesImpl: UserPreferencesImpl
     lateinit var token: String
 
+    private var _binding: FavouritesFragmentBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FavouritesFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         userOfferViewModel = (activity as HomeActivity).userOfferViewModel
         offerViewModel = (activity as HomeActivity).offerViewModel
         userPreferencesImpl = UserPreferencesImpl(requireContext())
         setupRecyclerView()
 
-        userPreferencesImpl.authToken.asLiveData().observe(viewLifecycleOwner, Observer { token ->
-
-            if (token != null) {
-                offerViewModel.getFavouriteOffers(token)
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    searchUserOffers(query)
+                }
+                return true
             }
 
+            override fun onQueryTextChange(query: String?): Boolean {
+                return true
+            }
         })
 
-        offerViewModel.getSavedOffers().observe(viewLifecycleOwner, Observer { offers ->
-            offersAdapter.differ.submitList(offers)
-        })
+        binding.searchView.setOnCloseListener {
+            getAllUserOffers()
+        }
 
+        getAllUserOffers()
 
         userPreferencesImpl.authToken.asLiveData().observe(viewLifecycleOwner, Observer { auth ->
 
             if (auth != null) {
                 token = auth
+                offerViewModel.getFavouriteOffers(token)
             }
 
         })
+
     }
 
-
     private fun setupRecyclerView() {
-        offersAdapter = UserOfferAdapter(this)
-        rvOffers.apply {
+        offersAdapter = FavOfferAdapter(listOf(), this)
+        binding.rvOffers.apply {
             adapter = offersAdapter
             layoutManager = LinearLayoutManager(activity)
         }
+        binding.rvOffers.setItemViewCacheSize(1000)
+        offersAdapter.notifyDataSetChanged()
+    }
+
+
+    private fun searchUserOffers(query: String) {
+        val searchQuery = "%$query%"
+        Log.d("QUERY ", query)
+        offerViewModel.searchUserOffer(searchQuery).observe(viewLifecycleOwner, Observer { offers ->
+            offers.map {
+                Log.d("OFFERS ", it.title)
+            }
+            offersAdapter.items = offers
+            offersAdapter.notifyDataSetChanged()
+        })
+    }
+
+    private fun getAllUserOffers(): Boolean {
+        offerViewModel.getSavedOffers().observe(viewLifecycleOwner, Observer { offers ->
+            offersAdapter.items = offers
+            offersAdapter.notifyDataSetChanged()
+        })
+        return true
     }
 
     override fun onItemClick(offer: UserOffer, view: View?) {
@@ -81,7 +125,7 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
             R.id.heartImageView -> {
 
                 Log.d(TAG, "heartImageView")
-                val userOffersRequest = UserOffersRequest(offer.id, "")
+                val addUserOfferRequest = AddUserOfferRequest(offer.id, "")
 
                 if (!offer.isFavourite) {
 
@@ -91,13 +135,17 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
                 } else {
 
                     offerViewModel.saveOffer(offer)
-                    offerViewModel.updateUserOffers(token, userOffersRequest)
+                    offerViewModel.addUserOffers(token, addUserOfferRequest)
 
                 }
 
             }
-            else -> {
 
+            R.id.editImageView -> {
+                showChangeNoteDialog(offer)
+            }
+
+            else -> {
                 val bundle = Bundle().apply {
                     putSerializable("offer", offer)
                 }
@@ -106,8 +154,15 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
                     R.id.action_favouritesFragment_to_offerFragment,
                     bundle
                 )
-
             }
+
         }
+
     }
+
+    private fun showChangeNoteDialog(offer: UserOffer) {
+        val dialog = ChangeNoteDialog(offer, token)
+        activity?.supportFragmentManager?.let { dialog.show(it, "OfferNoteDialog") }
+    }
+
 }

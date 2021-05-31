@@ -30,10 +30,7 @@
     <dimen name="text_view_3x">120dp</dimen>
     <dimen name="text_view_4x">160dp</dimen>
     <dimen name="text_view_5x">200dp</dimen>
+    <dimen name="text_view_6x">240dp</dimen>
 
-
-
-
-
-
+    <dimen name="common_search_view_width">340dp</dimen>
 </resources>
