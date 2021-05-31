@@ -42,14 +42,11 @@ class OffersFragment : Fragment(R.layout.offers_fragment), OfferAdapter.OnItemCl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, activity.toString())
-
         Log.d(TAG, "onViewCreated")
 
         viewModel = (activity as HomeActivity).offerViewModel
         offerViewModel = (activity as HomeActivity).offerViewModel
         setupRecyclerView()
-
         userPreferencesImpl = UserPreferencesImpl(requireContext())
 
         userPreferencesImpl.authToken.asLiveData().observe(viewLifecycleOwner, Observer { token ->
@@ -59,7 +56,6 @@ class OffersFragment : Fragment(R.layout.offers_fragment), OfferAdapter.OnItemCl
                 viewModel.getOffers(token)
             }
         })
-
 
         viewModel.offers.observe(viewLifecycleOwner, Observer { response ->
             when (response) {

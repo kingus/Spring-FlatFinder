@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.peargrammers.flatfinder.R
 import com.peargrammers.flatfinder.databinding.FavOfferListItemBinding
 import com.peargrammers.flatfinder.model.UserOffer
+import kotlin.math.roundToInt
 
 class FavOfferAdapter(
     var items: List<UserOffer>,
@@ -36,13 +37,13 @@ class FavOfferAdapter(
         binding.offerTitleTextView.text = currentOffer.title
 
         binding.districtTextView.text = String.format(
-            holder.itemView.context.getString(R.string.district),
-            currentOffer.district
+            holder.itemView.context.getString(R.string.district_param),
+            currentOffer.district.capitalize()
         )
 
         binding.priceTextView.text = String.format(
             holder.itemView.context.getString(R.string.price),
-            currentOffer.price.toString()
+            currentOffer.price.roundToInt()
         )
 
         when {

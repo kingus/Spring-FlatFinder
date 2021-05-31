@@ -13,6 +13,7 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.findNavController
 import com.peargrammers.flatfinder.databinding.UserProfileFragmentBinding
 import com.peargrammers.flatfinder.datastore.UserPreferencesImpl
+import com.peargrammers.flatfinder.ui.viewmodel.OfferViewModel
 import com.peargrammers.flatfinder.ui.viewmodel.ProfileViewModel
 import com.peargrammers.flatfinder.utils.Resource
 import kotlinx.coroutines.runBlocking
@@ -57,10 +58,10 @@ class UserProfileFragment : Fragment(R.layout.user_profile_fragment) {
         viewModel.userData.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
-                    Log.d(TAG, "Response")
+                    Log.d(TAG, "Success")
                     binding.usernameTextView.text = response.data?.username
                     binding.emailTextView.text = response.data?.email
-                    binding.districtTextView.text = response.data?.preffered_district
+                    binding.districtTextView.text = response.data?.preffered_district?.capitalize()
                     hideProgressBar()
                 }
                 is Resource.Error -> {

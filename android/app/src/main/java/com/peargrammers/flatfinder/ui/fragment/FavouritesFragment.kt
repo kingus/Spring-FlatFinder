@@ -72,6 +72,7 @@ class FavouritesFragment : Fragment(R.layout.favourites_fragment),
 
             if (auth != null) {
                 token = auth
+                offerViewModel.getFavouriteOffers(token)
             }
 
         })

@@ -11,7 +11,7 @@
     <string name="profile">Profile</string>
     <string name="offers">Offers</string>
     <string name="district_param">District: %s</string>
-    <string name="price">Price: %s</string>
+    <string name="price">Price: %s zł</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="email">Email</string>

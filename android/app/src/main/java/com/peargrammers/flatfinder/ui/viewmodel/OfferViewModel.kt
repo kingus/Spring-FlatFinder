@@ -19,9 +19,6 @@ class OfferViewModel(
 
     private val TAG = OfferViewModel::class.qualifiedName
 
-    init {
-    }
-
     fun getOffers(auth: String) = viewModelScope.launch {
         Log.d(TAG, "getOffers()")
         offers.postValue(Resource.Loading())
@@ -88,7 +85,8 @@ class OfferViewModel(
             val response = userOffersRepository.addUserOffer(token, addUserOfferRequest)
             Log.d(TAG, response.toString())
         }
-    fun searchUserOffer(searchQuery: String) : LiveData<List<UserOffer>>{
+
+    fun searchUserOffer(searchQuery: String): LiveData<List<UserOffer>> {
         return offerRepository.searchUserOffers(searchQuery).asFlow().asLiveData()
     }
 
