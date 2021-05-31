@@ -110,6 +110,15 @@ const Home = () => {
     let price_max = price.max;
     let price_per_m_min = pricePerM.min;
     let price_per_m_max = pricePerM.max;
+    console.log("search fn");
+    console.log(title);
+    console.log(area_min);
+    console.log(area_max);
+    console.log(price_min);
+    console.log(price_max);
+    console.log(price_per_m_min);
+    console.log(price_per_m_max);
+
 
     if (!area_min) {
       area_min = 0;
@@ -130,6 +139,7 @@ const Home = () => {
       price_per_m_max = 99999999;
     }
 
+
     setFilteredApartments(
       apartments.filter(
         (apartment) =>
@@ -140,8 +150,7 @@ const Home = () => {
           apartment.price <= price_max &&
           price_per_m_min <= apartment.price / apartment.area &&
           apartment.price / apartment.area <= price_per_m_max &&
-          // apartment.district.toLowerCase().includes(district.toLowerCase())
-          district.toLowerCase().includes(apartment.district.toLowerCase())
+            (district.toString().toLowerCase().includes(apartment.district.toLowerCase()) || district.toString() == "")
       )
     );
   };

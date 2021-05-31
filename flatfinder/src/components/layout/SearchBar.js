@@ -461,16 +461,25 @@ const SearchBar = (props) => {
           {/*</div>*/}
 
         </div>
-
       </div>
       <div
         className={classes.search_button}
         onClick={() => {
+          console.log(
+              {
+                description: description,
+                area: area,
+                price: price,
+                district: district.toString(),
+                pricePerM: pricePerM,
+                rooms: rooms
+              }
+          );
           props.handleClickSearch(
             description,
             area,
             price,
-            district.toString(),
+            district,
             pricePerM,
             rooms
           );

@@ -3,3 +3,7 @@
 .material-icons.md-30 {
   font-size: 30px;
 }
+.material-icons.active {
+  /*font-size: 30px;*/
+  color: #dd0000;
+}
